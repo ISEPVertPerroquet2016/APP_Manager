@@ -7,14 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% String nom = (String)session.getAttribute( "name" ); 
-		if(nom == null) 
-		{
-		    nom = "echec";
-		}
+	<% 
 		
 		
 	%>
-	<h1>Vous êtes connectés: bienvenue ${ utilisateur.nom }</h1>
+	<h1>Vous êtes connectés: bienvenue ${user.nom}</h1>
+	<p> le type est ${user.employeeType}</p>
+	<p> le numéro est ${user.employeeNumber}</p>
 </body>
 </html>

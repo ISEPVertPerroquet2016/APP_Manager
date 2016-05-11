@@ -17,9 +17,9 @@ public class Connexion extends HttpServlet
 {
 
     public static final String CONNEXION = "/WEB-INF/connexion.jsp";
-    public static final String ACCUEIL   = "/WEB-INF/accueil.jsp";
+    public static final String ACCUEIL   = "/WEB-INF/accueilTest.jsp";
 
-    public static final String USER      = "utilisateur";
+    public static final String USER      = "user";
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
@@ -31,14 +31,12 @@ public class Connexion extends HttpServlet
     {
         ConnexionMetier connexion = new ConnexionMetier();
 
-        LDAPObject utilisateur = connexion.connecterUtilisateur( request );
+        LDAPObject user = connexion.connecterUtilisateur( request );
 
         // Récupération de la session depuis la requête
         HttpSession session = request.getSession();
 
-        String nom = utilisateur.getNom();
-
-        session.setAttribute( USER, utilisateur );
+        session.setAttribute( USER, user );
 
         this.getServletContext().getRequestDispatcher( ACCUEIL ).forward( request, response );
 
