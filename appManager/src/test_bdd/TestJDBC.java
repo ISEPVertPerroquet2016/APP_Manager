@@ -50,12 +50,14 @@ public class TestJDBC
                     .executeQuery( "SELECT student_number, firstname, surname, id_group  FROM eleve;" );
             messages.add( "Requête \"SELECT student_number, firstname, surname, id_group  FROM eleve;\" effectuée !" );
 
-            // Execution d'une requête
-            int statut = statement.executeUpdate(
-                    "INSERT INTO eleve (student_number, firstname, surname, id_group) VALUES (8978, 'arnaud', 'tessandier', 1)" );
-
-            // Formatage pour affichage dans la JSP finale.
-            messages.add( "Résultat de la requête d'insertion : " + statut + "." );
+            /*
+             * // Execution d'une requête int statut = statement.executeUpdate(
+             * "INSERT INTO eleve (student_number, firstname, surname, id_group) VALUES (8978, 'arnaud', 'tessandier', 1)"
+             * );
+             * 
+             * // Formatage pour affichage dans la JSP finale. messages.add(
+             * "Résultat de la requête d'insertion : " + statut + "." )
+             */;
 
             /* Récupération des données du résultat de la requête de lecture */
 
