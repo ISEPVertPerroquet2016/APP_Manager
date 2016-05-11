@@ -15,6 +15,6 @@
 		
 		
 	%>
-	<h1>Vous êtes connectés: bienvenu ${ utilisateur.nom }</h1>
+	<h1>Vous êtes connectés: bienvenue ${ utilisateur.nom }</h1>
 </body>
 </html>
