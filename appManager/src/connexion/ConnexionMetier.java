@@ -1,7 +1,5 @@
 package connexion;
 
-import javax.servlet.http.HttpServletRequest;
-
 import entities.LDAPObject;
 
 public class ConnexionMetier
