@@ -16,7 +16,7 @@ import entities.LDAPObject;
 public class Connexion extends HttpServlet
 {
 
-    public static final String CONNEXION = "/WEB-INF/connexion.jsp";
+    public static final String CONNEXION = "/WEB-INF/index.jsp";
     public static final String ACCUEIL   = "/WEB-INF/accueilTest.jsp";
 
     public static final String USER      = "user";
