@@ -3,14 +3,14 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="page-header">compétences  <a href="nouvelleComp.jsp"><p class="fa fa-plus-circle"></p></a></h2>
+                    <h2 class="page-header">compétences  <a href="nouvelleFamille.jsp"><p class="fa fa-plus-circle"></p></a></h2>
                 </div>
                
             </div>
-            <!-- /.row -->
+            <!-- Famille 1 -->
             <div class="row">
           <div class="col-lg-4 col-md-6">
-                   <h3><p class="fa fa-chevron-circle-down" ></p> Travail en équipe <a href=""><p class="fa fa-plus-circle"></p></a></h3>
+                   <h3><p class="fa fa-chevron-circle-down" ></p> Travail en équipe <a href="nouvelleComp.jsp"><p class="fa fa-plus-circle"></p></a></h3>
                 </div></div>
                 <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -22,7 +22,7 @@
             <b>  B:</b> se montrer ouvert, collaboratif et participatif &nbsp <b>I</b>: agir avec coordination et entre-aide
              </div>
                 
-            <!-- /.row -->
+            <!-- Famille 2 -->
             
                 <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -33,7 +33,8 @@
                   <b> Coefficient:</b> 4<br>
             <b>  B:</b>animer en maintenant la cohésion de l'équipe et un minimum d'intérêt&nbsp <b>I:</b> motiver les membres de l'équipe
              </div>
-            <!-- /.row -->
+            
+            <!-- Famille 3 -->
             
             <div class="row">
                 <div class="col-lg-6 col-md-6">
@@ -45,7 +46,7 @@
             <b>  B:</b> détecter les conflits et accepter la diversité et les différences&nbsp <b>I:</b> apporter des solutions aux conflits et s'ouvrir aux différences 
              </div>
              
-             <!-- /.row -->
+             <!-- Famille 3 -->
             
             <div class="row">
                 <div class="col-lg-6 col-md-6">
@@ -58,7 +59,7 @@
             <b>  B:</b> émettre une idée pertinente &nbsp <b>I:</b> la justifier et la défendre  
              </div>
              
-             <!-- /.row -->
+             <!-- Famille 4 -->
         <div class="row">
           <div class="col-lg-4 col-md-6">
             <h3><p class="fa fa-chevron-circle-down" ></p> Communication <a href=""><p class="fa fa-plus-circle"></p></a></h3>
@@ -77,7 +78,7 @@
         </div>
         
         
-        <!-- /.row -->
+        <!-- Famille 4 -->
         
         <div class="row">
           <div class="col-lg-4 col-md-6">
