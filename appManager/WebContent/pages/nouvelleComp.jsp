@@ -29,7 +29,7 @@
              </div>    
             </div>
             <div class="panel  panel-danger ">
-               <div class="panel-heading"></div>
+               <div class="panel-heading">Niveau basique</div>
                <div class="panel-body">
                   <div class="form-group col-sm-4">
                        <label>B:</label>
@@ -50,7 +50,7 @@
             </div>
             
             <div class="panel  panel-danger ">
-               <div class="panel-heading"></div>
+               <div class="panel-heading">Niveau intermédiaire</div>
                <div class="panel-body">
                   <div class="form-group col-sm-4">
                        <label>I:</label>
