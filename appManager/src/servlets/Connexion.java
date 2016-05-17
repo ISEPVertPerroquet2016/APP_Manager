@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import connexion.ConnexionMetier;
 import entities.LDAPObject;
+import metiers.ConnexionMetier;
 
 @WebServlet( "/Connexion" )
 public class Connexion extends HttpServlet
 {
 
-    public static final String CONNEXION = "/WEB-INF/index.jsp";
+    public static final String CONNEXION = "/index.jsp";
     public static final String ACCUEIL   = "/WEB-INF/accueilTest.jsp";
 
     public static final String USER      = "user";

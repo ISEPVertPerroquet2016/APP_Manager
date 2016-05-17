@@ -1,4 +1,4 @@
-package connexion;
+package metiers;
 
 import javax.servlet.http.HttpServletRequest;
 

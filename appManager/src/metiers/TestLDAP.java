@@ -1,4 +1,4 @@
-package connexion;
+package metiers;
 
 import entities.LDAPObject;
 

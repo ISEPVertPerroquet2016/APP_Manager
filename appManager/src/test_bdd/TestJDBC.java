@@ -45,38 +45,42 @@ public class TestJDBC
             statement = connexion.createStatement();
             messages.add( "Objet requête créé !" );
 
-            /* Exécution d'une requête d'écriture */
-            resultat = statement
-                    .executeQuery( "SELECT student_number, firstname, surname, id_group  FROM eleve;" );
-            messages.add( "Requête \"SELECT student_number, firstname, surname, id_group  FROM eleve;\" effectuée !" );
+            // /* Exécution d'une requête d'écriture */
+            // resultat = statement
+            // .executeQuery( "SELECT id_student, firstname, surname, id_group
+            // FROM student;" );
+            // messages.add( "Requête \"SELECT id_student, firstname, surname,
+            // id_group FROM eleve;\" effectuée !" );
 
-            /*
-             * // Execution d'une requête int statut = statement.executeUpdate(
-             * "INSERT INTO eleve (student_number, firstname, surname, id_group) VALUES (8978, 'arnaud', 'tessandier', 1)"
-             * );
-             * 
-             * // Formatage pour affichage dans la JSP finale. messages.add(
-             * "Résultat de la requête d'insertion : " + statut + "." )
-             */;
+            // Execution d'une requête
+            int statut = statement.executeUpdate(
+                    "INSERT INTO familySkill (name_family) VALUES ('travail en équipe')" );
+
+            // Formatage pour affichage dans la JSP finale.
+            messages.add(
+                    "Résultat de la requête d'insertion : " + statut + "." );
 
             /* Récupération des données du résultat de la requête de lecture */
 
-            while ( resultat.next() ) {
-                int numberStudent = resultat.getInt( 1 );
-                String firstname = resultat.getString( 2 );
-                String surname = resultat.getString( 3 );
-                int idGroup = resultat.getInt( 4 );
+            // while ( resultat.next() ) {
+            // int idStudent = resultat.getInt( 1 );
+            // String firstname = resultat.getString( 2 );
+            // String surname = resultat.getString( 3 );
+            // int idGroup = resultat.getInt( 4 );
+            //
+            // /* Formatage des données pour affichage dans la JSP finale. */
+            // messages.add( "Données retournées par la requête : numberStudent
+            // = " + idStudent + ", firstname = "
+            // + firstname
+            // + ", surname = "
+            // + surname + ", idGroup = " + idGroup + "." );
+            //
+            // /* Traiter ici les valeurs récupérées. */
+            // }
 
-                /* Formatage des données pour affichage dans la JSP finale. */
-                messages.add( "Données retournées par la requête : numberStudent = " + numberStudent + ", firstname = "
-                        + firstname
-                        + ", surname = "
-                        + surname + ", idGroup = " + idGroup + "." );
+        } catch (
 
-                /* Traiter ici les valeurs récupérées. */
-            }
-
-        } catch ( SQLException e ) {
+        SQLException e ) {
             messages.add( "Erreur lors de la connexion : <br/>" + e.getMessage() );
         } finally {
             messages.add( "Fermeture de l'objet ResultSet." );

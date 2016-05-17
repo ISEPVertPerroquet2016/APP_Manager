@@ -1,4 +1,5 @@
 <%@include file="headerResp.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
    <div id="page-wrapper">
             <div class="row">
@@ -8,13 +9,13 @@
 			</div>
         
         <div class="panel-body col-sm-12 text-center">
-        <form action="" role="form">
+        <form action="Family" role="form" method="POST">
            <div class="panel  panel-primary ">
                <div class="panel-heading"></div>
                <div class="panel-body">
                   <div class="form-group col-sm-6">
                        <label>Famille</label>
-                       <input class="form-control">
+                       <input name="family"  class="form-control">
                  </div> 
                  <div class="form-group col-sm-6">
 					   <label>Description</label>
@@ -27,8 +28,10 @@
       
             
             
-            <button type="button" class="btn btn-primary">Valider</button>
+            <input type="submit" value="valider" class="btn btn-primary"/>
          </form>
+         <p>${param.family}</p>
+        
          </div> 
 
              

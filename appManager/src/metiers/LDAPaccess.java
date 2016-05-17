@@ -1,4 +1,4 @@
-package connexion;
+package metiers;
 import java.io.Serializable;
 import java.util.Hashtable;
 
