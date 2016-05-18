@@ -35,11 +35,9 @@ public class FamilyMetier
             /* Création de l'objet gérant les requêtes */
             statement = connexion.createStatement();
 
-            // Execution d'une requête
+            // Execution de la requête d'insertion
             int statut = statement.executeUpdate(
                     "INSERT INTO familySkill (name_family) VALUES ('" + family + "')" );
-
-            // Formatage pour affichage dans la JSP finale.
 
         } catch ( SQLException e ) {
             e.getMessage();

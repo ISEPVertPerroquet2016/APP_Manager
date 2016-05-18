@@ -12,22 +12,22 @@
     <title>APP Manager</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="./../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../css/metisMenu.min.css" rel="stylesheet">
+    <link href="./../css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="../css/timeline.css" rel="stylesheet">
+    <link href="./../css/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../css/sb-admin-2.css" rel="stylesheet">
+    <link href="./../css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="../css/morris.css" rel="stylesheet">
+    <link href="./../css/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,7 +44,7 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-static-top"style="margin-bottom: 0">
-        <img src="../images/isep-issy.jpg" style="width:100%;" >
+        <img src="./../images/isep-issy.jpg" style="width:100%;" >
         </nav>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
                  
