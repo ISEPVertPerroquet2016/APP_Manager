@@ -54,7 +54,7 @@ public class TestJDBC
 
             // Execution d'une requête
             int statut = statement.executeUpdate(
-                    "INSERT INTO familySkill (name_family) VALUES ('travail en équipe')" );
+                    "INSERT INTO familySkill (name_family) VALUES ('travail individuel')" );
 
             // Formatage pour affichage dans la JSP finale.
             messages.add(
