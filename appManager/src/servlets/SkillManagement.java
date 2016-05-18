@@ -13,7 +13,7 @@ import metiers.FamilyMetier;
 /**
  * Servlet implementation class Family
  */
-@WebServlet( "/Family" )
+@WebServlet( "/SkillManagement" )
 public class SkillManagement extends HttpServlet
 {
     private static final long  serialVersionUID = 1L;
