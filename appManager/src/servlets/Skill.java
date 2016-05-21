@@ -32,7 +32,7 @@ public class Skill extends HttpServlet
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
-        /* Initialisation de l'objet Java et récupération des messages */
+        // Initialisation de l'objet Metier
         SkillMetier skillMetier = new SkillMetier();
 
         SkillObject skill = skillMetier.createSkill( request );
