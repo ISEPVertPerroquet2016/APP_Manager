@@ -16,7 +16,7 @@ import metiers.ConnexionMetier;
 public class Connexion extends HttpServlet
 {
 
-    public static final String CONNEXION = "/index.jsp";
+    public static final String CONNEXION = "/pages/index.jsp";
     public static final String ACCUEIL   = "/WEB-INF/accueilTest.jsp";
 
     public static final String USER      = "user";

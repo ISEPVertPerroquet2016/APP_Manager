@@ -10,12 +10,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import entities.Family;
+import entities.FamilyObject;
 import entities.SkillObject;
 
 public class SkillManagementMetier
 {
-    private List<Family> families;
+    private List<FamilyObject> families;
     private List<String> familiesNames;
 
     public List<String> getFamiliesName( HttpServletRequest request )
@@ -94,14 +94,14 @@ public class SkillManagementMetier
         return familiesNames;
     }
 
-    public List<Family> getFamilies( HttpServletRequest request, List<String> familiesNames )
+    public List<FamilyObject> getFamilies( HttpServletRequest request, List<String> familiesNames )
     {
-        families = new ArrayList<Family>();
+        families = new ArrayList<FamilyObject>();
 
         for ( String familyName : familiesNames )
         {
 
-            Family family = new Family();
+            FamilyObject family = new FamilyObject();
             family.setNameFamily( familyName );
             List<SkillObject> skills = new ArrayList<SkillObject>();
             family.setSkills( skills );
@@ -168,7 +168,7 @@ public class SkillManagementMetier
                 String nameFamily = resultat.getString( "name_family" );
                 skill.setNameFamily( nameFamily );
 
-                for ( Family famili : families )
+                for ( FamilyObject famili : families )
                 {
                     if ( famili.getNameFamily().equals( nameFamily ) )
                     {

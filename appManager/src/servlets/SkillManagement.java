@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Family;
+import entities.FamilyObject;
 import metiers.SkillManagementMetier;
 
 /**
@@ -31,7 +31,7 @@ public class SkillManagement extends HttpServlet
         SkillManagementMetier skillManagementMetier = new SkillManagementMetier();
 
         List<String> familiesNames = skillManagementMetier.getFamiliesName( request );
-        List<Family> families = skillManagementMetier.getFamilies( request, familiesNames );
+        List<FamilyObject> families = skillManagementMetier.getFamilies( request, familiesNames );
 
         request.setAttribute( FAMILIES, families );
 

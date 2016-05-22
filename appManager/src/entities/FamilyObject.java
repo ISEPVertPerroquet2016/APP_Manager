@@ -2,7 +2,7 @@ package entities;
 
 import java.util.List;
 
-public class Family
+public class FamilyObject
 {
     private String            nameFamily;
     private List<SkillObject> skills;
