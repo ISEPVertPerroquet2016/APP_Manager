@@ -22,7 +22,6 @@ public class SkillManagement extends HttpServlet
 
     public static final String VUE              = "/pages/gerercomp.jsp";
     public static final String FAMILIES         = "families";
-    public static final String FAMILIES_NAMES   = "familiesNames";
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException

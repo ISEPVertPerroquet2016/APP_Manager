@@ -6,7 +6,6 @@ public class Family
 {
     private String            nameFamily;
     private List<SkillObject> skills;
-    private String            skillName;
 
     /**
      * @return the nameFamily
@@ -41,22 +40,4 @@ public class Family
     {
         this.skills = skills;
     }
-
-    /**
-     * @return the skillName
-     */
-    public String getSkillName()
-    {
-        return skillName;
-    }
-
-    /**
-     * @param skillName
-     *            the skillName to set
-     */
-    public void setSkillName( String skillName )
-    {
-        this.skillName = skillName;
-    }
-
 }
