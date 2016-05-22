@@ -125,6 +125,12 @@ function test(block,fleche){
 	}
 
 </script>
+		<c:forEach items="${ families }" var="family" varStatus="boucle">
+            <h1>${ family.nameFamily }</h1>
+            <c:forEach items="${ family.skills }" var="skill" varStatus="boucle">
+            	<p>${skill.nameSkill}</p>
+            </c:forEach>
+        </c:forEach>
 </body>
 
 </html>
