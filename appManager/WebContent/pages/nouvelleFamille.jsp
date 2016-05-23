@@ -29,7 +29,7 @@
             
             <input type="submit" value="valider" class="btn btn-primary"/>
          </form>
-         <p>${param.family}</p>
+         <p>${family.nameFamily}</p>
         
          </div> 
 
