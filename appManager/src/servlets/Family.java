@@ -22,6 +22,7 @@ public class Family extends HttpServlet
     private static final long  serialVersionUID = 1L;
 
     public static final String DAO_FACTORY      = "daoFactory";
+    public static final String ATT_FORM         = "form";
     public static final String FAMILY           = "family";
     public static final String FAMILY_METIER    = "familyMetier";
     public static final String VUE              = "/pages/nouvelleFamille.jsp";
@@ -54,6 +55,7 @@ public class Family extends HttpServlet
         FamilyObject family = familyMetier.createFamily( request );
 
         request.setAttribute( FAMILY, family );
+        request.setAttribute( ATT_FORM, familyMetier );
 
         // Transmission vers la page en charge de l'affichage des résultats 
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
