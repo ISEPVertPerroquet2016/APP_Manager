@@ -10,8 +10,8 @@
 		
 		
 	%>
-	<h1>Vous êtes connectés: bienvenue ${user.nom}</h1>
-	<p> le type est ${user.employeeType}</p>
-	<p> le numéro est ${user.employeeNumber}</p>
+	<h1>Vous êtes connectés: bienvenue ${user.surname}</h1>
+	<p> le type est ${user.type}</p>
+	<p> le numéro est ${user.userNumber}</p>
 </body>
 </html>

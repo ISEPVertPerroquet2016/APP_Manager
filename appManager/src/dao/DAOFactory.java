@@ -90,4 +90,9 @@ public class DAOFactory
         return new FamilyDao( this );
     }
 
+    public ConnexionDao getConnexionDao()
+    {
+        return new ConnexionDao( this );
+    }
+
 }

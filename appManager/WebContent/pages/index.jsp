@@ -58,7 +58,8 @@
                         </div>
                     </div>
 
-                </form>     
+                </form>
+                <p>${requestScope.formConnexion.erreur }</p>     
 
             </div>                     
         </div>  

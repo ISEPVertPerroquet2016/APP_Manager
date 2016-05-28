@@ -14,7 +14,7 @@
                <div class="panel-body">
                   <div class="form-group col-sm-6">
                        <label>Famille</label>
-                       <input name="family"  class="form-control"><p>${form.erreurs.nameFamily}</p>
+                       <input name="family"  class="form-control"><p>${requestScope.erreurs.nameFamily}</p>
                  </div> 
                  <div class="form-group col-sm-6">
 					   <label>Description</label>
@@ -29,7 +29,7 @@
             
             <input type="submit" value="valider" class="btn btn-primary"/>
          </form>
-         <p>${form.resultat}</p>
+         <p>${requestScope.formFamily.resultat}</p>
          
         
          </div> 
