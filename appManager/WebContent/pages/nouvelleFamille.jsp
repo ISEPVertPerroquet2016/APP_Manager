@@ -14,7 +14,7 @@
                <div class="panel-body">
                   <div class="form-group col-sm-6">
                        <label>Famille</label>
-                       <input name="family"  class="form-control"><p>${requestScope.erreurs.nameFamily}</p>
+                       <input name="family"  class="form-control"><p>${requestScope.formFamily.erreurs.nameFamily}</p>
                  </div> 
                  <div class="form-group col-sm-6">
 					   <label>Description</label>

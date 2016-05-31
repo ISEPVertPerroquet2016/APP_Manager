@@ -9,10 +9,10 @@ import entities.Utilisateur;
 
 public class ConnexionMetier
 {
-    private static final String CHAMP_LOGIN = "login";
-    private static final String CHAMP_PASS  = "password";
+    private static final String CHAMP_LOGIN     = "login";
+    private static final String CHAMP_PASS      = "password";
 
-    private String              erreurConnexion;
+    private String              erreurConnexion = "";
     private LDAPaccess          access;
     private ConnexionDao        connexionDao;
 
@@ -28,7 +28,7 @@ public class ConnexionMetier
         String password = getValeurChamp( request, CHAMP_PASS );
 
         LDAPaccess access = new LDAPaccess();
-        LDAPObject connect = new LDAPObject();
+        LDAPObject connect = null;
 
         try
         {
@@ -36,7 +36,6 @@ public class ConnexionMetier
         } catch ( Exception e )
         {
             System.err.println( e.getMessage() );
-            System.exit( 1 );
         }
         return connect;
     }
@@ -63,6 +62,9 @@ public class ConnexionMetier
                 e.printStackTrace();
             }
 
+        } else
+        {
+            erreurConnexion = "La connexion a échouée, veuillez réessayer";
         }
 
         return user;

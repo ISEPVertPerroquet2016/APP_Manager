@@ -69,12 +69,10 @@
                 
              </div>    
             </div>
-            
-            
+                 <input type="hidden" name="familyName" value='<c:out value="${familyName}"></c:out>'>       
             <input type="submit" value="valider" class="btn btn-primary"/>
          </form>
-         <p>${skill.coefficient}</p>
-         <p>${skill.nameSkill}</p>
+
          </div> 
 
              

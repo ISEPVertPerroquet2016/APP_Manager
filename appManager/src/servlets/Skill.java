@@ -20,11 +20,17 @@ public class Skill extends HttpServlet
     private static final long  serialVersionUID = 1L;
 
     public static final String SKILL            = "skill";
+    public static final String FAMILY_NAME      = "familyName";
+
     public static final String VUE              = "/pages/nouvelleComp.jsp";
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
+        String nameFamily = request.getParameter( "nameFamily" );
+
+        request.setAttribute( FAMILY_NAME, nameFamily );
+
         /* Transmission vers la page en charge de l'affichage des résultats */
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }

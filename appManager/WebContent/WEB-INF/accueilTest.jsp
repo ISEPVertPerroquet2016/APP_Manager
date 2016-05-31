@@ -10,8 +10,8 @@
 		
 		
 	%>
-	<h1>Vous êtes connectés: bienvenue ${user.surname}</h1>
-	<p> le type est ${user.type}</p>
-	<p> le numéro est ${user.userNumber}</p>
+	<h1>Vous êtes connectés: bienvenue ${sessionScope.user.surname}</h1>
+	<p> le type est ${sessionScope.user.type}</p>
+	<p> le numéro est ${sessionScope.user.userID}</p>
 </body>
 </html>

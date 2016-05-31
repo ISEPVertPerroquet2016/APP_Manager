@@ -20,6 +20,7 @@ public class SkillMetier
     private static final String MEDIUM_SKILL     = "medium_skill";
     private static final String MEDIUM_REQUIRED  = "medium_required";
     private static final String MEDIUM_FAILED    = "medium_failed";
+    private static final String NAME_FAMILY      = "familyName";
 
     public SkillObject createSkill( HttpServletRequest request )
     {
@@ -53,9 +54,14 @@ public class SkillMetier
         String mediumFailed = getValeurChamp( request, MEDIUM_FAILED );
         skill.setMediumFailed( mediumFailed );
 
-        try {
+        String nameFamily = getValeurChamp( request, NAME_FAMILY );
+        skill.setNameFamily( nameFamily );
+
+        try
+        {
             Class.forName( "com.mysql.jdbc.Driver" );
-        } catch ( ClassNotFoundException e ) {
+        } catch ( ClassNotFoundException e )
+        {
             e.getMessage();
         }
 
@@ -66,7 +72,8 @@ public class SkillMetier
         Connection connexion = null;
         Statement statement = null;
 
-        try {
+        try
+        {
             connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
 
             /* Création de l'objet gérant les requêtes */
@@ -77,23 +84,31 @@ public class SkillMetier
                     "INSERT INTO Skill (name_skill, observation_test, coefficient, basic_skill, basic_required, basic_failed, medium_skill, medium_required, medium_failed, name_family) VALUES ('"
                             + skillName + "','" + observationTest + "','" + coefficient + "','" + basicSkill + "','"
                             + basicRequired + "','" + basicFailed + "','" + mediumSkill + "','" + mediumRequired + "','"
-                            + mediumFailed + "','test')" );
+                            + mediumFailed + "','" + nameFamily + "')" );
 
-        } catch ( SQLException e ) {
+        } catch ( SQLException e )
+        {
             e.getMessage();
-        } finally {
-            if ( statement != null ) {
-                try {
+        } finally
+        {
+            if ( statement != null )
+            {
+                try
+                {
                     /* Puis on ferme le Statement */
                     statement.close();
-                } catch ( SQLException ignore ) {
+                } catch ( SQLException ignore )
+                {
                 }
             }
-            if ( connexion != null ) {
-                try {
+            if ( connexion != null )
+            {
+                try
+                {
                     /* Et enfin on ferme la connexion */
                     connexion.close();
-                } catch ( SQLException ignore ) {
+                } catch ( SQLException ignore )
+                {
                 }
             }
         }
@@ -108,9 +123,11 @@ public class SkillMetier
     private static String getValeurChamp( HttpServletRequest request, String nomChamp )
     {
         String valeur = request.getParameter( nomChamp );
-        if ( valeur == null || valeur.trim().length() == 0 ) {
+        if ( valeur == null || valeur.trim().length() == 0 )
+        {
             return null;
-        } else {
+        } else
+        {
             return valeur;
         }
     }
@@ -122,9 +139,11 @@ public class SkillMetier
     private static int getValeurIntegerChamp( HttpServletRequest request, String nomChamp )
     {
         String valeur = request.getParameter( nomChamp );
-        if ( valeur == null ) {
+        if ( valeur == null )
+        {
             return 0;
-        } else {
+        } else
+        {
             return Integer.parseInt( valeur );
         }
     }

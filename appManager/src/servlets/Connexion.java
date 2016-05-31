@@ -20,6 +20,7 @@ public class Connexion extends HttpServlet
 {
 
     public static final String CONNEXION          = "/pages/index.jsp";
+    public static final String ACCUEIL            = "/pages/AccueilTuteur.jsp";
     public static final String ACCUEIL_TEST       = "/WEB-INF/accueilTest.jsp";
     public static final String ELEVE              = "eleve";
     public static final String DAO_FACTORY        = "daoFactory";
@@ -41,8 +42,10 @@ public class Connexion extends HttpServlet
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
+
         /* Affichage de la page de connexion */
         this.getServletContext().getRequestDispatcher( CONNEXION ).forward( request, response );
+
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
@@ -66,6 +69,9 @@ public class Connexion extends HttpServlet
         if ( ELEVE.equals( user.getType() ) )
         {
             this.getServletContext().getRequestDispatcher( ACCUEIL_TEST ).forward( request, response );
+        } else
+        {
+            this.getServletContext().getRequestDispatcher( ACCUEIL ).forward( request, response );
         }
 
         // response.sendRedirect( ACCUEIL );
