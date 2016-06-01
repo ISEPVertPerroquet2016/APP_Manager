@@ -23,6 +23,7 @@ public class Connexion extends HttpServlet
     public static final String ACCUEIL            = "/appManager/Accueil";
     public static final String ACCUEIL_TEST       = "/WEB-INF/accueilTest.jsp";
     public static final String ELEVE              = "eleve";
+    public static final String PROFESSEUR         = "professeur";
     public static final String DAO_FACTORY        = "daoFactory";
     public static final String ATT_FORM_CONNEXION = "formConnexion";
 
@@ -72,7 +73,7 @@ public class Connexion extends HttpServlet
         {
             //this.getServletContext().getRequestDispatcher( ACCUEIL_TEST ).forward( request, response );
             response.sendRedirect( ACCUEIL );
-        } else
+        } else if ( PROFESSEUR.equals( user.getType() ) )
         {
             response.sendRedirect( ACCUEIL );
         }

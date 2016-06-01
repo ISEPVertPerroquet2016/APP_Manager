@@ -28,7 +28,7 @@ public class Skill extends HttpServlet
     public static final String ATT_FORM_SKILL   = "formSkill";
     public static final String FAMILY_NAME      = "familyName";
     public static final String USER             = "user";
-    public static final String ELEVE            = "eleve";
+    public static final String PROFESSEUR       = "professeur";
     public static final String VUE              = "/pages/nouvelleComp.jsp";
 
     private SkillDao           skillDao;
@@ -49,7 +49,7 @@ public class Skill extends HttpServlet
         HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur) session.getAttribute( USER );
 
-        if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && PROFESSEUR.equals( utilisateur.getType() ) )
         {
             String nameFamily = request.getParameter( "nameFamily" );
             request.setAttribute( FAMILY_NAME, nameFamily );

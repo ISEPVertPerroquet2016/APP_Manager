@@ -82,28 +82,20 @@
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="Accueil"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="Accueil"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="glyphicon glyphicon-list-alt"></i> Fiche de compétences<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                        <li>                         
                                 <li>
-                                    <a href="affichercomm.jsp">Voir la liste</a>
+                                    <a href="affichercomm.jsp">Fiche de compétences</a>
                                 </li>
                                 <li>
                                     <a href="notes.jsp">Notes</a>
                                 </li>
-                            </ul>
+                           
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="SkillManagement"><i class=""></i> Gestion de compétences</a>
-                        </li>
-                        <li>
-                            <a href=""><i class=""></i> Gestion des barèmes</a>
-                        </li>
-                        <li>
-                            <a href=""><i class=""></i> Tuteurs</a>
                         </li>
                         <li>
                             <a href=""><i class="glyphicon glyphicon-file"></i> Documents</a>

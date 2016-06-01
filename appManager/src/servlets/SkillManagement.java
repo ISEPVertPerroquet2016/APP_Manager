@@ -28,7 +28,7 @@ public class SkillManagement extends HttpServlet
     public static final String VUE              = "/pages/gerercomp.jsp";
     public static final String FAMILIES         = "families";
     public static final String USER             = "user";
-    public static final String ELEVE            = "eleve";
+    public static final String PROFESSEUR       = "professeur";
 
     private SkillManagementDao skillManagementDao;
 
@@ -49,7 +49,7 @@ public class SkillManagement extends HttpServlet
         HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur) session.getAttribute( USER );
 
-        if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && PROFESSEUR.equals( utilisateur.getType() ) )
         {
             // Initialisation de l'objet metier
             SkillManagementMetier skillManagementMetier = new SkillManagementMetier( skillManagementDao );
