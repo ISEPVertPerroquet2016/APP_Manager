@@ -19,8 +19,9 @@ import metiers.ConnexionMetier;
 public class Connexion extends HttpServlet
 {
 
-    public static final String CONNEXION          = "/pages/index.jsp";
-    public static final String ACCUEIL            = "/appManager/Accueil";
+    public static final String CONNEXION_VIEW     = "/pages/index.jsp";
+    public static final String SKILLS_SHEET_VIEW  = "/appManager/SkillsSheet";
+    public static final String ACCUEIL_VIEW       = "/appManager/Accueil";
     public static final String ACCUEIL_TEST       = "/WEB-INF/accueilTest.jsp";
     public static final String ELEVE              = "eleve";
     public static final String PROFESSEUR         = "professeur";
@@ -45,7 +46,7 @@ public class Connexion extends HttpServlet
     {
 
         /* Affichage de la page de connexion */
-        this.getServletContext().getRequestDispatcher( CONNEXION ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( CONNEXION_VIEW ).forward( request, response );
 
     }
 
@@ -63,7 +64,7 @@ public class Connexion extends HttpServlet
 
         if ( user == null )
         {
-            this.getServletContext().getRequestDispatcher( CONNEXION ).forward( request, response );
+            this.getServletContext().getRequestDispatcher( CONNEXION_VIEW ).forward( request, response );
         } else
         {
             session.setAttribute( USER, user );
@@ -72,10 +73,10 @@ public class Connexion extends HttpServlet
         if ( ELEVE.equals( user.getType() ) )
         {
             //this.getServletContext().getRequestDispatcher( ACCUEIL_TEST ).forward( request, response );
-            response.sendRedirect( ACCUEIL );
+            response.sendRedirect( SKILLS_SHEET_VIEW );
         } else if ( PROFESSEUR.equals( user.getType() ) )
         {
-            response.sendRedirect( ACCUEIL );
+            response.sendRedirect( ACCUEIL_VIEW );
         }
 
         // response.sendRedirect( ACCUEIL );

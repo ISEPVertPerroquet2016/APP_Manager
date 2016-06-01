@@ -80,23 +80,27 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        
+                    	<c:set var="type" value="${sessionScope.user.type}" scope="request" />
+                    	<c:set var="professeur" value="professeur" scope="request" />
+                        <c:if test="professeur.equals(type)">
+                        	<li>
+                            	<a href="Accueil"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
+                        	</li> 
+                        </c:if>
+                                                                     
                         <li>
-                            <a href="Accueil"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
+                            <a href="SkillsSheet">Fiche de competences</a>
                         </li>
-                        <li>                         
-                                <li>
-                                    <a href="affichercomm.jsp">Fiche de compétences</a>
-                                </li>
-                                <li>
-                                    <a href="notes.jsp">Notes</a>
-                                </li>
+                        <li>
+                            <a href="notes.jsp">Notes</a>
+                        </li>
                            
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="SkillManagement"><i class=""></i> Gestion de compétences</a>
-                        </li>
+                        <c:if test="professeur.equals(type)">
+                        	<li>
+                            	<a href="SkillManagement"><i class=""></i> Gestion de compétences</a>
+                        	</li>
+                        </c:if> 
+                                                
                         <li>
                             <a href=""><i class="glyphicon glyphicon-file"></i> Documents</a>
                         </li>

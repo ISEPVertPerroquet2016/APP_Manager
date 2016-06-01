@@ -3,7 +3,7 @@
    <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3 class="page-header">Nouvelle compétence </h3>
+                    <h3 class="page-header">Nouvelle compétence dans la famille "${familyName}" </h3>
                	</div>
 			</div>
         

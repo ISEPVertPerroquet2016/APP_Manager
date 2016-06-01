@@ -86,18 +86,12 @@
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="AccueilTuteur.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="glyphicon glyphicon-list-alt"></i> Fiche de compétences<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="affichercomm.jsp">Voir la liste</a>
+                                    <a href="SkillsSheet">Fiche de compétences</a>
                                 </li>
                                 <li>
                                     <a href="notes.jsp">Notes</a>
                                 </li>
-                            </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>

@@ -17,7 +17,7 @@ public class Deconnexion extends HttpServlet
 {
     private static final long  serialVersionUID = 1L;
 
-    public static final String VUE              = "/appManager/Connexion";
+    public static final String CONNEXION_VIEW   = "/appManager/Connexion";
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
@@ -25,7 +25,7 @@ public class Deconnexion extends HttpServlet
         HttpSession session = request.getSession();
         session.invalidate();
 
-        response.sendRedirect( VUE );
+        response.sendRedirect( CONNEXION_VIEW );
     }
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )

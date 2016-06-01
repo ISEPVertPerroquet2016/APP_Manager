@@ -21,15 +21,18 @@ import metiers.SkillMetier;
 @WebServlet( "/Skill" )
 public class Skill extends HttpServlet
 {
-    private static final long  serialVersionUID = 1L;
+    private static final long  serialVersionUID  = 1L;
 
-    public static final String DAO_FACTORY      = "daoFactory";
-    public static final String SKILL            = "skill";
-    public static final String ATT_FORM_SKILL   = "formSkill";
-    public static final String FAMILY_NAME      = "familyName";
-    public static final String USER             = "user";
-    public static final String PROFESSEUR       = "professeur";
-    public static final String VUE              = "/pages/nouvelleComp.jsp";
+    public static final String DAO_FACTORY       = "daoFactory";
+    public static final String SKILL             = "skill";
+    public static final String ATT_FORM_SKILL    = "formSkill";
+    public static final String FAMILY_NAME       = "familyName";
+    public static final String USER              = "user";
+    public static final String PROFESSEUR        = "professeur";
+    public static final String ELEVE             = "eleve";
+    public static final String SKILL_VIEW        = "/pages/nouvelleComp.jsp";
+    public static final String CONNEXION_VIEW    = "/pages/index.jsp";
+    public static final String SKILLS_SHEET_VIEW = "/appManager/SkillsSheet";
 
     private SkillDao           skillDao;
 
@@ -55,7 +58,13 @@ public class Skill extends HttpServlet
             request.setAttribute( FAMILY_NAME, nameFamily );
 
             // Transmission vers la page en charge de l'affichage des résultats 
-            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+            this.getServletContext().getRequestDispatcher( SKILL_VIEW ).forward( request, response );
+        } else if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+        {
+            response.sendRedirect( SKILLS_SHEET_VIEW );
+        } else
+        {
+            response.sendRedirect( CONNEXION_VIEW );
         }
     }
 
@@ -69,10 +78,13 @@ public class Skill extends HttpServlet
 
         /* Enregistrement de la famille */
         request.setAttribute( SKILL, skill );
+        request.setAttribute( FAMILY_NAME, skill.getNameFamily() );
         request.setAttribute( ATT_FORM_SKILL, skillMetier );
 
         /* Transmission vers la page en charge de l'affichage des résultats */
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        // response.sendRedirect( "/appManager/Skill?nameFamily=" + skill.getNameFamily() );
+
+        this.getServletContext().getRequestDispatcher( SKILL_VIEW ).forward( request, response );
     }
 
 }

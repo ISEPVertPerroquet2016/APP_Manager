@@ -22,13 +22,16 @@ import metiers.SkillManagementMetier;
 @WebServlet( "/SkillManagement" )
 public class SkillManagement extends HttpServlet
 {
-    private static final long  serialVersionUID = 1L;
+    private static final long  serialVersionUID      = 1L;
 
-    public static final String DAO_FACTORY      = "daoFactory";
-    public static final String VUE              = "/pages/gerercomp.jsp";
-    public static final String FAMILIES         = "families";
-    public static final String USER             = "user";
-    public static final String PROFESSEUR       = "professeur";
+    public static final String DAO_FACTORY           = "daoFactory";
+    public static final String SKILL_MANAGEMENT_VIEW = "/pages/gerercomp.jsp";
+    public static final String SKILLS_SHEET_VIEW     = "/appManager/SkillsSheet";
+    public static final String CONNEXION_VIEW        = "/pages/index.jsp";
+    public static final String FAMILIES              = "families";
+    public static final String USER                  = "user";
+    public static final String PROFESSEUR            = "professeur";
+    public static final String ELEVE                 = "eleve";
 
     private SkillManagementDao skillManagementDao;
 
@@ -60,7 +63,13 @@ public class SkillManagement extends HttpServlet
             request.setAttribute( FAMILIES, families );
 
             // Transmission vers la page en charge de l'affichage des résultats 
-            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+            this.getServletContext().getRequestDispatcher( SKILL_MANAGEMENT_VIEW ).forward( request, response );
+        } else if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+        {
+            response.sendRedirect( SKILLS_SHEET_VIEW );
+        } else
+        {
+            response.sendRedirect( CONNEXION_VIEW );
         }
 
     }

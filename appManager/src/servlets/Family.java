@@ -21,15 +21,18 @@ import metiers.FamilyMetier;
 @WebServlet( "/Family" )
 public class Family extends HttpServlet
 {
-    private static final long  serialVersionUID = 1L;
+    private static final long  serialVersionUID  = 1L;
 
-    public static final String DAO_FACTORY      = "daoFactory";
-    public static final String ATT_FORM_FAMILY  = "formFamily";
-    public static final String FAMILY           = "family";
-    public static final String FAMILY_METIER    = "familyMetier";
-    public static final String VUE              = "/pages/nouvelleFamille.jsp";
-    public static final String USER             = "user";
-    public static final String PROFESSEUR       = "professeur";
+    public static final String DAO_FACTORY       = "daoFactory";
+    public static final String ATT_FORM_FAMILY   = "formFamily";
+    public static final String FAMILY            = "family";
+    public static final String FAMILY_METIER     = "familyMetier";
+    public static final String FAMILY_VIEW       = "/pages/nouvelleFamille.jsp";
+    public static final String CONNEXION_VIEW    = "/appManager/Connexion";
+    public static final String SKILLS_SHEET_VIEW = "/appManager/SkillsSheet";
+    public static final String USER              = "user";
+    public static final String PROFESSEUR        = "professeur";
+    public static final String ELEVE             = "eleve";
 
     private FamilyDao          familyDao;
 
@@ -51,8 +54,14 @@ public class Family extends HttpServlet
 
         if ( utilisateur != null && PROFESSEUR.equals( utilisateur.getType() ) )
         {
-            // Transmission vers la page en charge de l'affichage des résultats 
-            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+
+            this.getServletContext().getRequestDispatcher( FAMILY_VIEW ).forward( request, response );
+        } else if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+        {
+            response.sendRedirect( SKILLS_SHEET_VIEW );
+        } else
+        {
+            response.sendRedirect( CONNEXION_VIEW );
         }
     }
 
@@ -68,7 +77,7 @@ public class Family extends HttpServlet
         request.setAttribute( ATT_FORM_FAMILY, familyMetier );
 
         // Transmission vers la page en charge de l'affichage des résultats 
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( FAMILY_VIEW ).forward( request, response );
     }
 
 }

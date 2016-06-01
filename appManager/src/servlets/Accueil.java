@@ -19,9 +19,12 @@ public class Accueil extends HttpServlet
 {
     private static final long  serialVersionUID = 1L;
 
-    public static final String VUE              = "/pages/AccueilTuteur.jsp";
+    public static final String ACCUEIL_VIEW     = "/pages/AccueilTuteur.jsp";
+    public static final String CONNEXION_VIEW   = "/appManager/Connexion";
+    public static final String SKILL_SHEET_VIEW = "/appManager/SkillsSheet";
     public static final String USER             = "user";
     public static final String PROFESSEUR       = "professeur";
+    public static final String ELEVE            = "eleve";
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
@@ -31,8 +34,13 @@ public class Accueil extends HttpServlet
 
         if ( utilisateur != null && PROFESSEUR.equals( utilisateur.getType() ) )
         {
-            // Transmission vers la page en charge de l'affichage des résultats 
-            this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+            this.getServletContext().getRequestDispatcher( ACCUEIL_VIEW ).forward( request, response );
+        } else if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+        {
+            response.sendRedirect( SKILL_SHEET_VIEW );
+        } else
+        {
+            response.sendRedirect( CONNEXION_VIEW );
         }
     }
 
