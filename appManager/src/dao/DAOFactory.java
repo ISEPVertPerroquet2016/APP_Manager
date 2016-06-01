@@ -95,4 +95,14 @@ public class DAOFactory
         return new ConnexionDao( this );
     }
 
+    public SkillManagementDao getSkillManagementDao()
+    {
+        return new SkillManagementDao( this );
+    }
+
+    public SkillDao getSkillDao()
+    {
+        return new SkillDao( this );
+    }
+
 }

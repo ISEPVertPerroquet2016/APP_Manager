@@ -62,17 +62,13 @@
             <ul class="nav navbar-top-links navbar-right">
         
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="">Responsable DUPONT
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">${sessionScope.user.firstname} ${sessionScope.user.surname}
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
 					</a>
                     
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="Deconnexion"><i class="fa fa-sign-out fa-fw"></i> Log out</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -86,7 +82,7 @@
                     <ul class="nav" id="side-menu">
                         
                         <li>
-                            <a href="AccueilTuteur.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="Accueil"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-list-alt"></i> Fiche de compétences<span class="fa arrow"></span></a>
@@ -101,7 +97,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="gerercomp.jsp"><i class=""></i> Gestion de compétences</a>
+                            <a href="SkillManagement"><i class=""></i> Gestion de compétences</a>
                         </li>
                         <li>
                             <a href=""><i class=""></i> Gestion des barèmes</a>

@@ -36,7 +36,7 @@ public class FamilyMetier
             if ( erreurs.isEmpty() )
             {
                 familyDao.create( family );
-                resultat = "Succès de l'opération, la famille" + "\"" + familyName + "\"" + "a bien été ajoutée";
+                resultat = "Succès de l'opération, la famille " + familyName + " a bien été ajoutée";
             } else
             {
                 resultat = "Echec de l'opération";
@@ -72,11 +72,11 @@ public class FamilyMetier
                 throw new FormValidationException( "Le nombre de caractère ne doit pas dépasser 150" );
             } else if ( familyDao.find( nameFamily ) != null )
             {
-                throw new FormValidationException( "Cette adresse est déja utilisée" );
+                throw new FormValidationException( "Cette famille existe déja" );
             }
         } else
         {
-            throw new FormValidationException( "Merci de saisir une adresse email" );
+            throw new FormValidationException( "Merci de saisir une famille" );
         }
     }
 

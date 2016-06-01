@@ -20,7 +20,7 @@ public class Connexion extends HttpServlet
 {
 
     public static final String CONNEXION          = "/pages/index.jsp";
-    public static final String ACCUEIL            = "/pages/AccueilTuteur.jsp";
+    public static final String ACCUEIL            = "/appManager/Accueil";
     public static final String ACCUEIL_TEST       = "/WEB-INF/accueilTest.jsp";
     public static final String ELEVE              = "eleve";
     public static final String DAO_FACTORY        = "daoFactory";
@@ -58,20 +58,23 @@ public class Connexion extends HttpServlet
         // Récupération de la session depuis la requête
         HttpSession session = request.getSession();
 
-        session.setAttribute( USER, user );
         request.setAttribute( ATT_FORM_CONNEXION, connexion );
 
         if ( user == null )
         {
             this.getServletContext().getRequestDispatcher( CONNEXION ).forward( request, response );
+        } else
+        {
+            session.setAttribute( USER, user );
         }
 
         if ( ELEVE.equals( user.getType() ) )
         {
-            this.getServletContext().getRequestDispatcher( ACCUEIL_TEST ).forward( request, response );
+            //this.getServletContext().getRequestDispatcher( ACCUEIL_TEST ).forward( request, response );
+            response.sendRedirect( ACCUEIL );
         } else
         {
-            this.getServletContext().getRequestDispatcher( ACCUEIL ).forward( request, response );
+            response.sendRedirect( ACCUEIL );
         }
 
         // response.sendRedirect( ACCUEIL );

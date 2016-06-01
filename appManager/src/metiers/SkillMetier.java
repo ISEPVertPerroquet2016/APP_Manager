@@ -1,12 +1,12 @@
 package metiers;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dao.DAOException;
+import dao.SkillDao;
 import entities.SkillObject;
 
 public class SkillMetier
@@ -22,13 +22,49 @@ public class SkillMetier
     private static final String MEDIUM_FAILED    = "medium_failed";
     private static final String NAME_FAMILY      = "familyName";
 
+    private static final String CHAMP_NOM        = "nameSkill";
+
+    private SkillDao            skillDao;
+    private String              resultat;
+    private Map<String, String> erreurs          = new HashMap<String, String>();
+
+    public SkillMetier( SkillDao skillDao )
+    {
+        this.skillDao = skillDao;
+    }
+
     public SkillObject createSkill( HttpServletRequest request )
+    {
+        SkillObject skill = null;
+
+        try
+        {
+            skill = map( request );
+
+            if ( erreurs.isEmpty() )
+            {
+                skillDao.create( skill );
+                resultat = "Succès de l'opération, la compétence " + skill.getNameSkill() + " a bien été ajoutée";
+            } else
+            {
+                resultat = "Echec de l'opération";
+            }
+        } catch ( DAOException e )
+        {
+            resultat = "Echec de l'opération, une erreur imprévue est survenue";
+            e.printStackTrace();
+        }
+
+        return skill;
+    }
+
+    private SkillObject map( HttpServletRequest request )
     {
         SkillObject skill = new SkillObject();
 
         /* Récupération des champs du formulaire */
         String skillName = getValeurChamp( request, NAME_SKILL );
-        skill.setNameSkill( skillName );
+        traiterName( skillName, skill );
 
         String observationTest = getValeurChamp( request, OBSERVATION_TEST );
         skill.setObservationTest( observationTest );
@@ -57,62 +93,6 @@ public class SkillMetier
         String nameFamily = getValeurChamp( request, NAME_FAMILY );
         skill.setNameFamily( nameFamily );
 
-        try
-        {
-            Class.forName( "com.mysql.jdbc.Driver" );
-        } catch ( ClassNotFoundException e )
-        {
-            e.getMessage();
-        }
-
-        /* Connexion à la base de données */
-        String url = "jdbc:mysql://localhost:3306/bdd_appmanager";
-        String utilisateur = "root";
-        String motDePasse = "perroquetG11";
-        Connection connexion = null;
-        Statement statement = null;
-
-        try
-        {
-            connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
-
-            /* Création de l'objet gérant les requêtes */
-            statement = connexion.createStatement();
-
-            // Execution de la requête d'insertion
-            int statut = statement.executeUpdate(
-                    "INSERT INTO Skill (name_skill, observation_test, coefficient, basic_skill, basic_required, basic_failed, medium_skill, medium_required, medium_failed, name_family) VALUES ('"
-                            + skillName + "','" + observationTest + "','" + coefficient + "','" + basicSkill + "','"
-                            + basicRequired + "','" + basicFailed + "','" + mediumSkill + "','" + mediumRequired + "','"
-                            + mediumFailed + "','" + nameFamily + "')" );
-
-        } catch ( SQLException e )
-        {
-            e.getMessage();
-        } finally
-        {
-            if ( statement != null )
-            {
-                try
-                {
-                    /* Puis on ferme le Statement */
-                    statement.close();
-                } catch ( SQLException ignore )
-                {
-                }
-            }
-            if ( connexion != null )
-            {
-                try
-                {
-                    /* Et enfin on ferme la connexion */
-                    connexion.close();
-                } catch ( SQLException ignore )
-                {
-                }
-            }
-        }
-
         return skill;
     }
 
@@ -139,7 +119,7 @@ public class SkillMetier
     private static int getValeurIntegerChamp( HttpServletRequest request, String nomChamp )
     {
         String valeur = request.getParameter( nomChamp );
-        if ( valeur == null )
+        if ( valeur == null || valeur.trim().length() == 0 )
         {
             return 0;
         } else
@@ -147,7 +127,49 @@ public class SkillMetier
             return Integer.parseInt( valeur );
         }
     }
-}
 
-// int valeur = Integer.parseInt( request.getParameter( String.valueOf( nomChamp
-// ) ) );
+    private void traiterName( String nameSkill, SkillObject skill )
+    {
+        try
+        {
+            validationName( nameSkill );
+        } catch ( FormValidationException e )
+        {
+            setErreur( CHAMP_NOM, e.getMessage() );
+        }
+        skill.setNameSkill( nameSkill );
+    }
+
+    //Validation du nom
+    private void validationName( String nameSkill ) throws FormValidationException
+    {
+        if ( nameSkill != null )
+        {
+            if ( nameSkill.length() > 150 )
+            {
+                throw new FormValidationException( "Le nombre de caractère ne doit pas dépasser 150" );
+            } else if ( skillDao.find( nameSkill ) != null )
+            {
+                throw new FormValidationException( "Cette compétence existe déja" );
+            }
+        } else
+        {
+            throw new FormValidationException( "Merci de saisir une compétence" );
+        }
+    }
+
+    private void setErreur( String champ, String message )
+    {
+        erreurs.put( champ, message );
+    }
+
+    public String getResultat()
+    {
+        return resultat;
+    }
+
+    public Map<String, String> getErreurs()
+    {
+        return erreurs;
+    }
+}

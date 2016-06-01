@@ -1,4 +1,4 @@
-<%@include file="header.jsp" %>
+<%@include file="headerResp.jsp" %>
 <%@ page import="java.io.*,java.util.*" %>
 <%@ page import="javax.servlet.*,java.text.*" %>
         <div id="page-wrapper">

@@ -15,6 +15,7 @@
                   <div class="form-group col-sm-4">
                        <label>Compétence</label>
                        <input class="form-control" name="name_skill">
+                       <p>${requestScope.formSkill.erreurs.nameSkill}</p>
                  </div> 
                  <div class="form-group col-sm-4">
 					   <label>Critères d'observation</label>
@@ -72,6 +73,7 @@
                  <input type="hidden" name="familyName" value='<c:out value="${familyName}"></c:out>'>       
             <input type="submit" value="valider" class="btn btn-primary"/>
          </form>
+         <p>${requestScope.formSkill.resultat}</p>
 
          </div> 
 
