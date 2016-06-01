@@ -1,4 +1,4 @@
-<%@include file="header.jsp" %>
+<%@include file="headerResp.jsp" %>
 <div id="page-wrapper">
             <div class="row">
          <nav class="navbar navbar-default">

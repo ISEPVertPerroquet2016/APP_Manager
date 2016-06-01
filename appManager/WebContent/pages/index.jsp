@@ -33,7 +33,7 @@
               </svg>
             </div>
         </div>
-       <img alt="" src="././images/Isep-Logo.png">  
+       <img alt="" src="images/Isep-Logo.png">  
         <div class="panel panel-default" >
        
               
