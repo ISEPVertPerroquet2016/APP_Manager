@@ -6,13 +6,10 @@
           
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href=""></a></li><li><a href=""></a></li><li><a href=""></a></li>    
-              <li class="active"><a href="affichercomm.jsp">Communication</a></li>
-              <li><a href="afficherTE.jsp">Travail en équipe</a></li>
-              <li><a href="affichercp.jsp">Conduite de projet</a></li>
-              <li><a href="affichercr.jsp">Conception, réalisation</a></li>
-              <li><a href="afficherpr.jsp">Professionnel responsable</a></li>
-             
+               <c:forEach items="${ requestScope.families }" var="family" varStatus="boucl" >
+               		<li><a href="">${ family.nameFamily }</a></li>
+               </c:forEach>     
+              
             </ul>
          
           </div><!--/.nav-collapse -->

@@ -105,4 +105,9 @@ public class DAOFactory
         return new SkillDao( this );
     }
 
+    public SkillSheetDao getSkillSheetDao()
+    {
+        return new SkillSheetDao( this );
+    }
+
 }

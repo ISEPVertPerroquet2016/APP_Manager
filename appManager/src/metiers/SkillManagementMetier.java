@@ -19,6 +19,11 @@ public class SkillManagementMetier
         this.skillManagementDao = skillManagementDao;
     }
 
+    public SkillManagementMetier()
+    {
+
+    }
+
     public List<String> getFamiliesName( HttpServletRequest request )
     {
         familiesNames = null;
