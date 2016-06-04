@@ -19,16 +19,19 @@ import metiers.ConnexionMetier;
 public class Connexion extends HttpServlet
 {
 
+    //views
     public static final String CONNEXION_VIEW     = "/pages/index.jsp";
     public static final String SKILLS_SHEET_VIEW  = "/appManager/SkillsSheet";
     public static final String ACCUEIL_VIEW       = "/appManager/Accueil";
     public static final String ACCUEIL_TEST       = "/WEB-INF/accueilTest.jsp";
+
+    //attributes
     public static final String ELEVE              = "eleve";
     public static final String PROFESSEUR         = "professeur";
-    public static final String DAO_FACTORY        = "daoFactory";
     public static final String ATT_FORM_CONNEXION = "formConnexion";
-
     public static final String USER               = "user";
+
+    public static final String DAO_FACTORY        = "daoFactory";
 
     private ConnexionDao       connexionDao;
 
