@@ -2,22 +2,22 @@ package entities;
 
 public class Utilisateur
 {
-    private Long   userID;
+    private int    userID;
 
     private String firstname;
 
     private String surname;
 
-    private Long   idGroup;
+    private int    idGroup;
 
     private String type;
 
-    public Long getUserID()
+    public int getUserID()
     {
         return userID;
     }
 
-    public void setUserID( Long userID )
+    public void setUserID( int userID )
     {
         this.userID = userID;
     }
@@ -32,12 +32,12 @@ public class Utilisateur
         this.surname = surname;
     }
 
-    public Long getIdGroup()
+    public int getIdGroup()
     {
         return idGroup;
     }
 
-    public void setIdGroup( Long idGroup )
+    public void setIdGroup( int idGroup )
     {
         this.idGroup = idGroup;
     }

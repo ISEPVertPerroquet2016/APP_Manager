@@ -59,14 +59,14 @@ public class ConnexionDao implements IConnexionDao
     {
         Utilisateur utilisateur = new Utilisateur();
 
-        utilisateur.setUserID( (Long) ( (long) resultset.getInt( "user_id" ) ) );
+        utilisateur.setUserID( resultset.getInt( "user_id" ) );
         utilisateur.setFirstname( resultset.getString( "firstname" ) );
         utilisateur.setSurname( resultset.getString( "surname" ) );
         utilisateur.setType( resultset.getString( "userType" ) );
 
-        Long group = (Long) ( (long) resultset.getInt( "id_group" ) );
+        int group = resultset.getInt( "id_group" );
 
-        if ( group != null )
+        if ( group > -1 )
         {
             utilisateur.setIdGroup( group );
         }
