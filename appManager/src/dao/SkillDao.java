@@ -5,15 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import entities.FamilyObject;
 import entities.SkillObject;
 
 public class SkillDao implements ISkillDao
 {
 
-    private static final String SQL_CREATE_SKILL = "INSERT INTO Skill (name_skill, observation_test, coefficient, basic_skill, basic_required, basic_failed, medium_skill, medium_required, medium_failed, name_family) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_CREATE_SKILL   = "INSERT INTO Skill (name_skill, observation_test, coefficient, basic_skill, basic_required, basic_failed, medium_skill, medium_required, medium_failed, name_family) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_SELECT_BY_NAME = "SELECT name_skill FROM Skill WHERE name_skill = ?";
-    
+
     private DAOFactory          daoFactory;
 
     public SkillDao( DAOFactory daoFactory )
@@ -69,7 +68,7 @@ public class SkillDao implements ISkillDao
     @Override
     public SkillObject find( String skillName )
     {
-    	Connection connexion = null;
+        Connection connexion = null;
         PreparedStatement preparedstatement = null;
         ResultSet resultSet = null;
         SkillObject skill = null;
@@ -101,7 +100,7 @@ public class SkillDao implements ISkillDao
             DAOUtilitaire.fermeturesSilencieuses( resultSet, preparedstatement, connexion );
         }
 
-        return null;
+        return skill;
     }
 
 }
