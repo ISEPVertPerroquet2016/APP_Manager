@@ -24,14 +24,18 @@ public class SkillManagement extends HttpServlet
 {
     private static final long  serialVersionUID      = 1L;
 
-    public static final String DAO_FACTORY           = "daoFactory";
+    //views
     public static final String SKILL_MANAGEMENT_VIEW = "/pages/gerercomp.jsp";
     public static final String SKILLS_SHEET_VIEW     = "/appManager/SkillsSheet";
     public static final String CONNEXION_VIEW        = "/pages/index.jsp";
+
+    //attributes
     public static final String FAMILIES              = "families";
     public static final String USER                  = "user";
     public static final String PROFESSEUR            = "professeur";
     public static final String ELEVE                 = "eleve";
+
+    public static final String DAO_FACTORY           = "daoFactory";
 
     private SkillManagementDao skillManagementDao;
 

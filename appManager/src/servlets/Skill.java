@@ -23,16 +23,20 @@ public class Skill extends HttpServlet
 {
     private static final long  serialVersionUID  = 1L;
 
-    public static final String DAO_FACTORY       = "daoFactory";
+    //views
+    public static final String SKILL_VIEW        = "/pages/nouvelleComp.jsp";
+    public static final String CONNEXION_VIEW    = "/pages/index.jsp";
+    public static final String SKILLS_SHEET_VIEW = "/appManager/SkillsSheet";
+
+    //attributes
     public static final String SKILL             = "skill";
     public static final String ATT_FORM_SKILL    = "formSkill";
     public static final String FAMILY_NAME       = "familyName";
     public static final String USER              = "user";
     public static final String PROFESSEUR        = "professeur";
     public static final String ELEVE             = "eleve";
-    public static final String SKILL_VIEW        = "/pages/nouvelleComp.jsp";
-    public static final String CONNEXION_VIEW    = "/pages/index.jsp";
-    public static final String SKILLS_SHEET_VIEW = "/appManager/SkillsSheet";
+
+    public static final String DAO_FACTORY       = "daoFactory";
 
     private SkillDao           skillDao;
 
