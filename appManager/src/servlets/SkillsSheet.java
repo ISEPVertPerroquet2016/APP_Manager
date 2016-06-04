@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.DAOFactory;
 import dao.SkillSheetDao;
 import entities.FamilyObject;
+import entities.GroupObject;
 import entities.Utilisateur;
 import metiers.SkillSheetMetier;
 
@@ -28,6 +29,7 @@ public class SkillsSheet extends HttpServlet
     public static final String PROFESSEUR        = "professeur";
     public static final String ELEVE             = "eleve";
     public static final String FAMILIES          = "families";
+    public static final String GROUPS            = "groups";
 
     public static final String DAO_FACTORY       = "daoFactory";
 
@@ -54,10 +56,12 @@ public class SkillsSheet extends HttpServlet
             {
                 SkillSheetMetier skillSheetMetier = new SkillSheetMetier( skillSheetDao );
 
-                List<String> familiesNames = skillSheetMetier.getFamiliesName( request );
+                List<String> familiesNames = skillSheetMetier.getFamiliesName();
                 List<FamilyObject> families = skillSheetMetier.getFamilies( familiesNames );
+                List<GroupObject> groups = skillSheetMetier.getGroups();
 
                 request.setAttribute( FAMILIES, families );
+                request.setAttribute( GROUPS, groups );
 
                 this.getServletContext().getRequestDispatcher( SKILLS_SHEET_VIEW ).forward( request, response );
             } else

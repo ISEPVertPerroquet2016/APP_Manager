@@ -61,7 +61,7 @@ public class SkillManagement extends HttpServlet
             // Initialisation de l'objet metier
             SkillManagementMetier skillManagementMetier = new SkillManagementMetier( skillManagementDao );
 
-            List<String> familiesNames = skillManagementMetier.getFamiliesName( request );
+            List<String> familiesNames = skillManagementMetier.getFamiliesName();
             List<FamilyObject> families = skillManagementMetier.getFamilies( familiesNames );
 
             request.setAttribute( FAMILIES, families );

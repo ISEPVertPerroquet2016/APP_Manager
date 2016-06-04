@@ -15,7 +15,7 @@ public class SkillManagementDao implements ISkillManagementDao
     private static final String SQL_SELECT_FAMILIES_NAMES = "SELECT name_family FROM familyskill";
     private static final String SQL_SELECT_FAMILIES       = "SELECT * FROM skill";
 
-    private DAOFactory          daoFactory;
+    protected DAOFactory        daoFactory;
 
     public SkillManagementDao( DAOFactory daoFactory )
     {

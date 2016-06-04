@@ -2,8 +2,6 @@ package metiers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import dao.DAOException;
 import dao.SkillManagementDao;
 import entities.FamilyObject;
@@ -24,7 +22,7 @@ public class SkillManagementMetier
 
     }
 
-    public List<String> getFamiliesName( HttpServletRequest request )
+    public List<String> getFamiliesName()
     {
         familiesNames = null;
 

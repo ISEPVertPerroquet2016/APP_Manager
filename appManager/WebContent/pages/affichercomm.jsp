@@ -6,7 +6,7 @@
           
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-               <c:forEach items="${ requestScope.families }" var="family" varStatus="boucl" >
+               <c:forEach items="${ requestScope.families }" var="family" >
                		<li><a href="">${ family.nameFamily }</a></li>
                </c:forEach>     
               
@@ -23,8 +23,9 @@
                                 <div class="form-group col-sm-6">
                                             
                                             <select placeholder="Equipe" class="form-control">
-                                              <option>Equipe 1</option>
-                                               <option>Equipe 2</option>
+	                                            <c:forEach items="${ requestScope.groups }" var="group">
+	                                            	<option>${group.groupID}</option>
+	                                            </c:forEach>                                                                                           
                                             </select>
                                   
                                      </div> 
