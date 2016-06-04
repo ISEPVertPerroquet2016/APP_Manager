@@ -2,15 +2,18 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import entities.FamilyObject;
 import entities.SkillObject;
 
 public class SkillDao implements ISkillDao
 {
 
     private static final String SQL_CREATE_SKILL = "INSERT INTO Skill (name_skill, observation_test, coefficient, basic_skill, basic_required, basic_failed, medium_skill, medium_required, medium_failed, name_family) VALUES (?,?,?,?,?,?,?,?,?,?)";
-
+    private static final String SQL_SELECT_BY_NAME = "SELECT name_skill FROM Skill WHERE name_skill = ?";
+    
     private DAOFactory          daoFactory;
 
     public SkillDao( DAOFactory daoFactory )
@@ -66,7 +69,38 @@ public class SkillDao implements ISkillDao
     @Override
     public SkillObject find( String skillName )
     {
-        // TODO Auto-generated method stub
+    	Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+        ResultSet resultSet = null;
+        SkillObject skill = null;
+
+        try
+        {
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_SELECT_BY_NAME );
+
+            preparedstatement.setString( 1, skillName );
+
+            resultSet = preparedstatement.executeQuery();
+
+            // Analyse du statut retourné par la requête d'insertion 
+            if ( resultSet.next() )
+            {
+                skill = new SkillObject();
+                skill.setNameFamily( skillName );
+            }
+
+        } catch ( SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( resultSet, preparedstatement, connexion );
+        }
+
         return null;
     }
 
