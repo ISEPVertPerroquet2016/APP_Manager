@@ -16,13 +16,10 @@
         </div><!--/.container-fluid -->
       </nav>
       <div class="col-lg-12">
-                    <h3 class="page-header"> Agir en bon communicant dans un environnement scientifique et technique</h3>
-                </div>
-                <div class="col-sm-4">
-                    <form role="form" >
+                     <form role="form" >
                                 <div class="form-group col-sm-6">
                                             
-                                            <select placeholder="Equipe" class="form-control">
+                                            <select placeholder="Equipe" class="form-control">                                        
 	                                            <c:forEach items="${ requestScope.groups }" var="group">
 	                                            	<option>${group.groupID}</option>
 	                                            </c:forEach>                                                                                           
@@ -37,7 +34,11 @@
                                           </div> 
                                     <div><a href="evaluercomm.jsp">Editer</a></div>
     
-                               </form>
+                   		</form>
+                </div>
+                <div class="col-lg-12">
+                                       <h3 class="page-header"> Agir en bon communicant dans un environnement scientifique et technique</h3>
+                   
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

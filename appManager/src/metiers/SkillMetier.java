@@ -11,22 +11,23 @@ import entities.SkillObject;
 
 public class SkillMetier
 {
-    private static final String NAME_SKILL       = "name_skill";
-    private static final String OBSERVATION_TEST = "observation_test";
-    private static final String COEFFICIENT      = "coefficient";
-    private static final String BASIC_SKILL      = "basic_skill";
-    private static final String BASIC_REQUIRED   = "basic_required";
-    private static final String BASIC_FAILED     = "basic_failed";
-    private static final String MEDIUM_SKILL     = "medium_skill";
-    private static final String MEDIUM_REQUIRED  = "medium_required";
-    private static final String MEDIUM_FAILED    = "medium_failed";
-    private static final String NAME_FAMILY      = "familyName";
+    private static final String NAME_SKILL        = "name_skill";
+    private static final String OBSERVATION_TEST  = "observation_test";
+    private static final String COEFFICIENT       = "coefficient";
+    private static final String BASIC_SKILL       = "basic_skill";
+    private static final String BASIC_REQUIRED    = "basic_required";
+    private static final String BASIC_FAILED      = "basic_failed";
+    private static final String MEDIUM_SKILL      = "medium_skill";
+    private static final String MEDIUM_REQUIRED   = "medium_required";
+    private static final String MEDIUM_FAILED     = "medium_failed";
+    private static final String NAME_FAMILY       = "familyName";
 
-    private static final String CHAMP_NOM        = "nameSkill";
+    private static final String CHAMP_NOM         = "nameSkill";
+    private static final String CHAMP_COEFFICIENT = "coefficient";
 
     private SkillDao            skillDao;
     private String              resultat;
-    private Map<String, String> erreurs          = new HashMap<String, String>();
+    private Map<String, String> erreurs           = new HashMap<String, String>();
 
     public SkillMetier( SkillDao skillDao )
     {
@@ -44,7 +45,8 @@ public class SkillMetier
             if ( erreurs.isEmpty() )
             {
                 skillDao.create( skill );
-                resultat = "Succès de l'opération, la compétence " + skill.getNameSkill() + " a bien été ajoutée";
+                resultat = "Succès de l'opération, la compétence " + "\"" + skill.getNameSkill() + "\""
+                        + " a bien été ajoutée";
             } else
             {
                 resultat = "Echec de l'opération";
@@ -70,7 +72,7 @@ public class SkillMetier
         skill.setObservationTest( observationTest );
 
         int coefficient = getValeurIntegerChamp( request, COEFFICIENT );
-        skill.setCoefficient( coefficient );
+        traiterCoefficient( coefficient, skill );
 
         String basicSkill = getValeurChamp( request, BASIC_SKILL );
         skill.setBasicSkill( basicSkill );
@@ -155,6 +157,27 @@ public class SkillMetier
         } else
         {
             throw new FormValidationException( "Merci de saisir une compétence" );
+        }
+    }
+
+    private void traiterCoefficient( int coefficient, SkillObject skill )
+    {
+        try
+        {
+            validationCoefficient( coefficient );
+        } catch ( FormValidationException e )
+        {
+            setErreur( CHAMP_COEFFICIENT, e.getMessage() );
+        }
+        skill.setCoefficient( coefficient );
+    }
+
+    //Validation du coefficient
+    private void validationCoefficient( int coefficient ) throws FormValidationException
+    {
+        if ( coefficient == 0 || coefficient < 0 )
+        {
+            throw new FormValidationException( "Merci de saisir un coefficient de valeur supérieure à 0" );
         }
     }
 

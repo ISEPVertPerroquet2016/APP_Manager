@@ -19,9 +19,12 @@ public class Accueil extends HttpServlet
 {
     private static final long  serialVersionUID = 1L;
 
+    //views
     public static final String ACCUEIL_VIEW     = "/pages/AccueilTuteur.jsp";
     public static final String CONNEXION_VIEW   = "/appManager/Connexion";
     public static final String SKILL_SHEET_VIEW = "/appManager/SkillsSheet";
+
+    //attributes
     public static final String USER             = "user";
     public static final String PROFESSEUR       = "professeur";
     public static final String ELEVE            = "eleve";
