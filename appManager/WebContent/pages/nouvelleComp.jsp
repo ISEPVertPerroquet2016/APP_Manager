@@ -24,7 +24,7 @@
                  <div class="form-group col-sm-4">
                   	   <label>Coefficient</label>
                        <input type="number" class="form-control" name="coefficient">
-                  
+                  		<p>${requestScope.formSkill.erreurs.coefficient}</p>
                	</div>
                 
              </div>    
