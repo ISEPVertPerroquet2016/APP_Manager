@@ -1,3 +1,5 @@
+<%@page import="entities.GroupObject"%>
+<%@page import="java.util.List"%>
 <%@include file="headerResp.jsp" %>
 <div id="page-wrapper">
             <div class="row">
@@ -6,7 +8,7 @@
           
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-               <c:forEach items="${ requestScope.families }" var="family" >
+               <c:forEach items="${ sessionScope.families }" var="family" >
                		<li><a href="">${ family.nameFamily }</a></li>
                </c:forEach>     
               
@@ -16,24 +18,47 @@
         </div><!--/.container-fluid -->
       </nav>
       <div class="col-lg-12">
-                     <form role="form" >
+                     <form role="form" action="SkillsSheet" method="post">
                                 <div class="form-group col-sm-6">
-                                            
-                                            <select placeholder="Equipe" class="form-control">                                        
-	                                            <c:forEach items="${ requestScope.groups }" var="group">
-	                                            	<option>${group.groupID}</option>
-	                                            </c:forEach>                                                                                           
-                                            </select>
+                        
+                                        <select class="form-control" name="sheetGroup"> 
+                                        	<% 
+                                        		int groupSelected = 0;
+                                        		if(request.getAttribute( "sheetEleves" ) != null)
+                                        		{
+                                        		    List<Utilisateur> eleveSelected = (List<Utilisateur>) request.getAttribute( "sheetEleves" ); 
+                                        		    groupSelected = eleveSelected.get( 0 ).getIdGroup(  ) ;
+                                        		}
+          	                                      		
+                                        		List<GroupObject> groups = (List<GroupObject>) session.getAttribute( "sheetGroups" );                                             		
+                                        	 	for(GroupObject group: groups)
+                                        	 	{
+                                        	 	    if( group.getGroupID(  ) == groupSelected)
+                                        	 	    {
+                                   	 	     %>
+                                   	 	     			<option selected><%=group.getGroupID(  )%></option>
+                                   	 	     <%    
+                                        	 	    }
+                                        	 	    else
+                                        	 	    {
+                                    	 	 %>
+                                    	 	 			<option><%=group.getGroupID(  )%></option>
+                                         	 <%   
+                                        	 	    }
+                                        	 	}
+                                        	 %>                                                                                          
+                                        </select>
                                   
                                      </div> 
                                             <div class="form-group col-sm-6"> 
-                                            <select placeholder="Equipe" class="form-control">
-                                              <option>Jean DUPONT</option>
-                                               <option></option>
+                                            <select class="form-control">
+                                              	<c:forEach items="${ requestScope.sheetEleves }" var="eleve">
+	                                            	<option>${eleve.firstname} ${eleve.surname}</option>
+	                                            </c:forEach>
                                             </select>
                                           </div> 
                                     <div><a href="evaluercomm.jsp">Editer</a></div>
-    
+    						<input type="submit" />
                    		</form>
                 </div>
                 <div class="col-lg-12">

@@ -117,7 +117,7 @@ public class SkillMetier
     }
 
     /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
+     * Méthode utilitaire qui retourne 0 si un champ est vide, et son contenu
      * sinon. (pour les int seulement)
      */
     private static int getValeurIntegerChamp( HttpServletRequest request, String nomChamp )

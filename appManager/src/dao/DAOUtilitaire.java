@@ -29,7 +29,8 @@ public final class DAOUtilitaire
     public static final String FAMILY_NAME                   = "familyName";
     public static final String FAMILY                        = "family";
     public static final String FAMILIES                      = "families";
-    public static final String GROUPS                        = "groups";
+    public static final String SHEET_GROUPS                  = "sheetGroups";
+    public static final String SHEET_ELEVES                  = "sheetEleves";
 
     /**
      * forward views

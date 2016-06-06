@@ -53,8 +53,8 @@ public class SkillsSheet extends HttpServlet
                 List<FamilyObject> families = skillSheetMetier.getFamilies( familiesNames );
                 List<GroupObject> groups = skillSheetMetier.getGroups();
 
-                request.setAttribute( DAOUtilitaire.FAMILIES, families );
-                request.setAttribute( DAOUtilitaire.GROUPS, groups );
+                session.setAttribute( DAOUtilitaire.FAMILIES, families );
+                session.setAttribute( DAOUtilitaire.SHEET_GROUPS, groups );
 
                 this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
                         .forward( request, response );
@@ -67,6 +67,13 @@ public class SkillsSheet extends HttpServlet
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
+        SkillSheetMetier skillSheetMetier = new SkillSheetMetier( skillSheetDao );
 
+        List<Utilisateur> eleves = skillSheetMetier.getElevesByGroup( request );
+
+        request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
+
+        this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
+                .forward( request, response );
     }
 }
