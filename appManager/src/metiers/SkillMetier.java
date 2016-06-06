@@ -11,23 +11,25 @@ import entities.SkillObject;
 
 public class SkillMetier
 {
-    private static final String NAME_SKILL        = "name_skill";
-    private static final String OBSERVATION_TEST  = "observation_test";
-    private static final String COEFFICIENT       = "coefficient";
-    private static final String BASIC_SKILL       = "basic_skill";
-    private static final String BASIC_REQUIRED    = "basic_required";
-    private static final String BASIC_FAILED      = "basic_failed";
-    private static final String MEDIUM_SKILL      = "medium_skill";
-    private static final String MEDIUM_REQUIRED   = "medium_required";
-    private static final String MEDIUM_FAILED     = "medium_failed";
-    private static final String NAME_FAMILY       = "familyName";
+    private static final String NAME_SKILL         = "name_skill";
+    private static final String OBSERVATION_TEST   = "observation_test";
+    private static final String COEFFICIENT        = "coefficient";
+    private static final String BASIC_SKILL        = "basic_skill";
+    private static final String BASIC_REQUIRED     = "basic_required";
+    private static final String BASIC_FAILED       = "basic_failed";
+    private static final String MEDIUM_SKILL       = "medium_skill";
+    private static final String MEDIUM_REQUIRED    = "medium_required";
+    private static final String MEDIUM_FAILED      = "medium_failed";
+    private static final String NAME_FAMILY        = "familyName";
 
-    private static final String CHAMP_NOM         = "nameSkill";
-    private static final String CHAMP_COEFFICIENT = "coefficient";
+    private static final String CHAMP_NOM          = "nameSkill";
+    private static final String CHAMP_COEFFICIENT  = "coefficient";
+    private static final String CHAMP_BASIC_SKILL  = "basicSkill";
+    private static final String CHAMP_MEDIUM_SKILL = "mediumSkill";
 
     private SkillDao            skillDao;
     private String              resultat;
-    private Map<String, String> erreurs           = new HashMap<String, String>();
+    private Map<String, String> erreurs            = new HashMap<String, String>();
 
     public SkillMetier( SkillDao skillDao )
     {
@@ -75,7 +77,7 @@ public class SkillMetier
         traiterCoefficient( coefficient, skill );
 
         String basicSkill = getValeurChamp( request, BASIC_SKILL );
-        skill.setBasicSkill( basicSkill );
+        traiterBasicSkill( basicSkill, skill );
 
         String basicRequired = getValeurChamp( request, BASIC_REQUIRED );
         skill.setBasicRequired( basicRequired );
@@ -84,7 +86,7 @@ public class SkillMetier
         skill.setBasicFailed( basicFailed );
 
         String mediumSkill = getValeurChamp( request, MEDIUM_SKILL );
-        skill.setMediumSkill( mediumSkill );
+        traiterMediumSkill( mediumSkill, skill );
 
         String mediumRequired = getValeurChamp( request, MEDIUM_REQUIRED );
         skill.setMediumRequired( mediumRequired );
@@ -178,6 +180,61 @@ public class SkillMetier
         if ( coefficient == 0 || coefficient < 0 )
         {
             throw new FormValidationException( "Merci de saisir un coefficient de valeur supérieure à 0" );
+        } else if ( coefficient > 100 )
+        {
+            throw new FormValidationException( "Merci de saisir un coefficient inférieur à 100" );
+        }
+    }
+
+    private void traiterBasicSkill( String basicSkill, SkillObject skill )
+    {
+        try
+        {
+            validationBasicSkill( basicSkill );
+        } catch ( FormValidationException e )
+        {
+            setErreur( CHAMP_BASIC_SKILL, e.getMessage() );
+        }
+        skill.setBasicSkill( basicSkill );
+    }
+
+    private void validationBasicSkill( String basicSkill ) throws FormValidationException
+    {
+        if ( basicSkill != null )
+        {
+            if ( basicSkill.length() > 100 )
+            {
+                throw new FormValidationException( "Le nombre de caractère ne doit pas dépasser 100" );
+            }
+        } else
+        {
+            throw new FormValidationException( "Merci de remplir la compétence de base" );
+        }
+    }
+
+    private void traiterMediumSkill( String mediumSkill, SkillObject skill )
+    {
+        try
+        {
+            validationMediumSkill( mediumSkill );
+        } catch ( FormValidationException e )
+        {
+            setErreur( CHAMP_MEDIUM_SKILL, e.getMessage() );
+        }
+        skill.setMediumSkill( mediumSkill );
+    }
+
+    private void validationMediumSkill( String mediumSkill ) throws FormValidationException
+    {
+        if ( mediumSkill != null )
+        {
+            if ( mediumSkill.length() > 100 )
+            {
+                throw new FormValidationException( "Le nombre de caractère ne doit pas dépasser 100" );
+            }
+        } else
+        {
+            throw new FormValidationException( "Merci de remplir la compétence de intermédiaire" );
         }
     }
 

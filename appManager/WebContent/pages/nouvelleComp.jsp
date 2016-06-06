@@ -35,6 +35,7 @@
                   <div class="form-group col-sm-4">
                        <label>B:</label>
                        <input class="form-control" name="basic_skill">
+                       <p>${requestScope.formSkill.erreurs.basicSkill}</p>
                   </div>
                   <div class="form-group col-sm-4">
 					   <label>Acquis si</label>
@@ -56,6 +57,7 @@
                   <div class="form-group col-sm-4">
                        <label>I:</label>
                        <input class="form-control" name="medium_skill">
+                       <p>${requestScope.formSkill.erreurs.mediumSkill}</p>
                   </div>
                   <div class="form-group col-sm-4">
 					   <label>Acquis si</label>
