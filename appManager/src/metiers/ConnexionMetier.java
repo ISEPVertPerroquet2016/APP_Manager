@@ -13,7 +13,6 @@ public class ConnexionMetier
     private static final String CHAMP_PASS      = "password";
 
     private String              erreurConnexion = "";
-    private LDAPaccess          access;
     private ConnexionDao        connexionDao;
 
     public ConnexionMetier( ConnexionDao connexionDao )

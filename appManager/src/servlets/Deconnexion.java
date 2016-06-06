@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DAOUtilitaire;
+
 /**
  * Servlet implementation class Deconnexion
  */
 @WebServlet( "/Deconnexion" )
 public class Deconnexion extends HttpServlet
 {
-    private static final long  serialVersionUID = 1L;
-
-    public static final String CONNEXION_VIEW   = "/appManager/Connexion";
+    private static final long serialVersionUID = 1L;
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
@@ -25,7 +25,7 @@ public class Deconnexion extends HttpServlet
         HttpSession session = request.getSession();
         session.invalidate();
 
-        response.sendRedirect( CONNEXION_VIEW );
+        response.sendRedirect( DAOUtilitaire.CONNEXION_VIEW_REDIRECT );
     }
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response )

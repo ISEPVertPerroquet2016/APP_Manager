@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DAOFactory;
+import dao.DAOUtilitaire;
 import dao.SkillDao;
 import entities.SkillObject;
 import entities.Utilisateur;
@@ -21,24 +22,9 @@ import metiers.SkillMetier;
 @WebServlet( "/Skill" )
 public class Skill extends HttpServlet
 {
-    private static final long  serialVersionUID  = 1L;
+    private static final long serialVersionUID = 1L;
 
-    //views
-    public static final String SKILL_VIEW        = "/pages/nouvelleComp.jsp";
-    public static final String CONNEXION_VIEW    = "/pages/index.jsp";
-    public static final String SKILLS_SHEET_VIEW = "/appManager/SkillsSheet";
-
-    //attributes
-    public static final String SKILL             = "skill";
-    public static final String ATT_FORM_SKILL    = "formSkill";
-    public static final String FAMILY_NAME       = "familyName";
-    public static final String USER              = "user";
-    public static final String PROFESSEUR        = "professeur";
-    public static final String ELEVE             = "eleve";
-
-    public static final String DAO_FACTORY       = "daoFactory";
-
-    private SkillDao           skillDao;
+    private SkillDao          skillDao;
 
     /**
      * methode instanciée une seule fois à la création du servlet lors du
@@ -47,28 +33,29 @@ public class Skill extends HttpServlet
     public void init() throws ServletException
     {
         // Récupération d'une instance de notre FamilyDAO 
-        this.skillDao = ( (DAOFactory) getServletContext().getAttribute( DAO_FACTORY ) ).getSkillDao();
+        this.skillDao = ( (DAOFactory) getServletContext().getAttribute( DAOUtilitaire.DAO_FACTORY ) ).getSkillDao();
     }
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        Utilisateur utilisateur = (Utilisateur) session.getAttribute( USER );
+        Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
 
-        if ( utilisateur != null && PROFESSEUR.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
         {
             String nameFamily = request.getParameter( "nameFamily" );
-            request.setAttribute( FAMILY_NAME, nameFamily );
+            request.setAttribute( DAOUtilitaire.FAMILY_NAME, nameFamily );
 
             // Transmission vers la page en charge de l'affichage des résultats 
-            this.getServletContext().getRequestDispatcher( SKILL_VIEW ).forward( request, response );
-        } else if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+            this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILL_VIEW_FORWARD ).forward( request,
+                    response );
+        } else if ( utilisateur != null && DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
         {
-            response.sendRedirect( SKILLS_SHEET_VIEW );
+            response.sendRedirect( DAOUtilitaire.SKILLS_SHEET_VIEW_REDIRECT );
         } else
         {
-            response.sendRedirect( CONNEXION_VIEW );
+            response.sendRedirect( DAOUtilitaire.CONNEXION_VIEW_REDIRECT );
         }
     }
 
@@ -81,14 +68,14 @@ public class Skill extends HttpServlet
         SkillObject skill = skillMetier.createSkill( request );
 
         /* Enregistrement de la famille */
-        request.setAttribute( SKILL, skill );
-        request.setAttribute( FAMILY_NAME, skill.getNameFamily() );
-        request.setAttribute( ATT_FORM_SKILL, skillMetier );
+        request.setAttribute( DAOUtilitaire.SKILL, skill );
+        request.setAttribute( DAOUtilitaire.FAMILY_NAME, skill.getNameFamily() );
+        request.setAttribute( DAOUtilitaire.ATT_FORM_SKILL, skillMetier );
 
         /* Transmission vers la page en charge de l'affichage des résultats */
         // response.sendRedirect( "/appManager/Skill?nameFamily=" + skill.getNameFamily() );
 
-        this.getServletContext().getRequestDispatcher( SKILL_VIEW ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILL_VIEW_FORWARD ).forward( request, response );
     }
 
 }

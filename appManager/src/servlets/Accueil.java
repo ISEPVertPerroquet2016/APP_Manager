@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DAOUtilitaire;
 import entities.Utilisateur;
 
 /**
@@ -17,33 +18,24 @@ import entities.Utilisateur;
 @WebServlet( "/Accueil" )
 public class Accueil extends HttpServlet
 {
-    private static final long  serialVersionUID = 1L;
-
-    //views
-    public static final String ACCUEIL_VIEW     = "/pages/AccueilTuteur.jsp";
-    public static final String CONNEXION_VIEW   = "/appManager/Connexion";
-    public static final String SKILL_SHEET_VIEW = "/appManager/SkillsSheet";
-
-    //attributes
-    public static final String USER             = "user";
-    public static final String PROFESSEUR       = "professeur";
-    public static final String ELEVE            = "eleve";
+    private static final long serialVersionUID = 1L;
 
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        Utilisateur utilisateur = (Utilisateur) session.getAttribute( USER );
+        Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
 
-        if ( utilisateur != null && PROFESSEUR.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
         {
-            this.getServletContext().getRequestDispatcher( ACCUEIL_VIEW ).forward( request, response );
-        } else if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+            this.getServletContext().getRequestDispatcher( DAOUtilitaire.ACCUEIL_VIEW_FORWARD ).forward( request,
+                    response );
+        } else if ( utilisateur != null && DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
         {
-            response.sendRedirect( SKILL_SHEET_VIEW );
+            response.sendRedirect( DAOUtilitaire.SKILLS_SHEET_VIEW_REDIRECT );
         } else
         {
-            response.sendRedirect( CONNEXION_VIEW );
+            response.sendRedirect( DAOUtilitaire.CONNEXION_VIEW_REDIRECT );
         }
     }
 

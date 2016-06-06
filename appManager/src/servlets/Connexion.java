@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ConnexionDao;
 import dao.DAOFactory;
+import dao.DAOUtilitaire;
 import entities.LDAPObject;
 import entities.Utilisateur;
 import metiers.ConnexionMetier;
@@ -19,21 +20,9 @@ import metiers.ConnexionMetier;
 public class Connexion extends HttpServlet
 {
 
-    //views
-    public static final String CONNEXION_VIEW     = "/pages/index.jsp";
-    public static final String SKILLS_SHEET_VIEW  = "/appManager/SkillsSheet";
-    public static final String ACCUEIL_VIEW       = "/appManager/Accueil";
-    public static final String ACCUEIL_TEST       = "/WEB-INF/accueilTest.jsp";
+    private static final long serialVersionUID = 1L;
 
-    //attributes
-    public static final String ELEVE              = "eleve";
-    public static final String PROFESSEUR         = "professeur";
-    public static final String ATT_FORM_CONNEXION = "formConnexion";
-    public static final String USER               = "user";
-
-    public static final String DAO_FACTORY        = "daoFactory";
-
-    private ConnexionDao       connexionDao;
+    private ConnexionDao      connexionDao;
 
     /**
      * methode instanciée une seule fois à la création du servlet lors du
@@ -42,14 +31,16 @@ public class Connexion extends HttpServlet
     public void init() throws ServletException
     {
         // Récupération d'une instance de notre FamilyDAO 
-        this.connexionDao = ( (DAOFactory) getServletContext().getAttribute( DAO_FACTORY ) ).getConnexionDao();
+        this.connexionDao = ( (DAOFactory) getServletContext().getAttribute( DAOUtilitaire.DAO_FACTORY ) )
+                .getConnexionDao();
     }
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
 
         /* Affichage de la page de connexion */
-        this.getServletContext().getRequestDispatcher( CONNEXION_VIEW ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( DAOUtilitaire.CONNEXION_VIEW_FORWARD ).forward( request,
+                response );
 
     }
 
@@ -63,25 +54,25 @@ public class Connexion extends HttpServlet
         // Récupération de la session depuis la requête
         HttpSession session = request.getSession();
 
-        request.setAttribute( ATT_FORM_CONNEXION, connexion );
+        request.setAttribute( DAOUtilitaire.ATT_FORM_CONNEXION, connexion );
 
         if ( user == null )
         {
-            this.getServletContext().getRequestDispatcher( CONNEXION_VIEW ).forward( request, response );
+            this.getServletContext().getRequestDispatcher( DAOUtilitaire.CONNEXION_VIEW_FORWARD ).forward( request,
+                    response );
         } else
         {
-            session.setAttribute( USER, user );
+            session.setAttribute( DAOUtilitaire.USER, user );
         }
 
-        if ( ELEVE.equals( user.getType() ) )
+        if ( DAOUtilitaire.ELEVE.equals( user.getType() ) )
         {
             //this.getServletContext().getRequestDispatcher( ACCUEIL_TEST ).forward( request, response );
-            response.sendRedirect( SKILLS_SHEET_VIEW );
-        } else if ( PROFESSEUR.equals( user.getType() ) )
+            response.sendRedirect( DAOUtilitaire.SKILLS_SHEET_VIEW_REDIRECT );
+        } else if ( DAOUtilitaire.PROFESSEUR.equals( user.getType() ) )
         {
-            response.sendRedirect( ACCUEIL_VIEW );
+            response.sendRedirect( DAOUtilitaire.ACCUEIL_VIEW_REDIRECT );
         }
 
-        // response.sendRedirect( ACCUEIL );
     }
 }

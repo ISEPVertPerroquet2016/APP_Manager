@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DAOFactory;
+import dao.DAOUtilitaire;
 import dao.SkillManagementDao;
 import entities.FamilyObject;
 import entities.Utilisateur;
@@ -22,20 +23,7 @@ import metiers.SkillManagementMetier;
 @WebServlet( "/SkillManagement" )
 public class SkillManagement extends HttpServlet
 {
-    private static final long  serialVersionUID      = 1L;
-
-    //views
-    public static final String SKILL_MANAGEMENT_VIEW = "/pages/gerercomp.jsp";
-    public static final String SKILLS_SHEET_VIEW     = "/appManager/SkillsSheet";
-    public static final String CONNEXION_VIEW        = "/pages/index.jsp";
-
-    //attributes
-    public static final String FAMILIES              = "families";
-    public static final String USER                  = "user";
-    public static final String PROFESSEUR            = "professeur";
-    public static final String ELEVE                 = "eleve";
-
-    public static final String DAO_FACTORY           = "daoFactory";
+    private static final long  serialVersionUID = 1L;
 
     private SkillManagementDao skillManagementDao;
 
@@ -46,7 +34,7 @@ public class SkillManagement extends HttpServlet
     public void init() throws ServletException
     {
         // Récupération d'une instance de notre FamilyDAO 
-        this.skillManagementDao = ( (DAOFactory) getServletContext().getAttribute( DAO_FACTORY ) )
+        this.skillManagementDao = ( (DAOFactory) getServletContext().getAttribute( DAOUtilitaire.DAO_FACTORY ) )
                 .getSkillManagementDao();
     }
 
@@ -54,9 +42,9 @@ public class SkillManagement extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        Utilisateur utilisateur = (Utilisateur) session.getAttribute( USER );
+        Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
 
-        if ( utilisateur != null && PROFESSEUR.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
         {
             // Initialisation de l'objet metier
             SkillManagementMetier skillManagementMetier = new SkillManagementMetier( skillManagementDao );
@@ -64,16 +52,17 @@ public class SkillManagement extends HttpServlet
             List<String> familiesNames = skillManagementMetier.getFamiliesName();
             List<FamilyObject> families = skillManagementMetier.getFamilies( familiesNames );
 
-            request.setAttribute( FAMILIES, families );
+            request.setAttribute( DAOUtilitaire.FAMILIES, families );
 
             // Transmission vers la page en charge de l'affichage des résultats 
-            this.getServletContext().getRequestDispatcher( SKILL_MANAGEMENT_VIEW ).forward( request, response );
-        } else if ( utilisateur != null && ELEVE.equals( utilisateur.getType() ) )
+            this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILL_MANAGEMENT_VIEW_FORWARD )
+                    .forward( request, response );
+        } else if ( utilisateur != null && DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
         {
-            response.sendRedirect( SKILLS_SHEET_VIEW );
+            response.sendRedirect( DAOUtilitaire.SKILLS_SHEET_VIEW_REDIRECT );
         } else
         {
-            response.sendRedirect( CONNEXION_VIEW );
+            response.sendRedirect( DAOUtilitaire.CONNEXION_VIEW_REDIRECT );
         }
 
     }
