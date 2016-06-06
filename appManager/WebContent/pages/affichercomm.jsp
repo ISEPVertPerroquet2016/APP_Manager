@@ -18,10 +18,10 @@
         </div><!--/.container-fluid -->
       </nav>
       <div class="col-lg-12">
-                     <form role="form" action="SkillsSheet" method="post">
+                     <form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
                                 <div class="form-group col-sm-6">
                         
-                                        <select class="form-control" name="sheetGroup"> 
+                                        <select class="form-control" name="sheetGroup" onchange="document.getElementById('skillSheetForm').submit()"> 
                                         	<% 
                                         		int groupSelected = 0;
                                         		if(request.getAttribute( "sheetEleves" ) != null)
@@ -52,13 +52,33 @@
                                      </div> 
                                             <div class="form-group col-sm-6"> 
                                             <select class="form-control">
-                                              	<c:forEach items="${ requestScope.sheetEleves }" var="eleve">
-	                                            	<option>${eleve.firstname} ${eleve.surname}</option>
-	                                            </c:forEach>
+                                            	<%
+                                            		int userID = ((Utilisateur)session.getAttribute( "user" )).getUserID(  );
+                                            		List<Utilisateur> eleves = null;
+	                                            	if(request.getAttribute( "sheetEleves" ) != null)
+	                                        		{	                                        		               		
+	                                            		eleves = (List<Utilisateur>) request.getAttribute( "sheetEleves" );
+	                                            	}
+	                                            		for(Utilisateur eleve: eleves)
+                                            		{
+                                            			if(userID == eleve.getUserID(  )) 
+                                            			{
+                                            	  		%>
+                                       	 	     			<option selected><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                       	 	    		 <%
+                                            			}else
+                                            			{
+                                            			%>
+                                       	 	     			<option><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                       	 	     		<% 
+                                            			}
+                                            		}
+                                            	%>
+	                                            
                                             </select>
                                           </div> 
                                     <div><a href="evaluercomm.jsp">Editer</a></div>
-    						<input type="submit" />
+    						
                    		</form>
                 </div>
                 <div class="col-lg-12">

@@ -52,9 +52,11 @@ public class SkillsSheet extends HttpServlet
                 List<String> familiesNames = skillSheetMetier.getFamiliesName();
                 List<FamilyObject> families = skillSheetMetier.getFamilies( familiesNames );
                 List<GroupObject> groups = skillSheetMetier.getGroups();
+                List<Utilisateur> eleves = skillSheetMetier.getElevesByGroup( request, utilisateur.getIdGroup() );
 
                 session.setAttribute( DAOUtilitaire.FAMILIES, families );
                 session.setAttribute( DAOUtilitaire.SHEET_GROUPS, groups );
+                request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
 
                 this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
                         .forward( request, response );

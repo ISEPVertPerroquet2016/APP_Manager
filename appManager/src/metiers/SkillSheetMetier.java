@@ -39,9 +39,14 @@ public class SkillSheetMetier extends SkillManagementMetier
 
     public List<Utilisateur> getElevesByGroup( HttpServletRequest request )
     {
-        List<Utilisateur> eleves = null;
-
         int groupID = getValeurIntegerChamp( request, SHEET_GROUP );
+
+        return getElevesByGroup( request, groupID );
+    }
+
+    public List<Utilisateur> getElevesByGroup( HttpServletRequest request, int groupID )
+    {
+        List<Utilisateur> eleves = null;
 
         try
         {
