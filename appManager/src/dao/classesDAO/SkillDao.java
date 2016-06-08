@@ -1,27 +1,30 @@
-package dao;
+package dao.classesDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import entities.FamilyObject;
+import dao.DAOUtilitaire;
+import dao.exceptions.DAOException;
+import dao.interfacesDao.ISkillDao;
+import entities.SkillObject;
 
-public class FamilyDao implements IFamilyDao
+public class SkillDao implements ISkillDao
 {
-    private static final String SQL_CREATE_FAMILY  = "INSERT INTO familySkill (name_family, description) VALUES (?, ?)";
-    private static final String SQL_SELECT_BY_NAME = "SELECT name_family FROM familyskill WHERE name_family = ?";
+
+    private static final String SQL_CREATE_SKILL   = "INSERT INTO Skill (name_skill, observation_test, coefficient, basic_skill, basic_required, basic_failed, medium_skill, medium_required, medium_failed, name_family) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_SELECT_BY_NAME = "SELECT name_skill FROM Skill WHERE name_skill = ?";
 
     private DAOFactory          daoFactory;
 
-    public FamilyDao( DAOFactory daoFactory )
+    public SkillDao( DAOFactory daoFactory )
     {
         this.daoFactory = daoFactory;
     }
 
     @Override
-    // Implémentation de la méthode createFamily() définie dans l'interface FamilyDao 
-    public void create( FamilyObject family ) throws IllegalArgumentException, DAOException
+    public void create( SkillObject skill )
     {
         Connection connexion = null;
         PreparedStatement preparedstatement = null;
@@ -32,11 +35,19 @@ public class FamilyDao implements IFamilyDao
             connexion = daoFactory.getConnection();
 
             // Création de l'objet gérant les requêtes préparées 
-            preparedstatement = connexion.prepareStatement( SQL_CREATE_FAMILY );
+            preparedstatement = connexion.prepareStatement( SQL_CREATE_SKILL );
 
             //remplissage des paramètres de la requête préparée
-            preparedstatement.setString( 1, family.getNameFamily() );
-            preparedstatement.setString( 2, family.getDescription() );
+            preparedstatement.setString( 1, skill.getNameSkill() );
+            preparedstatement.setString( 2, skill.getObservationTest() );
+            preparedstatement.setInt( 3, skill.getCoefficient() );
+            preparedstatement.setString( 4, skill.getBasicSkill() );
+            preparedstatement.setString( 5, skill.getBasicRequired() );
+            preparedstatement.setString( 6, skill.getBasicFailed() );
+            preparedstatement.setString( 7, skill.getMediumSkill() );
+            preparedstatement.setString( 8, skill.getMediumRequired() );
+            preparedstatement.setString( 9, skill.getMediumFailed() );
+            preparedstatement.setString( 10, skill.getNameFamily() );
 
             // Execution de la requête d'insertion
             int statut = preparedstatement.executeUpdate();
@@ -54,15 +65,16 @@ public class FamilyDao implements IFamilyDao
         {
             DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
         }
+
     }
 
     @Override
-    public FamilyObject find( String familyName ) throws DAOException
+    public SkillObject find( String skillName )
     {
         Connection connexion = null;
         PreparedStatement preparedstatement = null;
         ResultSet resultSet = null;
-        FamilyObject family = null;
+        SkillObject skill = null;
 
         try
         {
@@ -72,15 +84,15 @@ public class FamilyDao implements IFamilyDao
             // Création de l'objet gérant les requêtes préparées 
             preparedstatement = connexion.prepareStatement( SQL_SELECT_BY_NAME );
 
-            preparedstatement.setString( 1, familyName );
+            preparedstatement.setString( 1, skillName );
 
             resultSet = preparedstatement.executeQuery();
 
             // Analyse du statut retourné par la requête d'insertion 
             if ( resultSet.next() )
             {
-                family = new FamilyObject();
-                family.setNameFamily( familyName );
+                skill = new SkillObject();
+                skill.setNameFamily( skillName );
             }
 
         } catch ( SQLException e )
@@ -91,7 +103,7 @@ public class FamilyDao implements IFamilyDao
             DAOUtilitaire.fermeturesSilencieuses( resultSet, preparedstatement, connexion );
         }
 
-        return family;
+        return skill;
     }
 
 }

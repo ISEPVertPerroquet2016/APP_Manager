@@ -1,9 +1,9 @@
-package metiers;
+package metiers.metier;
 
 import java.util.List;
 
-import dao.DAOException;
-import dao.SkillManagementDao;
+import dao.classesDAO.SkillManagementDao;
+import dao.exceptions.DAOException;
 import entities.FamilyObject;
 
 public class SkillManagementMetier

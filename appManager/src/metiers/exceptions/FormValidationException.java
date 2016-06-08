@@ -1,4 +1,4 @@
-package metiers;
+package metiers.exceptions;
 
 public class FormValidationException extends Exception
 {

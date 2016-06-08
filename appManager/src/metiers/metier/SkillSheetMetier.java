@@ -1,11 +1,11 @@
-package metiers;
+package metiers.metier;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import dao.DAOException;
-import dao.SkillSheetDao;
+import dao.classesDAO.SkillSheetDao;
+import dao.exceptions.DAOException;
 import entities.GroupObject;
 import entities.Utilisateur;
 

@@ -4,7 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import dao.DAOFactory;
+import dao.classesDAO.DAOFactory;
 
 public class InitialisationDaoFactory implements ServletContextListener
 {

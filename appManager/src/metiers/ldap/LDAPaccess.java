@@ -1,4 +1,4 @@
-package metiers;
+package metiers.ldap;
 import java.io.Serializable;
 import java.util.Hashtable;
 

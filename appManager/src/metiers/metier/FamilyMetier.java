@@ -1,23 +1,24 @@
-package metiers;
+package metiers.metier;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import dao.DAOException;
-import dao.FamilyDao;
+import dao.classesDAO.FamilyDao;
+import dao.exceptions.DAOException;
 import entities.FamilyObject;
+import metiers.exceptions.FormValidationException;
 
 public class FamilyMetier
 {
-    private static final String FAMILY      = "family";
-    private static final String DESCRIPTION = "description";
-    private static final String CHAMP_NOM   = "nameFamily";
+    private static final String FAMILY            = "family";
+    private static final String CHAMP_DESCRIPTION = "description";
+    private static final String CHAMP_NOM         = "nameFamily";
 
     private FamilyDao           familyDao;
     private String              resultat;
-    private Map<String, String> erreurs     = new HashMap<String, String>();
+    private Map<String, String> erreurs           = new HashMap<String, String>();
 
     public FamilyMetier( FamilyDao familyDao )
     {
@@ -28,7 +29,7 @@ public class FamilyMetier
     {
         // Récupération des champs du formulaire 
         String familyName = getValeurChamp( request, FAMILY );
-        String description = getValeurChamp( request, DESCRIPTION );
+        String description = getValeurChamp( request, CHAMP_DESCRIPTION );
 
         FamilyObject family = new FamilyObject();
 

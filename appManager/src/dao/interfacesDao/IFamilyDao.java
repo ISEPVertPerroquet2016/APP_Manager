@@ -1,4 +1,4 @@
-package dao;
+package dao.interfacesDao;
 
 import entities.FamilyObject;
 

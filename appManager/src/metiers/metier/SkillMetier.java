@@ -1,13 +1,14 @@
-package metiers;
+package metiers.metier;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import dao.DAOException;
-import dao.SkillDao;
+import dao.classesDAO.SkillDao;
+import dao.exceptions.DAOException;
 import entities.SkillObject;
+import metiers.exceptions.FormValidationException;
 
 public class SkillMetier
 {

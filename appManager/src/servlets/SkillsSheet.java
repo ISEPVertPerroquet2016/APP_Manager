@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.DAOFactory;
 import dao.DAOUtilitaire;
-import dao.SkillSheetDao;
+import dao.classesDAO.DAOFactory;
+import dao.classesDAO.SkillSheetDao;
 import entities.FamilyObject;
 import entities.GroupObject;
 import entities.Utilisateur;
-import metiers.SkillSheetMetier;
+import metiers.metier.SkillSheetMetier;
 
 @WebServlet( "/SkillsSheet" )
 public class SkillsSheet extends HttpServlet

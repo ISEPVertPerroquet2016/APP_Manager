@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.DAOFactory;
 import dao.DAOUtilitaire;
-import dao.SkillManagementDao;
+import dao.classesDAO.DAOFactory;
+import dao.classesDAO.SkillManagementDao;
 import entities.FamilyObject;
 import entities.Utilisateur;
-import metiers.SkillManagementMetier;
+import metiers.metier.SkillManagementMetier;
 
 /**
  * Servlet implementation class Family

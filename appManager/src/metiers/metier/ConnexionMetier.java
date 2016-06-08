@@ -1,11 +1,12 @@
-package metiers;
+package metiers.metier;
 
 import javax.servlet.http.HttpServletRequest;
 
-import dao.ConnexionDao;
-import dao.DAOException;
+import dao.classesDAO.ConnexionDao;
+import dao.exceptions.DAOException;
 import entities.LDAPObject;
 import entities.Utilisateur;
+import metiers.ldap.LDAPaccess;
 
 public class ConnexionMetier
 {

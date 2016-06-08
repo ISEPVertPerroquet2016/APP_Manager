@@ -1,10 +1,13 @@
-package dao;
+package dao.classesDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dao.DAOUtilitaire;
+import dao.exceptions.DAOException;
+import dao.interfacesDao.IConnexionDao;
 import entities.Utilisateur;
 
 public class ConnexionDao implements IConnexionDao

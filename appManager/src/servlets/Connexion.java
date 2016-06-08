@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ConnexionDao;
-import dao.DAOFactory;
 import dao.DAOUtilitaire;
+import dao.classesDAO.ConnexionDao;
+import dao.classesDAO.DAOFactory;
 import entities.LDAPObject;
 import entities.Utilisateur;
-import metiers.ConnexionMetier;
+import metiers.metier.ConnexionMetier;
 
 @WebServlet( "/Connexion" )
 public class Connexion extends HttpServlet

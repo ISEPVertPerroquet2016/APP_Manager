@@ -1,4 +1,4 @@
-package dao;
+package dao.classesDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.DAOUtilitaire;
+import dao.exceptions.DAOException;
+import dao.interfacesDao.ISkillSheetDao;
 import entities.GroupObject;
 import entities.Utilisateur;
 
