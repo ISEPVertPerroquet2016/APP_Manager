@@ -6,7 +6,7 @@ import entities.FamilyObject;
 
 public interface ISkillManagementDao
 {
-    public List<String> findFamiliesNames();
+    public List<FamilyObject> findFamiliesNames();
 
-    public List<FamilyObject> findFamilies( List<String> familiesNames );
+    public List<FamilyObject> findFamilies( List<FamilyObject> families );
 }

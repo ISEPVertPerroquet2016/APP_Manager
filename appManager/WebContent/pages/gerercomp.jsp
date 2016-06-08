@@ -3,7 +3,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="page-header">compétences  <a href="Family"><p class="fa fa-plus-circle"></p></a></h2>
+                    <h2 class="page-header"> familles de compétences  <a href="Family"><p class="fa fa-plus-circle"></p></a></h2>
                 </div>
                
             </div>
@@ -11,8 +11,9 @@
             <c:forEach items="${ requestScope.families }" var="family" varStatus="status">
             <div class="row">
           <div class="col-lg-4 col-md-6">
-                   <h3><p class="fa fa-chevron-circle-down" ></p> ${ family.nameFamily } 
+                   <h3><p class="fa fa-chevron-circle-down" >${ family.nameFamily }</p>                   		
                    <a href="Skill?nameFamily=${ family.nameFamily }"><p class="fa fa-plus-circle"></p></a></h3>
+                   <p>Description famille: ${ family.description } </p>
                 </div></div>
                 
                 <c:forEach items="${ family.skills }" var="skill" varStatus="boucle">

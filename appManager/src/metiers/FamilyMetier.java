@@ -39,7 +39,7 @@ public class FamilyMetier
             if ( erreurs.isEmpty() )
             {
                 familyDao.create( family );
-                resultat = "Succès de l'opération, la famille " + familyName + " a bien été ajoutée";
+                resultat = "Succès de l'opération, la famille " + "\"" + familyName + "\"" + " a bien été ajoutée";
             } else
             {
                 resultat = "Echec de l'opération";

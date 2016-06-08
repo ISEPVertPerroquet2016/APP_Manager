@@ -45,12 +45,12 @@ public class SkillsSheet extends HttpServlet
         if ( utilisateur != null )
         {
             if ( DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() )
-                    || DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
+                    || DAOUtilitaire.ELEVE.equals( utilisateur.getType() )
+                    || DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() ) )
             {
                 SkillSheetMetier skillSheetMetier = new SkillSheetMetier( skillSheetDao );
 
-                List<String> familiesNames = skillSheetMetier.getFamiliesName();
-                List<FamilyObject> families = skillSheetMetier.getFamilies( familiesNames );
+                List<FamilyObject> families = skillSheetMetier.getFamilies();
 
                 session.setAttribute( DAOUtilitaire.FAMILIES, families );
 

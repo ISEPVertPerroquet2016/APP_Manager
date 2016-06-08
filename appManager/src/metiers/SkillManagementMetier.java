@@ -9,7 +9,7 @@ import entities.FamilyObject;
 public class SkillManagementMetier
 {
     private List<FamilyObject> families;
-    private List<String>       familiesNames;
+    private List<FamilyObject> familiesNames;
     private SkillManagementDao skillManagementDao;
 
     public SkillManagementMetier( SkillManagementDao skillManagementDao )
@@ -22,7 +22,7 @@ public class SkillManagementMetier
 
     }
 
-    public List<String> getFamiliesName()
+    private List<FamilyObject> getFamiliesName()
     {
         familiesNames = null;
 
@@ -38,9 +38,9 @@ public class SkillManagementMetier
         return familiesNames;
     }
 
-    public List<FamilyObject> getFamilies( List<String> familiesNames )
+    public List<FamilyObject> getFamilies()
     {
-        families = null;
+        families = this.getFamiliesName();
 
         try
         {

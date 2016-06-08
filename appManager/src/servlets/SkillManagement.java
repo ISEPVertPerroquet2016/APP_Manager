@@ -44,13 +44,12 @@ public class SkillManagement extends HttpServlet
         HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
 
-        if ( utilisateur != null && DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() ) )
         {
             // Initialisation de l'objet metier
             SkillManagementMetier skillManagementMetier = new SkillManagementMetier( skillManagementDao );
 
-            List<String> familiesNames = skillManagementMetier.getFamiliesName();
-            List<FamilyObject> families = skillManagementMetier.getFamilies( familiesNames );
+            List<FamilyObject> families = skillManagementMetier.getFamilies();
 
             request.setAttribute( DAOUtilitaire.FAMILIES, families );
 

@@ -17,6 +17,7 @@ public final class DAOUtilitaire
      */
     public static final String USER                          = "user";
     public static final String PROFESSEUR                    = "professeur";
+    public static final String RESPONSABLE                   = "responsable";
     public static final String ELEVE                         = "eleve";
 
     /**

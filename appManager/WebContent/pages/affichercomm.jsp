@@ -70,12 +70,12 @@
                                                 			if(userID == eleve.getUserID(  )) 
                                                 			{
                                                 	  		%>
-                                           	 	     			<option selected><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                           	 	     			<option selected><%=eleve.getUserID(  ) + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
                                            	 	    		 <%
                                                 			}else
                                                 			{
                                                 			%>
-                                           	 	     			<option><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                           	 	     			<option><%=eleve.getUserID(  ) + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
                                            	 	     		<% 
                                                 			}
                                                 		} 

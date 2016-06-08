@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="dao.DAOUtilitaire"%>
 <%@page import="entities.Utilisateur"%>
 <html lang="en">
 
@@ -86,7 +87,7 @@
                          	Utilisateur util = (Utilisateur)session.getAttribute( "user" );
                          	String typeProf = util.getType(  );	
                          %>    
-                         <% if("professeur".equals( typeProf )) { %>        	                       
+                         <% if( DAOUtilitaire.RESPONSABLE.equals( typeProf ) || DAOUtilitaire.PROFESSEUR.equals( typeProf ) ) { %>        	                       
                         	<li>
                             	<a href="Accueil"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
                         	</li>                                                    
@@ -98,7 +99,7 @@
                             <a href="notes.jsp">Notes</a>
                         </li>
                            
-                         <% if("professeur".equals( typeProf )) { %>
+                         <% if(DAOUtilitaire.RESPONSABLE.equals( typeProf )) { %>
                         	<li>
                             	<a href="SkillManagement"><i class=""></i> Gestion de compétences</a>
                         	</li>

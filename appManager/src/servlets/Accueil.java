@@ -26,7 +26,8 @@ public class Accueil extends HttpServlet
         HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
 
-        if ( utilisateur != null && DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && ( DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() )
+                || DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() ) ) )
         {
             this.getServletContext().getRequestDispatcher( DAOUtilitaire.ACCUEIL_VIEW_FORWARD ).forward( request,
                     response );

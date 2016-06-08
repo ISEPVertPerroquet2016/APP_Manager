@@ -63,16 +63,16 @@ public class Connexion extends HttpServlet
         } else
         {
             session.setAttribute( DAOUtilitaire.USER, user );
-        }
 
-        if ( DAOUtilitaire.ELEVE.equals( user.getType() ) )
-        {
-            //this.getServletContext().getRequestDispatcher( ACCUEIL_TEST ).forward( request, response );
-            response.sendRedirect( DAOUtilitaire.SKILLS_SHEET_VIEW_REDIRECT );
-        } else if ( DAOUtilitaire.PROFESSEUR.equals( user.getType() ) )
-        {
-            response.sendRedirect( DAOUtilitaire.ACCUEIL_VIEW_REDIRECT );
-        }
+            if ( DAOUtilitaire.ELEVE.equals( user.getType() ) )
+            {
+                response.sendRedirect( DAOUtilitaire.SKILLS_SHEET_VIEW_REDIRECT );
 
+            } else if ( DAOUtilitaire.PROFESSEUR.equals( user.getType() )
+                    || DAOUtilitaire.RESPONSABLE.equals( user.getType() ) )
+            {
+                response.sendRedirect( DAOUtilitaire.ACCUEIL_VIEW_REDIRECT );
+            }
+        }
     }
 }

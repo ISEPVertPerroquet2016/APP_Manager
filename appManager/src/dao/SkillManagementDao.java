@@ -12,7 +12,7 @@ import entities.SkillObject;
 
 public class SkillManagementDao implements ISkillManagementDao
 {
-    private static final String SQL_SELECT_FAMILIES_NAMES = "SELECT name_family FROM familyskill";
+    private static final String SQL_SELECT_FAMILIES_NAMES = "SELECT * FROM familyskill";
     private static final String SQL_SELECT_FAMILIES       = "SELECT * FROM skill";
 
     protected DAOFactory        daoFactory;
@@ -23,12 +23,12 @@ public class SkillManagementDao implements ISkillManagementDao
     }
 
     @Override
-    public List<String> findFamiliesNames()
+    public List<FamilyObject> findFamiliesNames()
     {
         Connection connexion = null;
         PreparedStatement preparedstatement = null;
         ResultSet resultSet = null;
-        List<String> familiesNames = null;
+        List<FamilyObject> families = null;
 
         try
         {
@@ -44,11 +44,14 @@ public class SkillManagementDao implements ISkillManagementDao
             // Analyse du statut retourné par la requête d'insertion 
             while ( resultSet.next() )
             {
-                if ( familiesNames == null )
+                if ( families == null )
                 {
-                    familiesNames = new ArrayList<String>();
+                    families = new ArrayList<FamilyObject>();
                 }
-                familiesNames.add( resultSet.getString( "name_family" ) );
+                FamilyObject family = new FamilyObject();
+                family.setNameFamily( resultSet.getString( "name_family" ) );
+                family.setDescription( resultSet.getString( "description" ) );
+                families.add( family );
             }
 
         } catch (
@@ -61,25 +64,20 @@ public class SkillManagementDao implements ISkillManagementDao
             DAOUtilitaire.fermeturesSilencieuses( resultSet, preparedstatement, connexion );
         }
 
-        return familiesNames;
+        return families;
     }
 
     @Override
-    public List<FamilyObject> findFamilies( List<String> familiesNames )
+    public List<FamilyObject> findFamilies( List<FamilyObject> families )
     {
         Connection connexion = null;
         PreparedStatement preparedstatement = null;
         ResultSet resultat = null;
-        List<FamilyObject> families = new ArrayList<FamilyObject>();
 
-        for ( String familyName : familiesNames )
+        for ( FamilyObject family : families )
         {
-
-            FamilyObject family = new FamilyObject();
-            family.setNameFamily( familyName );
             List<SkillObject> skills = new ArrayList<SkillObject>();
             family.setSkills( skills );
-            families.add( family );
         }
 
         try

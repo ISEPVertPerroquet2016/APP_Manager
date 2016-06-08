@@ -42,7 +42,7 @@ public class Skill extends HttpServlet
         HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
 
-        if ( utilisateur != null && DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
+        if ( utilisateur != null && DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() ) )
         {
             String nameFamily = request.getParameter( "nameFamily" );
             request.setAttribute( DAOUtilitaire.FAMILY_NAME, nameFamily );
