@@ -1,3 +1,4 @@
+<%@page import="dao.DAOUtilitaire"%>
 <%@page import="entities.GroupObject"%>
 <%@page import="java.util.List"%>
 <%@include file="headerResp.jsp" %>
@@ -20,19 +21,25 @@
       <div class="col-lg-12">
                      <form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
                                 <div class="form-group col-sm-6">
-                        
+                        			<% 
+                        				Utilisateur user = (Utilisateur)session.getAttribute( "user" );
+	                        			List<Utilisateur> elevesSelected = null;
+	                        			int groupSelected = 0;
+	                            		if(request.getAttribute( "sheetEleves" ) != null)
+	                            		{
+	                            		    elevesSelected = (List<Utilisateur>) request.getAttribute( "sheetEleves" ); 
+	                            		    groupSelected = elevesSelected.get( 0 ).getIdGroup(  ) ;
+	                            		}
+                            		%>
+	                            	<%	
+                        				if(!(DAOUtilitaire.ELEVE).equals( user.getType(  ) )){
+                       				 %>
                                         <select class="form-control" name="sheetGroup" onchange="document.getElementById('skillSheetForm').submit()"> 
-                                        	<% 
-                                        		int groupSelected = 0;
-                                        		if(request.getAttribute( "sheetEleves" ) != null)
-                                        		{
-                                        		    List<Utilisateur> eleveSelected = (List<Utilisateur>) request.getAttribute( "sheetEleves" ); 
-                                        		    groupSelected = eleveSelected.get( 0 ).getIdGroup(  ) ;
-                                        		}
-          	                                      		
+                                        	<option default disabled selected>Selectionner un groupe</option>
+                                        	<%                		
                                         		List<GroupObject> groups = (List<GroupObject>) session.getAttribute( "sheetGroups" );                                             		
                                         	 	for(GroupObject group: groups)
-                                        	 	{
+                                        	 	{	 	    
                                         	 	    if( group.getGroupID(  ) == groupSelected)
                                         	 	    {
                                    	 	     %>
@@ -48,31 +55,31 @@
                                         	 	}
                                         	 %>                                                                                          
                                         </select>
+                                        <% } %>
                                   
                                      </div> 
                                             <div class="form-group col-sm-6"> 
                                             <select class="form-control">
+                                            	<option default>Selectionner un eleve</option>
                                             	<%
-                                            		int userID = ((Utilisateur)session.getAttribute( "user" )).getUserID(  );
-                                            		List<Utilisateur> eleves = null;
-	                                            	if(request.getAttribute( "sheetEleves" ) != null)
-	                                        		{	                                        		               		
-	                                            		eleves = (List<Utilisateur>) request.getAttribute( "sheetEleves" );
-	                                            	}
-	                                            		for(Utilisateur eleve: eleves)
+                                            		int userID = user.getUserID(  );
+                                            		if(elevesSelected != null)
                                             		{
-                                            			if(userID == eleve.getUserID(  )) 
-                                            			{
-                                            	  		%>
-                                       	 	     			<option selected><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
-                                       	 	    		 <%
-                                            			}else
-                                            			{
-                                            			%>
-                                       	 	     			<option><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
-                                       	 	     		<% 
-                                            			}
-                                            		}
+                                            		    for(Utilisateur eleve: elevesSelected)
+                                                		{
+                                                			if(userID == eleve.getUserID(  )) 
+                                                			{
+                                                	  		%>
+                                           	 	     			<option selected><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                           	 	    		 <%
+                                                			}else
+                                                			{
+                                                			%>
+                                           	 	     			<option><%=eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                           	 	     		<% 
+                                                			}
+                                                		} 
+                                            		}                              	
                                             	%>
 	                                            
                                             </select>
@@ -145,8 +152,7 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
-    </div>
+   
     <!-- /#wrapper -->
 
     <!-- jQuery -->

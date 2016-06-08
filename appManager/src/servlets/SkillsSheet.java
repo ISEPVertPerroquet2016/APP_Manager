@@ -51,19 +51,27 @@ public class SkillsSheet extends HttpServlet
 
                 List<String> familiesNames = skillSheetMetier.getFamiliesName();
                 List<FamilyObject> families = skillSheetMetier.getFamilies( familiesNames );
-                List<GroupObject> groups = skillSheetMetier.getGroups();
-                List<Utilisateur> eleves = skillSheetMetier.getElevesByGroup( request, utilisateur.getIdGroup() );
 
                 session.setAttribute( DAOUtilitaire.FAMILIES, families );
-                session.setAttribute( DAOUtilitaire.SHEET_GROUPS, groups );
-                request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
+
+                if ( !DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
+                {
+                    List<GroupObject> groups = skillSheetMetier.getGroups();
+                    session.setAttribute( DAOUtilitaire.SHEET_GROUPS, groups );
+                }
+
+                if ( DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
+                {
+                    List<Utilisateur> eleves = skillSheetMetier.getElevesByGroup( request, utilisateur.getIdGroup() );
+                    request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
+                }
 
                 this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
                         .forward( request, response );
-            } else
-            {
-                response.sendRedirect( DAOUtilitaire.CONNEXION_VIEW_REDIRECT );
             }
+        } else
+        {
+            response.sendRedirect( DAOUtilitaire.CONNEXION_VIEW_REDIRECT );
         }
     }
 

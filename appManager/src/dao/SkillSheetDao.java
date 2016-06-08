@@ -13,8 +13,8 @@ import entities.Utilisateur;
 public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
 {
 
-    private static final String SQL_SELECT_GROUPS = "SELECT * FROM groupe";
-    private static final String SQL_SELECT_ELEVES = "SELECT * FROM Utilisateur WHERE id_group=?";
+    private static final String SQL_SELECT_GROUPS = "SELECT * FROM groupe WHERE id_group>0";
+    private static final String SQL_SELECT_ELEVES = "SELECT * FROM Utilisateur WHERE id_group=? and userType='eleve'";
 
     public SkillSheetDao( DAOFactory daoFactory )
     {
