@@ -5,6 +5,7 @@ import java.util.List;
 public class FamilyObject
 {
     private String            nameFamily;
+    private String            description;
     private List<SkillObject> skills;
 
     /**
@@ -39,5 +40,22 @@ public class FamilyObject
     public void setSkills( List<SkillObject> skills )
     {
         this.skills = skills;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     * @param description
+     *            the description to set
+     */
+    public void setDescription( String description )
+    {
+        this.description = description;
     }
 }

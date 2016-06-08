@@ -11,12 +11,13 @@ import entities.FamilyObject;
 
 public class FamilyMetier
 {
-    private static final String FAMILY    = "family";
-    private static final String CHAMP_NOM = "nameFamily";
+    private static final String FAMILY      = "family";
+    private static final String DESCRIPTION = "description";
+    private static final String CHAMP_NOM   = "nameFamily";
 
     private FamilyDao           familyDao;
     private String              resultat;
-    private Map<String, String> erreurs   = new HashMap<String, String>();
+    private Map<String, String> erreurs     = new HashMap<String, String>();
 
     public FamilyMetier( FamilyDao familyDao )
     {
@@ -27,12 +28,14 @@ public class FamilyMetier
     {
         // Récupération des champs du formulaire 
         String familyName = getValeurChamp( request, FAMILY );
+        String description = getValeurChamp( request, DESCRIPTION );
 
         FamilyObject family = new FamilyObject();
 
         try
         {
             traiterName( familyName, family );
+            family.setDescription( description );
             if ( erreurs.isEmpty() )
             {
                 familyDao.create( family );

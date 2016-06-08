@@ -9,7 +9,7 @@ import entities.FamilyObject;
 
 public class FamilyDao implements IFamilyDao
 {
-    private static final String SQL_CREATE_FAMILY  = "INSERT INTO familySkill (name_family) VALUES (?)";
+    private static final String SQL_CREATE_FAMILY  = "INSERT INTO familySkill (name_family, description) VALUES (?, ?)";
     private static final String SQL_SELECT_BY_NAME = "SELECT name_family FROM familyskill WHERE name_family = ?";
 
     private DAOFactory          daoFactory;
@@ -36,6 +36,7 @@ public class FamilyDao implements IFamilyDao
 
             //remplissage des paramètres de la requête préparée
             preparedstatement.setString( 1, family.getNameFamily() );
+            preparedstatement.setString( 2, family.getDescription() );
 
             // Execution de la requête d'insertion
             int statut = preparedstatement.executeUpdate();
