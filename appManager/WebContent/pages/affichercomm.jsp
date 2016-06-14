@@ -10,7 +10,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                <c:forEach items="${ sessionScope.families }" var="family" >
-               		<li><a href="">${ family.nameFamily }</a></li>
+               		<li><a href="" >${ family.nameFamily }</a></li>
                </c:forEach>     
               
             </ul>
@@ -85,16 +85,19 @@
                                             </select>
                                           </div> 
                                     <div><a href="evaluercomm.jsp">Editer</a></div>
-    						
                    		</form>
                 </div>
+                
                 <div class="col-lg-12">
-                                       <h3 class="page-header"> Agir en bon communicant dans un environnement scientifique et technique</h3>
-                   
+                   <h3 class="page-header"> Agir en bon communicant dans un environnement scientifique et technique</h3>              
                 </div>
+                
                 <!-- /.col-lg-12 -->
+                
             </div>
+                      
             <!-- /.row -->
+            
             <div class="panel-body">
           
           <div class="row">

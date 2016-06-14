@@ -26,10 +26,12 @@ public final class DAOUtilitaire
     public static final String ATT_FORM_SKILL                = "formSkill";
     public static final String ATT_FORM_CONNEXION            = "formConnexion";
     public static final String ATT_FORM_FAMILY               = "formFamily";
+    public static final String ATT_FORM_GROUP                = "formGroup";
     public static final String SKILL                         = "skill";
     public static final String FAMILY_NAME                   = "familyName";
     public static final String FAMILY                        = "family";
     public static final String FAMILIES                      = "families";
+    public static final String GROUP                         = "group";
     public static final String SHEET_GROUPS                  = "sheetGroups";
     public static final String SHEET_ELEVES                  = "sheetEleves";
 
@@ -42,6 +44,7 @@ public final class DAOUtilitaire
     public static final String FAMILY_VIEW_FORWARD           = "/pages/nouvelleFamille.jsp";
     public static final String SKILL_MANAGEMENT_VIEW_FORWARD = "/pages/gerercomp.jsp";
     public static final String SKILLS_SHEET_VIEW_FORWARD     = "/pages/affichercomm.jsp";
+    public static final String GROUP_VIEW_FORWARD            = "/pages/nouveauGroupe.jsp";
 
     /**
      * redirect views

@@ -14,7 +14,8 @@
                <div class="panel-body">
                   <div class="form-group col-sm-6">
                        <label>Groupe:</label>
-                       <input name="groupe"  class="form-control"><p>${requestScope.formFamily.erreurs.nameFamily}</p>
+                       <input type="number" name="groupe"  class="form-control">
+                       <p>${requestScope.formGroup.erreurs.group}</p>
                  </div> 
                  <div class="form-group col-sm-6">
 					   <label>Tuteur</label>
