@@ -111,5 +111,10 @@ public class DAOFactory
     {
         return new SkillSheetDao( this );
     }
+    
+    public GroupDao getGroupDao()
+    {
+    	return new GroupDao( this );
+    }
 
 }

@@ -103,6 +103,9 @@
                         	<li>
                             	<a href="SkillManagement"><i class=""></i> Gestion de compétences</a>
                         	</li>
+                        	<li>
+                            	<a href="Group"><i class=""></i> Gestion de Groupes</a>
+                        	</li>
                         <% } %> 
                                                 
                         <li>
