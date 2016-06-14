@@ -30,6 +30,8 @@ public final class DAOUtilitaire
     public static final String SKILL                         = "skill";
     public static final String FAMILY_NAME                   = "familyName";
     public static final String FAMILY                        = "family";
+    public static final String FAMILY_SELECTED               = "familySelected";
+    public static final String ELEVE_SELECTED                = "eleveSelected";
     public static final String FAMILIES                      = "families";
     public static final String GROUP                         = "group";
     public static final String SHEET_GROUPS                  = "sheetGroups";

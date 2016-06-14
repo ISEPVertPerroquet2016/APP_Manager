@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <a class="navbar-brand" href="index.html">APP Manager</a>
+               <a class="navbar-brand">APP Manager</a>
             </div>
             <!-- /.navbar-header -->
 

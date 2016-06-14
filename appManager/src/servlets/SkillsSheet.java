@@ -77,13 +77,33 @@ public class SkillsSheet extends HttpServlet
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
-        SkillSheetMetier skillSheetMetier = new SkillSheetMetier( skillSheetDao );
+        HttpSession session = request.getSession();
+        Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
+        List<Utilisateur> eleves = null;
 
-        List<Utilisateur> eleves = skillSheetMetier.getElevesByGroup( request );
+        if ( utilisateur != null )
+        {
+            SkillSheetMetier skillSheetMetier = new SkillSheetMetier( skillSheetDao );
 
-        request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
+            if ( !DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
+            {
+                eleves = skillSheetMetier.getElevesByGroup( request );
+            } else
+            {
+                eleves = skillSheetMetier.getElevesByGroup( request, utilisateur.getIdGroup() );
+            }
 
-        this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
-                .forward( request, response );
+            List<FamilyObject> families = (List<FamilyObject>) session.getAttribute( DAOUtilitaire.FAMILIES );
+            FamilyObject familySelected = skillSheetMetier.getFamilyByName( request, families );
+            int eleveSelectedID = skillSheetMetier.getEleveIDSelected( request );
+
+            request.setAttribute( DAOUtilitaire.FAMILY_SELECTED, familySelected );
+            request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
+            request.setAttribute( DAOUtilitaire.ELEVE_SELECTED, eleveSelectedID );
+
+            this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
+                    .forward( request, response );
+        }
+
     }
 }

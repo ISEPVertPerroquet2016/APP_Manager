@@ -2,6 +2,16 @@
 <%@page import="entities.GroupObject"%>
 <%@page import="java.util.List"%>
 <%@include file="headerResp.jsp" %>
+<script type="text/javascript" >
+function sendFamily(nameFamily){
+	
+	var familySelected = document.getElementById('familySelected');
+
+	familySelected.value = nameFamily;
+	
+	document.getElementById('skillSheetForm').submit();		
+}
+</script>
 <div id="page-wrapper">
             <div class="row">
          <nav class="navbar navbar-default">
@@ -10,7 +20,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                <c:forEach items="${ sessionScope.families }" var="family" >
-               		<li><a href="" >${ family.nameFamily }</a></li>
+               		<li><a href="" onclick="sendFamily('${ family.nameFamily }'); return false;">${ family.nameFamily }</a></li>
                </c:forEach>     
               
             </ul>
@@ -59,23 +69,29 @@
                                   
                                      </div> 
                                             <div class="form-group col-sm-6"> 
-                                            <select class="form-control">
-                                            	<option default>Selectionner un eleve</option>
+                                            <select class="form-control" name="eleveSelected" onchange="document.getElementById('skillSheetForm').submit()">
+                                            	<option default value="0">Selectionner un eleve</option>
                                             	<%
                                             		int userID = user.getUserID(  );
+                                            		int eleveSelectedID = -1;
+                                            		if(request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) != null)
+                                            		{
+                                            		    eleveSelectedID = (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED );
+                                            		}
+                                            		
                                             		if(elevesSelected != null)
                                             		{
                                             		    for(Utilisateur eleve: elevesSelected)
                                                 		{
-                                                			if(userID == eleve.getUserID(  )) 
+                                                			if( eleveSelectedID == eleve.getUserID(  )) 
                                                 			{
                                                 	  		%>
-                                           	 	     			<option selected><%=eleve.getUserID(  ) + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                           	 	     			<option selected value="<%=eleve.getUserID(  )%>"><%=eleveSelectedID + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
                                            	 	    		 <%
                                                 			}else
                                                 			{
                                                 			%>
-                                           	 	     			<option><%=eleve.getUserID(  ) + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                                           	 	     			<option value="<%=eleve.getUserID(  )%>"><%=eleve.getUserID(  ) + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
                                            	 	     		<% 
                                                 			}
                                                 		} 
@@ -85,11 +101,13 @@
                                             </select>
                                           </div> 
                                     <div><a href="evaluercomm.jsp">Editer</a></div>
+                                    
+                                    <input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
                    		</form>
                 </div>
                 
                 <div class="col-lg-12">
-                   <h3 class="page-header"> Agir en bon communicant dans un environnement scientifique et technique</h3>              
+                   <h3 class="page-header"> ${requestScope.familySelected.description}</h3>              
                 </div>
                 
                 <!-- /.col-lg-12 -->
@@ -174,6 +192,11 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+
+	
+<!--
+
+//-->
 
 </body>
 
