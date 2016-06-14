@@ -123,46 +123,30 @@ function sendFamily(nameFamily){
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th></th>
+                                            <th>Nom de la compétence</th>
                                             <th>Observation de l'équipe</th>
                                             <th>Observation individuelle</th>
+                                      <%if(!DAOUtilitaire.ELEVE.equals( user.getType(  ) )){ %>  
                                             <th>Remarques</th>
+                                      <%} %>  
                                             <th>Niveau</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Écouter et se faire écouter</td>
-                                            <td>Observation</td>
-                                            <td>Observation</td>
-                                            <td>Remarque</td>
-                                            <td><button type="button" class="btn btn-danger btn-circle">B
-                            </button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dialoguer, argumenter et convaincre</td>
-                                            <td>Observation</td>
-                                            <td>Observation</td>
-                                            <td>Remarque</td>
-                                            <td><button type="button" class="btn btn-warning btn-circle">B
-                            </button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Communiquer à l'oral </td>
-                                            <td>Observation</td>
-                                            <td>Observation</td>
-                                            <td>Remarque</td>
-                                            <td><button type="button" class="btn btn-success btn-circle">I
-                            </button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Communiquer à l'écrit</td>
-                                            <td>Observation</td>
-                                            <td>Observation</td>
-                                            <td>Remarque</td>
-                                            <td><button type="button" class="btn btn-success btn-circle">I
-                            </button></td>
-                                      </tr>
+                                        <c:forEach items="${requestScope.familySelected.skills}" var="skill">
+	                                        <tr>
+	                                            <td>${skill.nameSkill}</td>
+	                                            <td>Observation</td>
+	                                            <td>Observation</td>
+                                            <%if(!DAOUtilitaire.ELEVE.equals( user.getType(  ) )){ %>
+	                                            <td></td>
+                                            <%} %> 
+	                                            <td><button type="button" class="btn btn-danger btn-circle">B</button></td>
+	                                        </tr>
+                                        </c:forEach>
+                                    
+                                  
+                                     
                                     </tbody>
                                 </table>
                             </div>       
