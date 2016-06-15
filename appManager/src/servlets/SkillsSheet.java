@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import dao.DAOUtilitaire;
 import dao.classesDAO.DAOFactory;
 import dao.classesDAO.SkillSheetDao;
 import entities.FamilyObject;
+import entities.FicheObject;
 import entities.GroupObject;
 import entities.Utilisateur;
 import metiers.metier.SkillSheetMetier;
@@ -80,6 +82,7 @@ public class SkillsSheet extends HttpServlet
         HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
         List<Utilisateur> eleves = null;
+        Map<String, FicheObject> ficheSelected = null;
 
         if ( utilisateur != null )
         {
@@ -97,9 +100,16 @@ public class SkillsSheet extends HttpServlet
             FamilyObject familySelected = skillSheetMetier.getFamilyByName( request, families );
             int eleveSelectedID = skillSheetMetier.getEleveIDSelected( request );
 
+            if ( familySelected != null && eleveSelectedID > 0 )
+            {
+                ficheSelected = skillSheetMetier.getFiche( familySelected.getNameFamily(),
+                        eleveSelectedID );
+            }
+
             request.setAttribute( DAOUtilitaire.FAMILY_SELECTED, familySelected );
             request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
             request.setAttribute( DAOUtilitaire.ELEVE_SELECTED, eleveSelectedID );
+            request.setAttribute( DAOUtilitaire.FICHE_SELECTED, ficheSelected );
 
             this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
                     .forward( request, response );

@@ -1,12 +1,14 @@
 package metiers.metier;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import dao.classesDAO.SkillSheetDao;
 import dao.exceptions.DAOException;
 import entities.FamilyObject;
+import entities.FicheObject;
 import entities.GroupObject;
 import entities.Utilisateur;
 
@@ -61,6 +63,22 @@ public class SkillSheetMetier extends SkillManagementMetier
         }
 
         return eleves;
+    }
+
+    public Map<String, FicheObject> getFiche( String name_family, int eleveID )
+    {
+        Map<String, FicheObject> fiches = null;
+
+        try
+        {
+            fiches = skillSheetDao.findFiches( name_family, eleveID );
+
+        } catch ( DAOException e )
+        {
+            e.printStackTrace();
+        }
+
+        return fiches;
     }
 
     /*

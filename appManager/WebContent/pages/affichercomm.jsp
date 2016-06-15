@@ -2,16 +2,7 @@
 <%@page import="entities.GroupObject"%>
 <%@page import="java.util.List"%>
 <%@include file="headerResp.jsp" %>
-<script type="text/javascript" >
-function sendFamily(nameFamily){
-	
-	var familySelected = document.getElementById('familySelected');
 
-	familySelected.value = nameFamily;
-	
-	document.getElementById('skillSheetForm').submit();		
-}
-</script>
 <div id="page-wrapper">
             <div class="row">
          <nav class="navbar navbar-default">
@@ -120,6 +111,10 @@ function sendFamily(nameFamily){
           
           <div class="row">
                        <div class="table-responsive">
+                  <% 
+                  		if(request.getAttribute( DAOUtilitaire.FAMILY_SELECTED ) != null 
+                  		&& (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
+                  %>     
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -133,15 +128,21 @@ function sendFamily(nameFamily){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${requestScope.familySelected.skills}" var="skill">
+                                        <c:forEach items="${requestScope.familySelected.skills}" var="skill" >
+                                        	<c:set var="skillName" value="${skill.nameSkill}" scope="page" />
+                                        	
 	                                        <tr>
 	                                            <td>${skill.nameSkill}</td>
-	                                            <td>Observation</td>
-	                                            <td>Observation</td>
+	                                            <td>Observation de l'équipe</td>
+	                                            <td>${requestScope.ficheSelected[skillName].observation}</td>
                                             <%if(!DAOUtilitaire.ELEVE.equals( user.getType(  ) )){ %>
 	                                            <td></td>
                                             <%} %> 
-	                                            <td><button type="button" class="btn btn-danger btn-circle">B</button></td>
+	                                            <td>
+		                                            <button type="button" class="btn btn-danger btn-circle">
+		                                           	 	${requestScope.ficheSelected[skillName].niveau}
+		                                            </button>
+	                                            </td>
 	                                        </tr>
                                         </c:forEach>
                                     
@@ -149,9 +150,10 @@ function sendFamily(nameFamily){
                                      
                                     </tbody>
                                 </table>
+                               <%} %>
                             </div>       
                      </div>
-                     </div>
+                  </div>
             <!-- /.row -->
             
             <!-- /.row -->
@@ -181,7 +183,8 @@ function sendFamily(nameFamily){
 <!--
 
 //-->
-
+	<script src="js/skillSheetJS.js"></script>
+	
 </body>
 
 </html>
