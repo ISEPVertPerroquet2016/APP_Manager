@@ -83,6 +83,8 @@ public class SkillsSheet extends HttpServlet
         Utilisateur utilisateur = (Utilisateur) session.getAttribute( DAOUtilitaire.USER );
         List<Utilisateur> eleves = null;
         Map<String, FicheObject> ficheSelected = null;
+        Map<String, String> fichesCollectives = null;
+        int groupSelected = 0;
 
         if ( utilisateur != null )
         {
@@ -91,9 +93,14 @@ public class SkillsSheet extends HttpServlet
             if ( !DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
             {
                 eleves = skillSheetMetier.getElevesByGroup( request );
+                if ( !eleves.isEmpty() )
+                {
+                    groupSelected = eleves.get( 0 ).getIdGroup();
+                }
             } else
             {
                 eleves = skillSheetMetier.getElevesByGroup( request, utilisateur.getIdGroup() );
+                groupSelected = utilisateur.getIdGroup();
             }
 
             List<FamilyObject> families = (List<FamilyObject>) session.getAttribute( DAOUtilitaire.FAMILIES );
@@ -104,12 +111,16 @@ public class SkillsSheet extends HttpServlet
             {
                 ficheSelected = skillSheetMetier.getFiche( familySelected.getNameFamily(),
                         eleveSelectedID );
+
+                fichesCollectives = skillSheetMetier.getFicheCollective( familySelected.getNameFamily(),
+                        groupSelected );
             }
 
             request.setAttribute( DAOUtilitaire.FAMILY_SELECTED, familySelected );
             request.setAttribute( DAOUtilitaire.SHEET_ELEVES, eleves );
             request.setAttribute( DAOUtilitaire.ELEVE_SELECTED, eleveSelectedID );
             request.setAttribute( DAOUtilitaire.FICHE_SELECTED, ficheSelected );
+            request.setAttribute( DAOUtilitaire.FICHE_COLLECTIVE_SELECTED, fichesCollectives );
 
             this.getServletContext().getRequestDispatcher( DAOUtilitaire.SKILLS_SHEET_VIEW_FORWARD )
                     .forward( request, response );

@@ -33,6 +33,7 @@ public final class DAOUtilitaire
     public static final String FAMILY_SELECTED               = "familySelected";
     public static final String ELEVE_SELECTED                = "eleveSelected";
     public static final String FICHE_SELECTED                = "ficheSelected";
+    public static final String FICHE_COLLECTIVE_SELECTED     = "ficheCollectiveSelected";
     public static final String FAMILIES                      = "families";
     public static final String GROUP                         = "group";
     public static final String SHEET_GROUPS                  = "sheetGroups";

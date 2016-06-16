@@ -14,4 +14,6 @@ public interface ISkillSheetDao
     List<Utilisateur> findElevesByGroup( int id_group );
 
     Map<String, FicheObject> findFiches( String nameFamily, int userID );
+
+    public Map<String, String> findFichesCollectives( String nameFamily, int groupID );
 }

@@ -133,7 +133,7 @@
                                         	
 	                                        <tr>
 	                                            <td>${skill.nameSkill}</td>
-	                                            <td>${requestScope.ficheSelected[skillName].observationCollective}</td>
+	                                            <td>${requestScope.ficheCollectiveSelected[skillName]}</td>
 	                                            <td>${requestScope.ficheSelected[skillName].observation}</td>
                                             <%if(!DAOUtilitaire.ELEVE.equals( user.getType(  ) )){ %>
 	                                            <td></td>

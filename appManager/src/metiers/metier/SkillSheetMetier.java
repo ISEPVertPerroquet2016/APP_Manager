@@ -81,6 +81,22 @@ public class SkillSheetMetier extends SkillManagementMetier
         return fiches;
     }
 
+    public Map<String, String> getFicheCollective( String name_family, int groupID )
+    {
+        Map<String, String> fichesCollectives = null;
+
+        try
+        {
+            fichesCollectives = skillSheetDao.findFichesCollectives( name_family, groupID );
+
+        } catch ( DAOException e )
+        {
+            e.printStackTrace();
+        }
+
+        return fichesCollectives;
+    }
+
     /*
      * Méthode utilitaire qui retourne 0 si un champ est vide, et son contenu
      * sinon. (pour les int seulement)

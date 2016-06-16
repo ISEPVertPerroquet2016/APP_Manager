@@ -19,10 +19,10 @@ import entities.Utilisateur;
 public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
 {
 
-    private static final String SQL_SELECT_GROUPS = "SELECT * FROM groupe WHERE id_group>0";
-    private static final String SQL_SELECT_ELEVES = "SELECT * FROM Utilisateur WHERE id_group=? and userType='eleve'";
-    private static final String SQL_SELECT_FICHES = "SELECT * FROM fiche WHERE user_id = ? and name_family = ?";
-    private static final String SQL_SELECT_FICHES_COLLECTIVES = "SELECT observation_collective, name_skill FROM fichecollective WHERE user_id = ? and name_family = ?";
+    private static final String SQL_SELECT_GROUPS             = "SELECT * FROM groupe WHERE id_group>0";
+    private static final String SQL_SELECT_ELEVES             = "SELECT * FROM Utilisateur WHERE id_group=? and userType='eleve'";
+    private static final String SQL_SELECT_FICHES             = "SELECT * FROM fiche WHERE user_id=? and name_family = ?";
+    private static final String SQL_SELECT_FICHES_COLLECTIVES = "SELECT observation_collective, name_skill FROM fichecollective WHERE id_group = ? and name_family = ?";
 
     public SkillSheetDao( DAOFactory daoFactory )
     {
@@ -125,7 +125,6 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
         PreparedStatement preparedstatement = null;
         ResultSet resultSet = null;
         Map<String, FicheObject> fiches = null;
-        Map<String, String> observationsCollectives = findFichesCollectives(nameFamily, userID);
 
         try
         {
@@ -148,8 +147,8 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
                 {
                     fiches = new HashMap<String, FicheObject>();
                 }
+
                 FicheObject fiche = mapFiche( resultSet );
-                fiche.setObservationCollective(observationsCollectives.get(fiche.getNameSkill()));
                 fiches.put( fiche.getNameSkill(), fiche );
             }
 
@@ -165,8 +164,8 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
 
         return fiches;
     }
-    
-    public Map<String, String> findFichesCollectives( String nameFamily, int userID )
+
+    public Map<String, String> findFichesCollectives( String nameFamily, int groupID )
     {
         Connection connexion = null;
         PreparedStatement preparedstatement = null;
@@ -182,7 +181,7 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
             // Création de l'objet gérant les requêtes préparées 
             preparedstatement = connexion.prepareStatement( SQL_SELECT_FICHES_COLLECTIVES );
 
-            preparedstatement.setInt( 1, userID );
+            preparedstatement.setInt( 1, groupID );
             preparedstatement.setString( 2, nameFamily );
 
             resultSet = preparedstatement.executeQuery();
@@ -192,11 +191,11 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
             {
                 if ( observationsCollectives == null )
                 {
-                	observationsCollectives = new HashMap<String, String>();
+                    observationsCollectives = new HashMap<String, String>();
                 }
-                String observationCollective = resultSet.getString("observation_collective");
-                String nameSkill = resultSet.getString("name_skill");
-                
+                String observationCollective = resultSet.getString( "observation_collective" );
+                String nameSkill = resultSet.getString( "name_skill" );
+
                 observationsCollectives.put( nameSkill, observationCollective );
             }
 
@@ -212,7 +211,6 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
 
         return observationsCollectives;
     }
-    
 
     private FicheObject mapFiche( ResultSet resultSet ) throws SQLException
     {
@@ -223,7 +221,7 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
         int userID = resultSet.getInt( "user_id" );
         String niveau = resultSet.getString( "niveau" );
         String observation = resultSet.getString( "observation" );
-        
+
         fiche.setNameFamily( nameFamily );
         fiche.setNameSkill( nameSkill );
         fiche.setUserID( userID );
