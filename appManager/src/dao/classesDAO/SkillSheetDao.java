@@ -19,7 +19,7 @@ import entities.Utilisateur;
 public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
 {
 
-    private static final String SQL_SELECT_GROUPS             = "SELECT * FROM groupe WHERE id_group>0";
+    private static final String SQL_SELECT_GROUPS             = "SELECT DISTINCT groupe.id_group FROM groupe INNER JOIN utilisateur ON utilisateur.id_group = groupe.id_group WHERE utilisateur.id_group>0 AND utilisateur.userType='eleve'";
     private static final String SQL_SELECT_ELEVES             = "SELECT * FROM Utilisateur WHERE id_group=? and userType='eleve'";
     private static final String SQL_SELECT_FICHES             = "SELECT * FROM fiche WHERE user_id=? and name_family = ?";
     private static final String SQL_SELECT_FICHES_COLLECTIVES = "SELECT observation_collective, name_skill FROM fichecollective WHERE id_group = ? and name_family = ?";
@@ -235,9 +235,8 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
     {
         GroupObject group = new GroupObject();
         int idGroup = resultSet.getInt( "id_group" );
-        int idProf = resultSet.getInt( "id_prof" );
         group.setGroupID( idGroup );
-        group.setIdProf( idProf );
+
         return group;
     }
 
