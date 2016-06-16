@@ -22,6 +22,7 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
     private static final String SQL_SELECT_GROUPS = "SELECT * FROM groupe WHERE id_group>0";
     private static final String SQL_SELECT_ELEVES = "SELECT * FROM Utilisateur WHERE id_group=? and userType='eleve'";
     private static final String SQL_SELECT_FICHES = "SELECT * FROM fiche WHERE user_id = ? and name_family = ?";
+    private static final String SQL_SELECT_FICHES_COLLECTIVES = "SELECT observation_collective, name_skill FROM fichecollective WHERE user_id = ? and name_family = ?";
 
     public SkillSheetDao( DAOFactory daoFactory )
     {
@@ -124,6 +125,7 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
         PreparedStatement preparedstatement = null;
         ResultSet resultSet = null;
         Map<String, FicheObject> fiches = null;
+        Map<String, String> observationsCollectives = findFichesCollectives(nameFamily, userID);
 
         try
         {
@@ -147,6 +149,7 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
                     fiches = new HashMap<String, FicheObject>();
                 }
                 FicheObject fiche = mapFiche( resultSet );
+                fiche.setObservationCollective(observationsCollectives.get(fiche.getNameSkill()));
                 fiches.put( fiche.getNameSkill(), fiche );
             }
 
@@ -162,6 +165,54 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
 
         return fiches;
     }
+    
+    public Map<String, String> findFichesCollectives( String nameFamily, int userID )
+    {
+        Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+        ResultSet resultSet = null;
+        Map<String, String> observationsCollectives = null;
+
+        try
+        {
+
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_SELECT_FICHES_COLLECTIVES );
+
+            preparedstatement.setInt( 1, userID );
+            preparedstatement.setString( 2, nameFamily );
+
+            resultSet = preparedstatement.executeQuery();
+
+            // Analyse du statut retourné par la requête d'insertion 
+            while ( resultSet.next() )
+            {
+                if ( observationsCollectives == null )
+                {
+                	observationsCollectives = new HashMap<String, String>();
+                }
+                String observationCollective = resultSet.getString("observation_collective");
+                String nameSkill = resultSet.getString("name_skill");
+                
+                observationsCollectives.put( nameSkill, observationCollective );
+            }
+
+        } catch (
+
+        SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( resultSet, preparedstatement, connexion );
+        }
+
+        return observationsCollectives;
+    }
+    
 
     private FicheObject mapFiche( ResultSet resultSet ) throws SQLException
     {
@@ -172,7 +223,7 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
         int userID = resultSet.getInt( "user_id" );
         String niveau = resultSet.getString( "niveau" );
         String observation = resultSet.getString( "observation" );
-
+        
         fiche.setNameFamily( nameFamily );
         fiche.setNameSkill( nameSkill );
         fiche.setUserID( userID );
