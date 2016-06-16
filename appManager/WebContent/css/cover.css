@@ -107,3 +107,16 @@ img{
 	 position: relative;
 	 float:top;
 }
+
+h1 {
+    padding-top: 100px;
+    padding-bottom: 7%;
+    
+    margin-top: 0;
+   	
+    color: #1e1e1e;
+    font-family: verdana;
+    font-size: 350%;
+    letter-spacing: .10em;
+    text-align: center;
+}

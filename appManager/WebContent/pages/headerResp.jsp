@@ -16,17 +16,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="css/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Timeline CSS -->
-    <link href="css/timeline.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="css/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -45,9 +36,12 @@
     <div id="wrapper">
 
         <!-- Navigation -->
+        
         <nav class="navbar navbar-inverse navbar-static-top"style="margin-bottom: 0">
-        <img src="images/isep-issy.jpg" style="width:100%;" >
+        	<img src="images/isep-issy.jpg" style="width:100%;" >
         </nav>
+        
+        
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
                  
             <div class="navbar-header">
@@ -57,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <a class="navbar-brand">APP Manager</a>
+               	<a class="navbar-brand">APP Manager</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -73,11 +67,10 @@
                         <li><a href="Deconnexion"><i class="fa fa-sign-out fa-fw"></i> Log out</a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
+               
             </ul>
-            <!-- /.navbar-top-links -->
+            
            
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -100,24 +93,17 @@
                         </li>
                            
                          <% if(DAOUtilitaire.RESPONSABLE.equals( typeProf )) { %>
-                        	<li>
-                            	<a href="SkillManagement"><i class=""></i> Gestion de compétences</a>
-                        	</li>
-                        	<li>
-                            	<a href="Group"><i class=""></i> Gestion de Groupes</a>
-                        	</li>
+                        	
+                        	<li><a href="SkillManagement"><i class=""></i> Gestion de compétences</a></li>
+                        	<li><a href="Group"><i class=""></i> Gestion de Groupes</a></li>
                         <% } %> 
                                                 
-                        <li>
-                            <a href=""><i class="glyphicon glyphicon-file"></i> Documents</a>
-                        </li>
-                       
-                   
-                    </ul>
+                        <li><a href=""><i class="glyphicon glyphicon-file"></i> Documents</a></li>
+                   </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
+               
             </div>
-            <!-- /.navbar-static-side -->
+          
         </nav>
 
         

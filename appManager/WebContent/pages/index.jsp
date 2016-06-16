@@ -6,38 +6,22 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Styles css -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/cover.css" rel="stylesheet">
-    <script src="js/ie-emulation-modes-warning.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-     <script src="js/loginform.js"></script>
+    
 <div class="container">    
     <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
-    <div class="row"> 
-                     
-            <div class="iconmelon">
-            
-              <svg viewBox="0 0 32 32">
-                <g filter="">
-                  <use xlink:href="#git"></use>
-                </g>
-              </svg>
-            </div>
-        </div>
-        <h2>APP Manager</h2>
-       <img alt="" src="images/Isep-Logo.png">  
+    		
+        <h1>APP Manager</h1>
+       	<img alt="" src="images/Isep-Logo.png">  
+       	
         <div class="panel panel-default" >
-       
-              
-
-            <div class="panel-body" >
+       		<div class="panel-body" >
 
                 <form name="Connexion" id="form" class="form-horizontal" method="POST">
                    
-                    <div class="input-group">
+                   <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="login" type="text" class="form-control" name="login" value="" placeholder="Login">                                        
                     </div>
@@ -48,19 +32,22 @@
                     </div>                                                                  
 
                     <div class="form-group">
-                        <!-- Button -->
-                        <div class="col-sm-12 controls">
-                            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
+                    	<div class="col-sm-12 controls">
+                            <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
                         </div>
                     </div>
 
                 </form>
                 <p>${requestScope.formConnexion.erreurConnexion }</p>     
-
-            </div>                     
+			</div>                     
         </div>  
     </div>
 </div>
 
-<!--  <div id="particles"></div>-->
+	<!------------ Script------------>
+	<script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/loginform.js"></script>
 
