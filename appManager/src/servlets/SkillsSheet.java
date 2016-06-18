@@ -93,7 +93,7 @@ public class SkillsSheet extends HttpServlet
             if ( !DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
             {
                 eleves = skillSheetMetier.getElevesByGroup( request );
-                if ( !eleves.isEmpty() )
+                if ( eleves != null && !eleves.isEmpty() )
                 {
                     groupSelected = eleves.get( 0 ).getIdGroup();
                 }

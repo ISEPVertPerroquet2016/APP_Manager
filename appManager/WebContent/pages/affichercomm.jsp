@@ -2,104 +2,110 @@
 <%@page import="entities.GroupObject"%>
 <%@page import="java.util.List"%>
 <%@include file="headerResp.jsp" %>
-
+ <link href="css/toggle.css" rel="stylesheet">
 <div id="page-wrapper">
-            <div class="row">
+     <div class="row">
          <nav class="navbar navbar-default">
-        <div class="container-fluid">
+       		 <div class="container-fluid">
           
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-               <c:forEach items="${ sessionScope.families }" var="family" >
-               		<li><a href="" onclick="sendFamily('${ family.nameFamily }'); return false;">${ family.nameFamily }</a></li>
-               </c:forEach>     
-              
-            </ul>
-         
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
-      <div class="col-lg-12">
-                     <form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
-                                <div class="form-group col-sm-6">
-                        			<% 
-                        				Utilisateur user = (Utilisateur)session.getAttribute( "user" );
-	                        			List<Utilisateur> elevesSelected = null;
-	                        			int groupSelected = 0;
-	                            		if(request.getAttribute( "sheetEleves" ) != null)
-	                            		{
-	                            		    elevesSelected = (List<Utilisateur>) request.getAttribute( "sheetEleves" ); 
-	                            		    groupSelected = elevesSelected.get( 0 ).getIdGroup(  ) ;
-	                            		}
-                            		%>
-	                            	<%	
-                        				if(!(DAOUtilitaire.ELEVE).equals( user.getType(  ) )){
-                       				 %>
-                                        <select class="form-control" name="sheetGroup" onchange="document.getElementById('skillSheetForm').submit()"> 
-                                        	<option default disabled selected>Selectionner un groupe</option>
-                                        	<%                		
-                                        		List<GroupObject> groups = (List<GroupObject>) session.getAttribute( "sheetGroups" );                                             		
-                                        	 	for(GroupObject group: groups)
-                                        	 	{	 	    
-                                        	 	    if( group.getGroupID(  ) == groupSelected)
-                                        	 	    {
-                                   	 	     %>
-                                   	 	     			<option selected><%=group.getGroupID(  )%></option>
-                                   	 	     <%    
-                                        	 	    }
-                                        	 	    else
-                                        	 	    {
-                                    	 	 %>
-                                    	 	 			<option><%=group.getGroupID(  )%></option>
-                                         	 <%   
-                                        	 	    }
-                                        	 	}
-                                        	 %>                                                                                          
-                                        </select>
-                                        <% } %>
+		         <div id="navbar" class="navbar-collapse collapse">
+		          <ul class="nav navbar-nav">
+		             <c:forEach items="${ sessionScope.families }" var="family" >
+		             		<li><a href="" onclick="sendFamily('${ family.nameFamily }'); return false;">${ family.nameFamily }</a></li>
+		             </c:forEach>                  
+		          </ul>         
+		         </div><!--/.nav-collapse -->
+          
+   			 </div><!--/.container-fluid -->
+     	 </nav>
+     	 	
+     	 <div class="col-lg-12">
+         	<form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
+                <div class="form-group col-sm-6">
+           			<% 
+           				Utilisateur user = (Utilisateur)session.getAttribute( "user" );
+            			List<Utilisateur> elevesSelected = null;
+            			int groupSelected = 0;
+                		if(request.getAttribute( "sheetEleves" ) != null)
+                		{
+                		    elevesSelected = (List<Utilisateur>) request.getAttribute( "sheetEleves" ); 
+                		    groupSelected = elevesSelected.get( 0 ).getIdGroup(  ) ;
+                		}
+               		%>
+                	<%	
+           				if(!(DAOUtilitaire.ELEVE).equals( user.getType(  ) )){
+   				 	%>
+                       <select class="form-control" name="sheetGroup" onchange="document.getElementById('skillSheetForm').submit()"> 
+                           		<option default disabled selected>Selectionner un groupe</option>
+                           	<%                		
+                           		List<GroupObject> groups = (List<GroupObject>) session.getAttribute( "sheetGroups" );                                             		
+                           	 	for(GroupObject group: groups)
+                           	 	{	 	    
+                           	 	    if( group.getGroupID(  ) == groupSelected)
+                           	 	    {
+                  	 	     %>
+          	 	     			<option selected><%=group.getGroupID(  )%></option>
+                   	 	     <%    
+                           	 	    }
+                           	 	    else
+                           	 	    {
+                       	 	 %>
+               	 	 			<option><%=group.getGroupID(  )%></option>
+                            	 <%   
+                           	 	    }
+                           	 	}
+                           	 %>                                                                                          
+                         </select>
+                           <% } %>
                                   
-                                     </div> 
-                                            <div class="form-group col-sm-6"> 
-                                            <select class="form-control" name="eleveSelected" onchange="document.getElementById('skillSheetForm').submit()">
-                                            	<option default value="0">Selectionner un eleve</option>
-                                            	<%
-                                            		int userID = user.getUserID(  );
-                                            		int eleveSelectedID = -1;
-                                            		if(request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) != null)
-                                            		{
-                                            		    eleveSelectedID = (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED );
-                                            		}
-                                            		
-                                            		if(elevesSelected != null)
-                                            		{
-                                            		    for(Utilisateur eleve: elevesSelected)
-                                                		{
-                                                			if( eleveSelectedID == eleve.getUserID(  )) 
-                                                			{
-                                                	  		%>
-                                           	 	     			<option selected value="<%=eleve.getUserID(  )%>"><%=eleveSelectedID + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
-                                           	 	    		 <%
-                                                			}else
-                                                			{
-                                                			%>
-                                           	 	     			<option value="<%=eleve.getUserID(  )%>"><%=eleve.getUserID(  ) + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
-                                           	 	     		<% 
-                                                			}
-                                                		} 
-                                            		}                              	
-                                            	%>
-	                                            
-                                            </select>
-                                          </div> 
-                                    <div><a href="evaluercomm.jsp">Editer</a></div>
-                                    
-                                    <input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
-                   		</form>
-                </div>
+                </div> 
+                <div class="form-group col-sm-6"> 
+                    <select class="form-control" name="eleveSelected" onchange="document.getElementById('skillSheetForm').submit()">
+                        <option default value="0">Selectionner un eleve</option>
+                  	<%
+                  		int userID = user.getUserID(  );
+                  		int eleveSelectedID = -1;
+                  		if(request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) != null)
+                  		{
+                  		    eleveSelectedID = (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED );
+                  		}
+                  		
+                  		if(elevesSelected != null)
+                  		{
+                  		    for(Utilisateur eleve: elevesSelected)
+                      		{
+                      			if( eleveSelectedID == eleve.getUserID(  )) 
+                      			{
+                      	  	%>
+                 	 	     		<option selected value="<%=eleve.getUserID(  )%>"><%=eleveSelectedID + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                 	 	     <%
+                      			}else
+                      			{
+                      			%>
+                 	 	     		<option value="<%=eleve.getUserID(  )%>"><%=eleve.getUserID(  ) + " - " + eleve.getFirstname(  ) + " " + eleve.getSurname(  )%></option>
+                 	 	     	<% 
+                      			}
+                      		} 
+                  		}                              	
+                  	%>
+                   
+                	</select>
+                </div> 
                 
-                <div class="col-lg-12">
-                   <h3 class="page-header"> ${requestScope.familySelected.description}</h3>              
-                </div>
+               	   <div class="form-group col-sm-6"> <label class="switch">
+    					<input class="switch-input" type="checkbox" />
+    					<span class="switch-label" data-on="On" data-off="Off"></span> 
+    					<span class="switch-handle"></span> 
+    				</label>
+    				</div>
+                                   
+               	<input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
+       		</form>
+         </div>
+                
+         <div class="col-lg-12">
+            <h3 class="page-header"> ${requestScope.familySelected.description}</h3>              
+         </div>
                 
                 <!-- /.col-lg-12 -->
                 
