@@ -16,4 +16,10 @@ public interface ISkillSheetDao
     Map<String, FicheObject> findFiches( String nameFamily, int userID );
 
     public Map<String, String> findFichesCollectives( String nameFamily, int groupID );
+
+    void updateFiche( String nameSkill, int userID, String niveau, String observation );
+
+    void createFiche( String nameFamily, String nameSkill, int userID, String niveau, String observation );
+
+    void deleteFiche( String nameSkill, int userID );
 }

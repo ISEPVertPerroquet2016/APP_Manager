@@ -10,13 +10,20 @@ import dao.exceptions.DAOException;
 import entities.FamilyObject;
 import entities.FicheObject;
 import entities.GroupObject;
+import entities.SkillObject;
 import entities.Utilisateur;
 
 public class SkillSheetMetier extends SkillManagementMetier
 {
-    private static final String SHEET_GROUP           = "sheetGroup";
-    private static final String CHAMP_FAMILY_SELECTED = "familySelected";
-    private static final String CHAMP_ELEVE_SELECTED  = "eleveSelected";
+    private static final String SHEET_GROUP               = "sheetGroup";
+    private static final String CHAMP_FAMILY_SELECTED     = "familySelected";
+    private static final String CHAMP_ELEVE_SELECTED      = "eleveSelected";
+    private static final String CHAMP_OBSERVATION         = "observationEleve";
+    private static final String CHAMP_OBSERVATION_UPDATED = "observationEleveUpdated";
+    private static final String CHAMP_NIVEAU              = "niveauRadio";
+    private static final String CHAMP_NIVEAU_UPDATED      = "niveauRadioUpdated";
+    private static final String CHAMP_VALIDER_FICHE       = "validerFiche";
+    private static final String CHAMP_VALIDER_FICHE_VALUE = "Valider";
 
     private SkillSheetDao       skillSheetDao;
 
@@ -95,6 +102,53 @@ public class SkillSheetMetier extends SkillManagementMetier
         }
 
         return fichesCollectives;
+    }
+
+    public void editFiche( HttpServletRequest request, FamilyObject familySelected, int eleveID )
+    {
+        if ( CHAMP_VALIDER_FICHE_VALUE.equals( getValeurChamp( request, CHAMP_VALIDER_FICHE ) ) )
+        {
+            try
+            {
+                for ( SkillObject skill : familySelected.getSkills() )
+                {
+                    String oldObservation = getValeurChamp( request, CHAMP_OBSERVATION + skill.getNameSkill() );
+                    String newObservation = getValeurChamp( request, CHAMP_OBSERVATION_UPDATED + skill.getNameSkill() );
+
+                    String oldNiveau = getValeurChamp( request, CHAMP_NIVEAU + skill.getNameSkill() );
+                    String newNiveau = getValeurChamp( request, CHAMP_NIVEAU_UPDATED + skill.getNameSkill() );
+
+                    if ( oldObservation == null && oldNiveau == null )
+                    {
+                        if ( newObservation == null && newNiveau == null )
+                        {
+                            //rien
+                        } else
+                        {
+                            skillSheetDao.createFiche( skill.getNameFamily(), skill.getNameSkill(), eleveID, newNiveau,
+                                    newObservation );
+                        }
+
+                    } else if ( oldObservation != null || oldNiveau != null )
+                    {
+
+                        if ( newObservation == null && newNiveau == null )
+                        {
+                            skillSheetDao.deleteFiche( skill.getNameSkill(), eleveID );
+                        } else
+                        {
+                            skillSheetDao.updateFiche( skill.getNameSkill(), eleveID, newNiveau,
+                                    newObservation );
+                        }
+                    }
+                }
+
+            } catch ( DAOException e )
+            {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     /*

@@ -23,6 +23,9 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
     private static final String SQL_SELECT_ELEVES             = "SELECT * FROM Utilisateur WHERE id_group=? and userType='eleve'";
     private static final String SQL_SELECT_FICHES             = "SELECT * FROM fiche WHERE user_id=? and name_family = ?";
     private static final String SQL_SELECT_FICHES_COLLECTIVES = "SELECT observation_collective, name_skill FROM fichecollective WHERE id_group = ? and name_family = ?";
+    private static final String SQL_CREATE_FICHE              = "INSERT INTO fiche (name_family, name_skill, user_id, niveau, observation) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE_FICHE              = "UPDATE fiche SET observation = ?, niveau = ? WHERE name_skill = ? AND user_id = ?";
+    private static final String SQL_DELETE_FICHE              = "DELETE FROM fiche where name_skill = ? AND user_id = ?";
 
     public SkillSheetDao( DAOFactory daoFactory )
     {
@@ -210,6 +213,119 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
         }
 
         return observationsCollectives;
+    }
+
+    @Override
+    public void createFiche( String nameFamily, String nameSkill, int userID, String niveau, String observation )
+    {
+        Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+
+        try
+        {
+
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_CREATE_FICHE );
+
+            preparedstatement.setString( 1, nameFamily );
+            preparedstatement.setString( 2, nameSkill );
+            preparedstatement.setInt( 3, userID );
+            preparedstatement.setString( 4, niveau );
+            preparedstatement.setString( 5, observation );
+
+            int statut = preparedstatement.executeUpdate();
+
+            if ( statut == 0 )
+            {
+                throw new DAOException(
+                        "Échec de la création d'une fiche de competence." );
+            }
+        } catch (
+
+        SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
+        }
+
+    }
+
+    @Override
+    public void updateFiche( String nameSkill, int userID, String niveau, String observation )
+    {
+        Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+
+        try
+        {
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_UPDATE_FICHE );
+
+            preparedstatement.setString( 1, observation );
+            preparedstatement.setString( 2, niveau );
+            preparedstatement.setString( 3, nameSkill );
+            preparedstatement.setInt( 4, userID );
+
+            int statut = preparedstatement.executeUpdate();
+
+            // Analyse du statut retourné par la requête d'insertion 
+            if ( statut == 0 )
+            {
+                throw new DAOException(
+                        "Échec de l'update d'une fiche de competence, la ligne n'a pas été modifiée dans la table." );
+            }
+
+        } catch ( SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
+        }
+
+    }
+
+    @Override
+    public void deleteFiche( String nameSkill, int userID )
+    {
+        Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+
+        try
+        {
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_DELETE_FICHE );
+
+            preparedstatement.setString( 1, nameSkill );
+            preparedstatement.setInt( 2, userID );
+
+            int statut = preparedstatement.executeUpdate();
+
+            // Analyse du statut retourné par la requête d'insertion 
+            if ( statut == 0 )
+            {
+                throw new DAOException(
+                        "Échec de la suppression d'une fiche de competence" );
+            }
+
+        } catch ( SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
+        }
     }
 
     private FicheObject mapFiche( ResultSet resultSet ) throws SQLException

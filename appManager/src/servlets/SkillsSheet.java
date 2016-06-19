@@ -90,7 +90,8 @@ public class SkillsSheet extends HttpServlet
         {
             SkillSheetMetier skillSheetMetier = new SkillSheetMetier( skillSheetDao );
 
-            if ( !DAOUtilitaire.ELEVE.equals( utilisateur.getType() ) )
+            if ( DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() )
+                    || DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
             {
                 eleves = skillSheetMetier.getElevesByGroup( request );
                 if ( eleves != null && !eleves.isEmpty() )
@@ -109,11 +110,18 @@ public class SkillsSheet extends HttpServlet
 
             if ( familySelected != null && eleveSelectedID > 0 )
             {
+                if ( DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() )
+                        || DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
+                {
+                    skillSheetMetier.editFiche( request, familySelected, eleveSelectedID );
+                }
+
                 ficheSelected = skillSheetMetier.getFiche( familySelected.getNameFamily(),
                         eleveSelectedID );
 
                 fichesCollectives = skillSheetMetier.getFicheCollective( familySelected.getNameFamily(),
                         groupSelected );
+
             }
 
             request.setAttribute( DAOUtilitaire.FAMILY_SELECTED, familySelected );

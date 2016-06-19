@@ -48,17 +48,4 @@ function selectNiveau(){
 	}while(niveau != null);
 }
 
-//var niveau = document.getElementById('niveauRadio' + '1').value;
-//alert(niveau);
-//if(niveau != null){
-//	document.getElementById('testFiche').value  = niveau;
-//}
-//document.getElementById('testFiche').value  = niveau;
-//if(niveau == "NA" || niveau == "B-" || niveau == "B+" || niveau == "I-" || niveau == "I+")
-//{
-//		document.getElementById(niveau + "1").checked = true;
-//}
-
-
-
 		
