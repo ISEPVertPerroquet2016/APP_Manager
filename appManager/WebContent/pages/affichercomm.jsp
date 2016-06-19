@@ -154,7 +154,7 @@
 		                                      <input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" id="I+<c:out value="${boucle.count}"></c:out>" value="I+">I+
 		                                   </label>
 		                                   
-		                                    <input id="niveauRadio<c:out value="${boucle.count}"></c:out>" type="text" name="niveauRadio<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheSelected[skillName].niveau}">
+		                                    <input id="niveauRadio<c:out value="${boucle.count}"></c:out>" type="hidden" name="niveauRadio<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheSelected[skillName].niveau}">
 		                                    
 	                                  </div>
                                                                     	   
