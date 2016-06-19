@@ -12,8 +12,6 @@ public class FicheObject
 
     private String observation;
 
-    private String observationCollective;
-
     /**
      * @return the nameFamily
      */
@@ -99,20 +97,4 @@ public class FicheObject
         this.observation = observation;
     }
 
-    /**
-     * @return the observationCollective
-     */
-    public String getObservationCollective()
-    {
-        return observationCollective;
-    }
-
-    /**
-     * @param observationCollective
-     *            the observationCollective to set
-     */
-    public void setObservationCollective( String observationCollective )
-    {
-        this.observationCollective = observationCollective;
-    }
 }

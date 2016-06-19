@@ -7,3 +7,58 @@ function sendFamily(nameFamily){
 	
 	document.getElementById('skillSheetForm').submit();		
 }
+
+function switchFiche(){
+	
+	var toggle = document.getElementById('toggleFiche');
+	var fiche = document.getElementById('fiche');
+	var edit = document.getElementById('editFiche');
+	
+	if(toggle.checked){
+		fiche.style.display = "none";
+		edit.style.display = "block";
+	}else{
+		fiche.style.display = "block";
+		edit.style.display = "none";
+	}	
+}
+
+function changeGroup(){
+	
+	document.getElementById('selectEleve').value = "0";
+	document.getElementById('skillSheetForm').submit();
+	
+}
+	
+function selectNiveau(){
+
+	var count = 1;
+	
+	do{
+		
+		var niveau = document.getElementById('niveauRadio' + count).value;
+		
+		if(niveau == "NA" || niveau == "B-" || niveau == "B+" || niveau == "I-" || niveau == "I+")
+		{
+				document.getElementById(niveau + count).checked = true;
+		}
+		
+		count++;
+		
+	}while(niveau != null);
+}
+
+//var niveau = document.getElementById('niveauRadio' + '1').value;
+//alert(niveau);
+//if(niveau != null){
+//	document.getElementById('testFiche').value  = niveau;
+//}
+//document.getElementById('testFiche').value  = niveau;
+//if(niveau == "NA" || niveau == "B-" || niveau == "B+" || niveau == "I-" || niveau == "I+")
+//{
+//		document.getElementById(niveau + "1").checked = true;
+//}
+
+
+
+		

@@ -2,6 +2,9 @@
 <%@page import="entities.GroupObject"%>
 <%@page import="java.util.List"%>
 <%@include file="headerResp.jsp" %>
+
+
+
  <link href="css/toggle.css" rel="stylesheet">
 <div id="page-wrapper">
      <div class="row">
@@ -18,9 +21,14 @@
           
    			 </div><!--/.container-fluid -->
      	 </nav>
-     	 	
+     	 
+	     	  <div class="col-lg-12">
+	            <h3 class="page-header"> ${requestScope.familySelected.description}</h3>              
+	         </div>
+	         
+   	 	 <form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
      	 <div class="col-lg-12">
-         	<form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
+         	
                 <div class="form-group col-sm-6">
            			<% 
            				Utilisateur user = (Utilisateur)session.getAttribute( "user" );
@@ -35,7 +43,7 @@
                 	<%	
            				if(!(DAOUtilitaire.ELEVE).equals( user.getType(  ) )){
    				 	%>
-                       <select class="form-control" name="sheetGroup" onchange="document.getElementById('skillSheetForm').submit()"> 
+                       <select class="form-control" name="sheetGroup" onchange="changeGroup()"> 
                            		<option default disabled selected>Selectionner un groupe</option>
                            	<%                		
                            		List<GroupObject> groups = (List<GroupObject>) session.getAttribute( "sheetGroups" );                                             		
@@ -60,7 +68,7 @@
                                   
                 </div> 
                 <div class="form-group col-sm-6"> 
-                    <select class="form-control" name="eleveSelected" onchange="document.getElementById('skillSheetForm').submit()">
+                    <select id="selectEleve" class="form-control" name="eleveSelected" onchange="document.getElementById('skillSheetForm').submit()">
                         <option default value="0">Selectionner un eleve</option>
                   	<%
                   		int userID = user.getUserID(  );
@@ -92,28 +100,89 @@
                 	</select>
                 </div> 
                 
-               	   <div class="form-group col-sm-6"> <label class="switch">
-    					<input class="switch-input" type="checkbox" />
-    					<span class="switch-label" data-on="On" data-off="Off"></span> 
-    					<span class="switch-handle"></span> 
-    				</label>
+               	   <div class="form-group col-sm-6"> 
+	               	   <label class="switch">
+	    					<input id="toggleFiche" class="switch-input" type="checkbox" onclick="switchFiche()"/>
+	    					<span class="switch-label" data-on="Fiche" data-off="edit"></span> 
+	    					<span class="switch-handle"></span> 
+	    				</label>
     				</div>
                                    
                	<input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
+               	
+               	<div  class="panel-body" id="editFiche" style="display:none">
+           	<% 
+	       		if(request.getAttribute( DAOUtilitaire.FAMILY_SELECTED ) != null 
+	       		&& (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
+            %>
+           		<c:forEach items="${requestScope.familySelected.skills}" var="skill" varStatus="boucle">
+           			<c:set var="skillName" value="${skill.nameSkill}" scope="page" />
+	               <div class="panel-body col-sm-6">
+        
+            			<div class="panel  panel-primary ">
+                        	<div class="panel-heading">${skill.nameSkill}</div>
+                          	<div class="panel-body"> 
+                          	
+                           		<div class="form-group col-sm-6">
+                             		<label>Observation de l'élève</label>
+                              		<textarea class="form-control" rows="3" name="observationEleveUpdated<c:out value="${skill.nameSkill}"></c:out>" placeholder="observation">${requestScope.ficheSelected[skillName].observation}</textarea>
+                              		
+                              		<input id="observationEleve" type="hidden" name="observationEleve<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheSelected[skillName].observation}">
+                            	</div>                           	
+                       			<div class="form-group">
+                                    <label>Niveau de l'élève</label>
+                                                                     
+	                                 <div class="radio" onload="selectNiveau('${boucle.count}')">
+		                                  <label>
+		                                    <input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" id="NA<c:out value="${boucle.count}"></c:out>" value="NA">NA
+		                                  </label>
+		                                          
+		                                  <label>
+		                                   	<input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" id="B-<c:out value="${boucle.count}"></c:out>" value="B-">B-
+		                                   </label>
+		                                          
+		                                    
+		                                   <label>
+		                                     <input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" id="B+<c:out value="${boucle.count}"></c:out>" value="B+">B+
+		                                   </label>
+		                                                 
+		                                   <label>
+		                                      <input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" id="I-<c:out value="${boucle.count}"></c:out>" value="I-">I-
+		                                   </label>
+		                                            
+		                                   <label>
+		                                      <input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" id="I+<c:out value="${boucle.count}"></c:out>" value="I+">I+
+		                                   </label>
+		                                   
+		                                    <input id="niveauRadio<c:out value="${boucle.count}"></c:out>" type="text" name="niveauRadio<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheSelected[skillName].niveau}">
+		                                    
+	                                  </div>
+                                                                    	   
+                           		</div>
+
+                          </div>
+                </div>
+                   
+         
+                </div>
+                </c:forEach>               
+            <%
+	       		}  
+            %>
+            	<input name="validerFiche" value="Valider" type="submit">
+            
+               	</div>
+               	</div>
+               	              	
        		</form>
-         </div>
+         
                 
-         <div class="col-lg-12">
-            <h3 class="page-header"> ${requestScope.familySelected.description}</h3>              
-         </div>
-                
-                <!-- /.col-lg-12 -->
-                
+        
             </div>
                       
             <!-- /.row -->
             
-            <div class="panel-body">
+            <div id="fiche" class="panel-body">
           
           <div class="row">
                        <div class="table-responsive">
@@ -160,7 +229,9 @@
                             </div>       
                      </div>
                   </div>
-            <!-- /.row -->
+            <!-- edit -->
+            
+            
             
             <!-- /.row -->
         </div>
@@ -189,7 +260,15 @@
 <!--
 
 //-->
+	
+	<script>
+	document.getElementById("body").onload = function() {selectNiveau()};
+	
+	
+	</script>
 	<script src="js/skillSheetJS.js"></script>
+	
+	
 	
 </body>
 
