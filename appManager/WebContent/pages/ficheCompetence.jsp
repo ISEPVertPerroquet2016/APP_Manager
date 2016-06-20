@@ -117,8 +117,14 @@
                	 <div id="editFiche" style="display:none">
                		<div  class="panel-body" >
            	<% 
+           		List<Utilisateur> eleves = null;
+           		if(request.getAttribute( DAOUtilitaire.SHEET_ELEVES) != null)
+           		{
+           			eleves = (List<Utilisateur>) request.getAttribute( DAOUtilitaire.SHEET_ELEVES);
+           		}
+           		
 	       		if(request.getAttribute( DAOUtilitaire.FAMILY_SELECTED ) != null 
-	       		&& (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
+	       		&& ( (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0) || ( eleves != null && !eleves.isEmpty(  ) && eleves.get(0).getIdGroup(  ) > 0  )){
             %>
            		<c:forEach items="${requestScope.familySelected.skills}" var="skill" varStatus="boucle">
            			<c:set var="skillName" value="${skill.nameSkill}" scope="page" />
@@ -127,7 +133,9 @@
             			<div class="panel  panel-primary ">
                         	<div class="panel-heading">${skill.nameSkill}</div>
                           	<div class="panel-body"> 
-                          	
+                          		<%
+                          			if( (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0 ){
+                          		%>
                            		<div class="form-group col-sm-6">
                              		<label>Observation de l'élève</label>
                               		<textarea class="form-control" rows="3" name="observationEleveUpdated<c:out value="${skill.nameSkill}"></c:out>" placeholder="observation" style="resize:none;">${requestScope.ficheSelected[skillName].observation}</textarea>
@@ -169,6 +177,21 @@
 	                                  </div>
                                                                     	   
                            		</div>
+                           		<%
+	       							}else{
+	       							    
+                          		%>
+                          		
+                          		<div class="form-group col-sm-6">
+                             		<label>Observation de l'équipe</label>
+                              		<textarea class="form-control" rows="3" name="observationEquipeUpdated<c:out value="${skill.nameSkill}"></c:out>" placeholder="observation" style="resize:none;">${requestScope.ficheCollectiveSelected[skillName]}</textarea>
+                              		
+                              		<input id="observationEquipe" type="text" name="observationEleve<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheCollectiveSelected[skillName]}">
+                            	</div>
+                          		
+                          		<%
+	       							}       							    
+                         		%>
 
                           </div>
                 </div>
@@ -176,13 +199,14 @@
          
                 </div>
                 </c:forEach>               
-            <%
-	       		}  
-            %>
+            
             	</div>
             	<div class="panel-body" align="center">
             		<input name="validerFiche" value="Valider" type="submit" class="btn btn-primary btn-lg">
             	</div>
+            	<%
+	       		}  
+           		%>
             
                	</div>
                <%

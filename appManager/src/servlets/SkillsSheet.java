@@ -118,10 +118,19 @@ public class SkillsSheet extends HttpServlet
 
                 ficheSelected = skillSheetMetier.getFiche( familySelected.getNameFamily(),
                         eleveSelectedID );
+            }
+
+            if ( familySelected != null && groupSelected > 0 )
+            {
+
+                if ( DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() )
+                        || DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
+                {
+                    //skillSheetMetier.editFicheCollective( request, familySelected, groupSelected );
+                }
 
                 fichesCollectives = skillSheetMetier.getFicheCollective( familySelected.getNameFamily(),
                         groupSelected );
-
             }
 
             request.setAttribute( DAOUtilitaire.FAMILY_SELECTED, familySelected );
