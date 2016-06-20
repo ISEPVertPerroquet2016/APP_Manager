@@ -26,6 +26,8 @@
 	         </div>
 	         
    	 	 <form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
+   	 	 
+   	 	 <input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
      	 <div class="col-lg-12">
          	
                 <div class="form-group col-sm-6">
@@ -98,7 +100,11 @@
                    
                 	</select>
                 </div> 
-                
+              </div>
+                <%
+                	String userType = ((Utilisateur)session.getAttribute( DAOUtilitaire.USER )).getType(); 
+                	if(DAOUtilitaire.PROFESSEUR.equals( userType ) || DAOUtilitaire.RESPONSABLE.equals( userType ) ){
+                %>
                	   <div class="form-group col-sm-6"> 
 	               	   <label class="switch">
 	    					<input id="toggleFiche" class="switch-input" type="checkbox" onclick="switchFiche()"/>
@@ -106,10 +112,10 @@
 	    					<span class="switch-handle"></span> 
 	    				</label>
     				</div>
-                  </div>                 
-               	<input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
+                                                	
+               	
                	 <div id="editFiche" style="display:none">
-               	<div  class="panel-body" >
+               		<div  class="panel-body" >
            	<% 
 	       		if(request.getAttribute( DAOUtilitaire.FAMILY_SELECTED ) != null 
 	       		&& (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
@@ -174,7 +180,9 @@
             	</div>
             
                	</div>
-               	              	
+               <%
+	       		}  
+            	%>	              	
        		</form>
          
                 
