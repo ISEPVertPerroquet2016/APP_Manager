@@ -21,16 +21,16 @@
    			 </div><!--/.container-fluid -->
      	 </nav>
      	 
-	     	  <div class="col-lg-12">
+	     	  <div class="lg-12">
 	            <h3 class="page-header"> ${requestScope.familySelected.description}</h3>              
 	         </div>
 	         
    	 	 <form id ="skillSheetForm" role="form" action="SkillsSheet" method="post">
    	 	 
    	 	 <input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
-     	 <div class="col-lg-12">
+     	 <div class="lg-12">
          	
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-4">
            			<% 
            				Utilisateur user = (Utilisateur)session.getAttribute( "user" );
             			List<Utilisateur> elevesSelected = null;
@@ -68,7 +68,7 @@
                            <% } %>
                                   
                 </div> 
-                <div class="form-group col-sm-6"> 
+                <div class="form-group col-sm-4"> 
                     <select id="selectEleve" class="form-control" name="eleveSelected" onchange="document.getElementById('skillSheetForm').submit()">
                         <option default value="0">Selectionner un eleve</option>
                   	<%
@@ -105,16 +105,16 @@
                 	String userType = ((Utilisateur)session.getAttribute( DAOUtilitaire.USER )).getType(); 
                 	if(DAOUtilitaire.PROFESSEUR.equals( userType ) || DAOUtilitaire.RESPONSABLE.equals( userType ) ){
                 %>
-               	   <div class="form-group col-sm-6"> 
+               	   <div class="form-group col-sm-4"> 
 	               	   <label class="switch">
 	    					<input id="toggleFiche" class="switch-input" type="checkbox" onclick="switchFiche()"/>
 	    					<span class="switch-label" data-on="Fiche" data-off="edit"></span> 
 	    					<span class="switch-handle"></span> 
 	    				</label>
     				</div>
-                                                	
+                                              	
                	
-               	 <div id="editFiche" style="display:none">
+               	 <div class="col-lg-12" id="editFiche" style="display:none">
                		<div  class="panel-body" >
            	<% 
            		List<Utilisateur> eleves = null;
