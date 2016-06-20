@@ -184,9 +184,9 @@
                           		
                           		<div class="form-group col-sm-6">
                              		<label>Observation de l'équipe</label>
-                              		<textarea class="form-control" rows="3" name="observationEquipeUpdated<c:out value="${skill.nameSkill}"></c:out>" placeholder="observation" style="resize:none;">${requestScope.ficheCollectiveSelected[skillName]}</textarea>
+                              		<textarea class="form-control" rows="3" name="observationCollectiveUpdated<c:out value="${skill.nameSkill}"></c:out>" placeholder="observation" style="resize:none;">${requestScope.ficheCollectiveSelected[skillName]}</textarea>
                               		
-                              		<input id="observationEquipe" type="text" name="observationEleve<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheCollectiveSelected[skillName]}">
+                              		<input id="observationCollective" type="hidden" name="observationCollective<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheCollectiveSelected[skillName]}">
                             	</div>
                           		
                           		<%
