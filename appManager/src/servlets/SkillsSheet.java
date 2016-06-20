@@ -126,7 +126,7 @@ public class SkillsSheet extends HttpServlet
                 if ( DAOUtilitaire.RESPONSABLE.equals( utilisateur.getType() )
                         || DAOUtilitaire.PROFESSEUR.equals( utilisateur.getType() ) )
                 {
-                    //skillSheetMetier.editFicheCollective( request, familySelected, groupSelected );
+                    skillSheetMetier.editFicheCollective( request, familySelected, groupSelected );
                 }
 
                 fichesCollectives = skillSheetMetier.getFicheCollective( familySelected.getNameFamily(),

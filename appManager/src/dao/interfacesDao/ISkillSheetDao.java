@@ -22,4 +22,10 @@ public interface ISkillSheetDao
     void createFiche( String nameFamily, String nameSkill, int userID, String niveau, String observation );
 
     void deleteFiche( String nameSkill, int userID );
+
+    void updateFicheCollective( String nameSkill, int groupID, String observationCollective );
+
+    void createFicheCollective( String nameFamily, String nameSkill, int groupID, String observationCollective );
+
+    void deleteFicheCollective( String nameSkill, int groupID );
 }

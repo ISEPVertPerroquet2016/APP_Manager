@@ -26,6 +26,9 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
     private static final String SQL_CREATE_FICHE              = "INSERT INTO fiche (name_family, name_skill, user_id, niveau, observation) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE_FICHE              = "UPDATE fiche SET observation = ?, niveau = ? WHERE name_skill = ? AND user_id = ?";
     private static final String SQL_DELETE_FICHE              = "DELETE FROM fiche where name_skill = ? AND user_id = ?";
+    private static final String SQL_CREATE_FICHE_COLLECTIVE   = "INSERT INTO fichecollective (name_family, name_skill, id_group, observation_collective) VALUES (?, ?, ?, ?)";
+    private static final String SQL_UPDATE_FICHE_COLLECTIVE   = "UPDATE fichecollective SET observation_collective = ? WHERE name_skill = ? AND id_group = ?";
+    private static final String SQL_DELETE_FICHE_COLLECTIVE   = "DELETE FROM fichecollective where name_skill = ? AND id_group = ?";
 
     public SkillSheetDao( DAOFactory daoFactory )
     {
@@ -326,6 +329,118 @@ public class SkillSheetDao extends SkillManagementDao implements ISkillSheetDao
         {
             DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
         }
+    }
+
+    @Override
+    public void createFicheCollective( String nameFamily, String nameSkill, int groupID, String observationCollective )
+    {
+        Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+
+        try
+        {
+
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_CREATE_FICHE_COLLECTIVE );
+
+            preparedstatement.setString( 1, nameFamily );
+            preparedstatement.setString( 2, nameSkill );
+            preparedstatement.setInt( 3, groupID );
+            preparedstatement.setString( 4, observationCollective );
+
+            int statut = preparedstatement.executeUpdate();
+
+            if ( statut == 0 )
+            {
+                throw new DAOException(
+                        "Échec de la création d'une fiche collective de competence." );
+            }
+        } catch (
+
+        SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
+        }
+
+    }
+
+    @Override
+    public void updateFicheCollective( String nameSkill, int groupID, String observationCollective )
+    {
+        Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+
+        try
+        {
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_UPDATE_FICHE_COLLECTIVE );
+
+            preparedstatement.setString( 1, observationCollective );
+            preparedstatement.setString( 2, nameSkill );
+            preparedstatement.setInt( 3, groupID );
+
+            int statut = preparedstatement.executeUpdate();
+
+            // Analyse du statut retourné par la requête d'insertion 
+            if ( statut == 0 )
+            {
+                throw new DAOException(
+                        "Échec de l'update d'une fiche collective de competence, la ligne n'a pas été modifiée dans la table." );
+            }
+
+        } catch ( SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
+        }
+
+    }
+
+    @Override
+    public void deleteFicheCollective( String nameSkill, int groupID )
+    {
+        Connection connexion = null;
+        PreparedStatement preparedstatement = null;
+
+        try
+        {
+            // Récupération d'une connexion depuis la Factory 
+            connexion = daoFactory.getConnection();
+
+            // Création de l'objet gérant les requêtes préparées 
+            preparedstatement = connexion.prepareStatement( SQL_DELETE_FICHE_COLLECTIVE );
+
+            preparedstatement.setString( 1, nameSkill );
+            preparedstatement.setInt( 2, groupID );
+
+            int statut = preparedstatement.executeUpdate();
+
+            // Analyse du statut retourné par la requête d'insertion 
+            if ( statut == 0 )
+            {
+                throw new DAOException(
+                        "Échec de la suppression d'une fiche collective de competence" );
+            }
+
+        } catch ( SQLException e )
+        {
+            throw new DAOException( e );
+        } finally
+        {
+            DAOUtilitaire.fermeturesSilencieuses( preparedstatement, connexion );
+        }
+
     }
 
     private FicheObject mapFiche( ResultSet resultSet ) throws SQLException

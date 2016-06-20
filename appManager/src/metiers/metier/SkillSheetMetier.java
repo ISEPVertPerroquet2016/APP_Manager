@@ -15,15 +15,17 @@ import entities.Utilisateur;
 
 public class SkillSheetMetier extends SkillManagementMetier
 {
-    private static final String SHEET_GROUP               = "sheetGroup";
-    private static final String CHAMP_FAMILY_SELECTED     = "familySelected";
-    private static final String CHAMP_ELEVE_SELECTED      = "eleveSelected";
-    private static final String CHAMP_OBSERVATION         = "observationEleve";
-    private static final String CHAMP_OBSERVATION_UPDATED = "observationEleveUpdated";
-    private static final String CHAMP_NIVEAU              = "niveauRadio";
-    private static final String CHAMP_NIVEAU_UPDATED      = "niveauRadioUpdated";
-    private static final String CHAMP_VALIDER_FICHE       = "validerFiche";
-    private static final String CHAMP_VALIDER_FICHE_VALUE = "Valider";
+    private static final String SHEET_GROUP                          = "sheetGroup";
+    private static final String CHAMP_FAMILY_SELECTED                = "familySelected";
+    private static final String CHAMP_ELEVE_SELECTED                 = "eleveSelected";
+    private static final String CHAMP_OBSERVATION                    = "observationEleve";
+    private static final String CHAMP_OBSERVATION_UPDATED            = "observationEleveUpdated";
+    private static final String CHAMP_NIVEAU                         = "niveauRadio";
+    private static final String CHAMP_NIVEAU_UPDATED                 = "niveauRadioUpdated";
+    private static final String CHAMP_OBSERVATION_COLLECTIVE         = "observationCollective";
+    private static final String CHAMP_OBSERVATION_COLLECTIVE_UPDATED = "observationCollectiveUpdated";
+    private static final String CHAMP_VALIDER_FICHE                  = "validerFiche";
+    private static final String CHAMP_VALIDER_FICHE_VALUE            = "Valider";
 
     private SkillSheetDao       skillSheetDao;
 
@@ -149,6 +151,54 @@ public class SkillSheetMetier extends SkillManagementMetier
             }
         }
 
+    }
+
+    public void editFicheCollective( HttpServletRequest request, FamilyObject familySelected, int groupID )
+    {
+        if ( CHAMP_VALIDER_FICHE_VALUE.equals( getValeurChamp( request, CHAMP_VALIDER_FICHE ) ) )
+        {
+            try
+            {
+                for ( SkillObject skill : familySelected.getSkills() )
+                {
+                    String oldObservationCollective = getValeurChamp( request,
+                            CHAMP_OBSERVATION_COLLECTIVE + skill.getNameSkill() );
+                    String newObservationCollective = getValeurChamp( request,
+                            CHAMP_OBSERVATION_COLLECTIVE_UPDATED + skill.getNameSkill() );
+
+                    if ( oldObservationCollective == null )
+                    {
+                        if ( newObservationCollective == null )
+                        {
+                            //do nothing
+                        } else
+                        {
+                            skillSheetDao.createFicheCollective( skill.getNameFamily(), skill.getNameSkill(), groupID,
+                                    newObservationCollective );
+                        }
+                    } else
+                    {
+                        if ( newObservationCollective == null )
+                        {
+                            skillSheetDao.deleteFicheCollective( skill.getNameSkill(), groupID );
+                        } else
+                        {
+                            //ne pas update si rien n'a été modifié
+                            if ( !newObservationCollective.equals( oldObservationCollective ) )
+                            {
+                                skillSheetDao.updateFicheCollective( skill.getNameSkill(), groupID,
+                                        newObservationCollective );
+                            }
+                        }
+                    }
+
+                }
+
+            } catch ( DAOException e )
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     /*
