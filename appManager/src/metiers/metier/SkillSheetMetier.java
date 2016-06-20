@@ -120,7 +120,7 @@ public class SkillSheetMetier extends SkillManagementMetier
 
                     if ( oldObservation == null && oldNiveau == null )
                     {
-                        if ( newObservation == null && newNiveau == null )
+                        if ( newObservation == null && "NN".equals( newNiveau ) )
                         {
                             //rien
                         } else
@@ -132,7 +132,7 @@ public class SkillSheetMetier extends SkillManagementMetier
                     } else if ( oldObservation != null || oldNiveau != null )
                     {
 
-                        if ( newObservation == null && newNiveau == null )
+                        if ( newObservation == null && "NN".equals( newNiveau ) )
                         {
                             skillSheetDao.deleteFiche( skill.getNameSkill(), eleveID );
                         } else

@@ -130,14 +130,19 @@
                           	
                            		<div class="form-group col-sm-6">
                              		<label>Observation de l'élève</label>
-                              		<textarea class="form-control" rows="3" name="observationEleveUpdated<c:out value="${skill.nameSkill}"></c:out>" placeholder="observation">${requestScope.ficheSelected[skillName].observation}</textarea>
+                              		<textarea class="form-control" rows="3" name="observationEleveUpdated<c:out value="${skill.nameSkill}"></c:out>" placeholder="observation" style="resize:none;">${requestScope.ficheSelected[skillName].observation}</textarea>
                               		
                               		<input id="observationEleve" type="hidden" name="observationEleve<c:out value="${skill.nameSkill}"></c:out>" value="${requestScope.ficheSelected[skillName].observation}">
                             	</div>                           	
                        			<div class="form-group">
                                     <label>Niveau de l'élève</label>
                                                                      
-	                                 <div class="radio" onload="selectNiveau('${boucle.count}')">
+	                                 <div class="radio">
+	                                 
+	                                 	  <label>
+		                                    <input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" value="NN" checked>NN
+		                                  </label>
+	                                 
 		                                  <label>
 		                                    <input type="radio" name="niveauRadioUpdated<c:out value="${skill.nameSkill}"></c:out>" id="NA<c:out value="${boucle.count}"></c:out>" value="NA">NA
 		                                  </label>
@@ -224,7 +229,17 @@
                                             <%} %> 
 	                                            <td>
 		                                            <button type="button" class="btn btn-danger btn-circle">
-		                                           	 	${requestScope.ficheSelected[skillName].niveau}
+		                                            <c:choose>
+		                                            	<c:when test="${requestScope.ficheSelected[skillName].niveau == null}">
+		                                            	NN
+		                                            	</c:when>
+		                                            	<c:otherwise>
+		                                            	${requestScope.ficheSelected[skillName].niveau }
+		                                            	</c:otherwise>
+		                                            
+		                                            </c:choose>
+		                                            
+		                                           	 	
 		                                            </button>
 	                                            </td>
 	                                        </tr>
