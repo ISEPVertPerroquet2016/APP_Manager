@@ -225,19 +225,28 @@
           <div class="row">
                        <div class="table-responsive">
                   <% 
+                  	List<Utilisateur> eleves = null;
+             		if(request.getAttribute( DAOUtilitaire.SHEET_ELEVES) != null)
+             		{
+             			eleves = (List<Utilisateur>) request.getAttribute( DAOUtilitaire.SHEET_ELEVES);
+             		}
+                  
                   		if(request.getAttribute( DAOUtilitaire.FAMILY_SELECTED ) != null 
-                  		&& (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
+                  		&& ( (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0 || ( eleves != null && !eleves.isEmpty(  ) && eleves.get(0).getIdGroup(  ) > 0  ) )){
                   %>     
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>Nom de la compétence</th>
                                             <th>Observation de l'équipe</th>
-                                            <th>Observation individuelle</th>
-                                      <%if(!DAOUtilitaire.ELEVE.equals( user.getType(  ) )){ %>  
-                                            <th>Remarques</th>
-                                      <%} %>  
+                                       <%
+                                       		if( request.getAttribute( DAOUtilitaire.ELEVE_SELECTED )!= null && (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
+                                       %>
+                                            <th>Observation individuelle</th>                                                                                                                             
                                             <th>Niveau</th>
+                                       <%
+                                       		}
+                                       %>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -247,10 +256,10 @@
 	                                        <tr>
 	                                            <td>${skill.nameSkill}</td>
 	                                            <td>${requestScope.ficheCollectiveSelected[skillName]}</td>
-	                                            <td>${requestScope.ficheSelected[skillName].observation}</td>
-                                            <%if(!DAOUtilitaire.ELEVE.equals( user.getType(  ) )){ %>
-	                                            <td></td>
-                                            <%} %> 
+                                       <%
+                                       		if( request.getAttribute( DAOUtilitaire.ELEVE_SELECTED )!= null && (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
+                                       %>
+	                                            <td>${requestScope.ficheSelected[skillName].observation}</td> 
 	                                            <td>
 		                                            <button type="button" class="btn btn-danger btn-circle">
 		                                            <c:choose>
@@ -266,6 +275,9 @@
 		                                           	 	
 		                                            </button>
 	                                            </td>
+                                      <%
+                                      		}
+                                       %>
 	                                        </tr>
                                         </c:forEach>
                                     
