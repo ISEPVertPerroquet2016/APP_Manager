@@ -201,9 +201,18 @@
                 </c:forEach>               
             
             	</div>
+            	<% 
+                	if(request.getAttribute( DAOUtilitaire.FAMILY_SELECTED ) != null){
+                %>
+            	
             	<div class="panel-body" align="center">
             		<input name="validerFiche" value="Valider" type="submit" class="btn btn-primary btn-lg">
             	</div>
+            	
+            	<%
+                	}
+            	%>
+            	
             	<%
 	       		}  
            		%>
@@ -250,7 +259,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${requestScope.familySelected.skills}" var="skill" >
+                                        <c:forEach items="${requestScope.familySelected.skills}" var="skill" varStatus="status" >
                                         	<c:set var="skillName" value="${skill.nameSkill}" scope="page" />
                                         	
 	                                        <tr>
@@ -261,18 +270,16 @@
                                        %>
 	                                            <td>${requestScope.ficheSelected[skillName].observation}</td> 
 	                                            <td>
-		                                            <button type="button" class="btn btn-danger btn-circle">
-		                                            <c:choose>
-		                                            	<c:when test="${requestScope.ficheSelected[skillName].niveau == null}">
-		                                            	NN
-		                                            	</c:when>
-		                                            	<c:otherwise>
-		                                            	${requestScope.ficheSelected[skillName].niveau }
-		                                            	</c:otherwise>
-		                                            
-		                                            </c:choose>
-		                                            
-		                                           	 	
+		                                            <button id="niveauButton<c:out value="${status.count}"></c:out>" type="button" class="btn btn-danger btn-circle">
+			                                            <c:choose>
+			                                            	<c:when test="${requestScope.ficheSelected[skillName].niveau == null}">
+			                                            		NN
+			                                            	</c:when>
+			                                            	<c:otherwise>
+			                                            		${requestScope.ficheSelected[skillName].niveau }
+			                                            	</c:otherwise>
+			                                            
+			                                            </c:choose>                	 	
 		                                            </button>
 	                                            </td>
                                       <%

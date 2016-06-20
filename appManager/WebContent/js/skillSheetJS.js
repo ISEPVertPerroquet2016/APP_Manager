@@ -5,7 +5,7 @@ function sendFamily(nameFamily){
 
 	familySelected.value = nameFamily;
 	
-	document.getElementById('skillSheetForm').submit();		
+	document.getElementById('skillSheetForm').submit();	
 }
 
 function switchFiche(){
@@ -41,6 +41,25 @@ function selectNiveau(){
 		if(niveau == "NA" || niveau == "B-" || niveau == "B+" || niveau == "I-" || niveau == "I+")
 		{
 				document.getElementById(niveau + count).checked = true;
+
+				var niveauButton = document.getElementById('niveauButton' + count);
+
+				/*if(niveau == "NA"){
+					niveauButton.className = "btn btn-danger btn-circle";
+				} 
+				if(niveau ="B-"){
+					niveauButton.className = "btn btn-warning btn-circle";
+				}
+				if(niveau ="B+"){
+					niveauButton.className = "btn btn-info btn-circle";
+				}
+				if(niveau ="I-"){
+					niveauButton.className = "btn btn-primary btn-circle";
+				}
+				if(niveau ="I+"){
+					niveauButton.className = "btn btn-success btn-circle";
+				}*/
+				
 		}
 		
 		count++;

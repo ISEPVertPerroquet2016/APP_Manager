@@ -88,9 +88,6 @@
                         <li>
                             <a href="SkillsSheet">Fiche de competences</a>
                         </li>
-                        <li>
-                            <a href="notes.jsp">Notes</a>
-                        </li>
                            
                          <% if(DAOUtilitaire.RESPONSABLE.equals( typeProf )) { %>
                         	
