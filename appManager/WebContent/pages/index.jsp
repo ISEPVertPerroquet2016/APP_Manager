@@ -8,7 +8,7 @@
 
     <!-- Styles css -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/cover.css" rel="stylesheet">
+    <link href="css/indexConnexion.css" rel="stylesheet">
     
 <div class="container">    
     <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
@@ -45,9 +45,9 @@
 </div>
 
 	<!------------ Script------------>
-	<script src="js/ie-emulation-modes-warning.js"></script>
+	
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script src="js/loginform.js"></script>
+
 

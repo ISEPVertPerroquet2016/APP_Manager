@@ -1,11 +1,10 @@
 <%@page import="dao.DAOUtilitaire"%>
 <%@page import="entities.GroupObject"%>
 <%@page import="java.util.List"%>
-<%@include file="headerResp.jsp" %>
+<%@include file="header.jsp" %>
+<link href="css/toggle.css" rel="stylesheet">
 
 
-
- <link href="css/toggle.css" rel="stylesheet">
 <div id="page-wrapper">
      <div class="row">
          <nav class="navbar navbar-default">
@@ -107,10 +106,10 @@
 	    					<span class="switch-handle"></span> 
 	    				</label>
     				</div>
-                                   
+                  </div>                 
                	<input type="hidden" id="familySelected" name="familySelected" value="${requestScope.familySelected.nameFamily}" />
-               	
-               	<div  class="panel-body" id="editFiche" style="display:none">
+               	 <div id="editFiche" style="display:none">
+               	<div  class="panel-body" >
            	<% 
 	       		if(request.getAttribute( DAOUtilitaire.FAMILY_SELECTED ) != null 
 	       		&& (Integer) request.getAttribute( DAOUtilitaire.ELEVE_SELECTED ) > 0){
@@ -169,9 +168,11 @@
             <%
 	       		}  
             %>
-            	<input name="validerFiche" value="Valider" type="submit">
+            	</div>
+            	<div class="panel-body" align="center">
+            		<input name="validerFiche" value="Valider" type="submit" class="btn btn-primary btn-lg">
+            	</div>
             
-               	</div>
                	</div>
                	              	
        		</form>
@@ -229,15 +230,9 @@
                             </div>       
                      </div>
                   </div>
-            <!-- edit -->
-            
-            
-            
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-   
-    <!-- /#wrapper -->
+           
+</div>
+      
 
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
@@ -245,27 +240,12 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="js/metisMenu.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/raphael-min.js"></script>
-    <script src="js/morris.min.js"></script>
-    <script src="js/morris-data.js"></script>
-
     <!-- Custom Theme JavaScript -->
-    <script src="js/sb-admin-2.js"></script>
+    <script src="js/scriptApp.js"></script>
+
 
 	
-<!--
-
-//-->
-	
-	<script>
-	document.getElementById("body").onload = function() {selectNiveau()};
-	
-	
-	</script>
+	<script>document.getElementById("body").onload = function() {selectNiveau()};</script>
 	<script src="js/skillSheetJS.js"></script>
 	
 	

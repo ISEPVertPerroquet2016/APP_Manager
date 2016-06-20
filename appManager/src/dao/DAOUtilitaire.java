@@ -43,11 +43,11 @@ public final class DAOUtilitaire
      * forward views
      */
     public static final String CONNEXION_VIEW_FORWARD        = "/pages/index.jsp";
-    public static final String ACCUEIL_VIEW_FORWARD          = "/pages/AccueilTuteur.jsp";
+    public static final String ACCUEIL_VIEW_FORWARD          = "/pages/Accueil.jsp";
     public static final String SKILL_VIEW_FORWARD            = "/pages/nouvelleComp.jsp";
     public static final String FAMILY_VIEW_FORWARD           = "/pages/nouvelleFamille.jsp";
     public static final String SKILL_MANAGEMENT_VIEW_FORWARD = "/pages/gerercomp.jsp";
-    public static final String SKILLS_SHEET_VIEW_FORWARD     = "/pages/affichercomm.jsp";
+    public static final String SKILLS_SHEET_VIEW_FORWARD     = "/pages/ficheCompetence.jsp";
     public static final String GROUP_VIEW_FORWARD            = "/pages/nouveauGroupe.jsp";
 
     /**
