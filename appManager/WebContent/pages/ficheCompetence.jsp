@@ -12,11 +12,11 @@
           
 		         <div id="navbar" class="navbar-collapse collapse">
 		          <ul class="nav navbar-nav">
-		             <c:forEach items="${ sessionScope.families }" var="family" >
-		             		<li><a href="" onclick="sendFamily('${ family.nameFamily }'); return false;">${ family.nameFamily }</a></li>
+		             <c:forEach items="${ sessionScope.families }" var="family" varStatus="cpt">
+		             		<li class="" id="li<c:out value="${cpt.count}"></c:out>"><a id="link<c:out value="${cpt.count}"></c:out>" href="" onclick="sendFamily('${ family.nameFamily }'); return false;">${ family.nameFamily }</a></li>
 		             </c:forEach>                  
 		          </ul>         
-		         </div><!--/.nav-collapse -->
+		         </div>
           
    			 </div><!--/.container-fluid -->
      	 </nav>
@@ -270,7 +270,7 @@
                                        %>
 	                                            <td>${requestScope.ficheSelected[skillName].observation}</td> 
 	                                            <td>
-		                                            <button id="niveauButton<c:out value="${status.count}"></c:out>" type="button" class="btn btn-danger btn-circle">
+		                                            <button id="niveauButton<c:out value="${status.count}"></c:out>" type="button" class="btn btn-default btn-circle">
 			                                            <c:choose>
 			                                            	<c:when test="${requestScope.ficheSelected[skillName].niveau == null}">
 			                                            		NN
@@ -314,6 +314,24 @@
 	<script>document.getElementById("body").onload = function() {selectNiveau()};</script>
 	<script src="js/skillSheetJS.js"></script>
 	
+	<script type="text/javascript">
+	var count = 1;
+	var familySelected = document.getElementById('familySelected').value;
+	
+	do{
+			
+			var link = document.getElementById('link' + count).innerHTML;
+			var li = document.getElementById('li' + count);
+			if(link==familySelected){
+				li.className="active";
+			}
+			
+			count++;
+			
+		
+	}while(link != null);
+	
+</script>
 	
 	
 </body>
